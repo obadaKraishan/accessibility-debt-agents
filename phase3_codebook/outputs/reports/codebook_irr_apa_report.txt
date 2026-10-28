@@ -1,0 +1,188 @@
+================================================================================
+  INTER-RATER RELIABILITY
+  Obada and Kulsawasd coding independently, plus each coder against the automated rules
+================================================================================
+
+Report id      : codebook_irr
+Generated      : 2026-09-10 11:46:37
+Script         : phase3_codebook/03_coder_agreement.py
+Git commit     : bb8055f (dirty)
+Environment    : Darwin 25.6.0 | python 3.13.9, numpy 2.5.3, scipy 1.18.1, pandas 2.3.3, statsmodels 0.15.0, matplotlib 3.11.1
+coder_a        : phase3_codebook/outputs/coded_obada.csv
+coder_b        : phase3_codebook/outputs/coded_kulsawasd.csv
+seed           : 20260908
+codebook       : phase3_codebook/CODEBOOK.md
+target_kappa   : 0.8
+
+--------------------------------------------------------------------------------
+1. DESIGN
+--------------------------------------------------------------------------------
+
+Two coders applied the definitions in CODEBOOK.md to the same 300 stratified
+elements, independently and blind both to each other and to the automated codes.
+Human-to-human agreement is the inter-rater reliability of the coding scheme.
+Each coder is then scored against the deterministic rules in taxonomy.py;
+because those rules cannot disagree with themselves, that second comparison
+measures the validity of the automated scheme against human judgement, not
+reliability. The two are reported separately and should be described separately
+in the Method section.
+  Items double-coded.............................. 300
+  Items coded by Obada only....................... 0
+  Items coded by Kulsawasd only................... 0
+
+Obada vs Kulsawasd agree on element role beyond chance.
+  Cohen's kappa, element role: Obada vs Kulsawasd
+    agreement = 0.970, p = n/a, Cohen's kappa = 0.962, 95% CI [0.936, 0.983], N = 300
+    Interpretation: almost perfect (inter-rater reliability)
+    raw_agreement_pct: 97
+    n_categories: 7
+    Note. Percentile CI from 2,000 bootstrap replicates of the double-coded
+          items. Chance-corrected; raw agreement alone overstates reliability.
+
+Obada vs automated rules agree on element role beyond chance.
+  Cohen's kappa, element role: Obada vs automated rules
+    agreement = 0.980, p = n/a, Cohen's kappa = 0.975, 95% CI [0.953, 0.992], N = 300
+    Interpretation: almost perfect (scheme validity)
+    raw_agreement_pct: 98
+    n_categories: 7
+    Note. Percentile CI from 2,000 bootstrap replicates of the double-coded
+          items. Chance-corrected; raw agreement alone overstates reliability.
+
+Kulsawasd vs automated rules agree on element role beyond chance.
+  Cohen's kappa, element role: Kulsawasd vs automated rules
+    agreement = 0.990, p = n/a, Cohen's kappa = 0.987, 95% CI [0.971, 1.000], N = 300
+    Interpretation: almost perfect (scheme validity)
+    raw_agreement_pct: 99
+    n_categories: 7
+    Note. Percentile CI from 2,000 bootstrap replicates of the double-coded
+          items. Chance-corrected; raw agreement alone overstates reliability.
+
+Obada vs Kulsawasd agree on label status beyond chance.
+  Cohen's kappa, label status: Obada vs Kulsawasd
+    agreement = 0.933, p = n/a, Cohen's kappa = 0.908, 95% CI [0.867, 0.945], N = 300
+    Interpretation: almost perfect (inter-rater reliability)
+    raw_agreement_pct: 93.3333
+    n_categories: 4
+    Note. Percentile CI from 2,000 bootstrap replicates of the double-coded
+          items. Chance-corrected; raw agreement alone overstates reliability.
+
+Obada vs automated rules agree on label status beyond chance.
+  Cohen's kappa, label status: Obada vs automated rules
+    agreement = 0.973, p = n/a, Cohen's kappa = 0.963, 95% CI [0.936, 0.986], N = 300
+    Interpretation: almost perfect (scheme validity)
+    raw_agreement_pct: 97.3333
+    n_categories: 4
+    Note. Percentile CI from 2,000 bootstrap replicates of the double-coded
+          items. Chance-corrected; raw agreement alone overstates reliability.
+
+Kulsawasd vs automated rules agree on label status beyond chance.
+  Cohen's kappa, label status: Kulsawasd vs automated rules
+    agreement = 0.960, p = n/a, Cohen's kappa = 0.945, 95% CI [0.913, 0.977], N = 300
+    Interpretation: almost perfect (scheme validity)
+    raw_agreement_pct: 96
+    n_categories: 4
+    Note. Percentile CI from 2,000 bootstrap replicates of the double-coded
+          items. Chance-corrected; raw agreement alone overstates reliability.
+
+Table 1. Confusion matrix for element role between the two human coders. Rows are Obada, columns are Kulsawasd.
+Obada \ Kulsawasd  button  container  image  input  other  text  web
+-----------------  ------  ---------  -----  -----  -----  ----  ---
+button             18      0          1      0      0      0     0  
+container          0       81         0      0      2      0     0  
+image              2       0          68     0      3      0     0  
+input              0       0          0      8      0      0     0  
+other              0       0          1      0      44     0     0  
+text               0       0          0      0      0      67    0  
+web                0       0          0      0      0      0     5  
+
+Note. Off-diagonal cells are the items to adjudicate. A disagreement concentrated in one cell is an ambiguous rule worth rewording in the codebook; a scattered one is coder fatigue and is fixed by adjudication alone.
+
+
+Table 2. Confusion matrix for label status between the two human coders. Rows are Obada, columns are Kulsawasd.
+Obada \ Kulsawasd  labelled  named_by_text  not_applicable  unlabelled
+-----------------  --------  -------------  --------------  ----------
+labelled           69        1              4               0         
+named_by_text      3         69             0               0         
+not_applicable     0         1              101             7         
+unlabelled         0         0              4               41        
+
+Note. Off-diagonal cells are the items to adjudicate. A disagreement concentrated in one cell is an ambiguous rule worth rewording in the codebook; a scattered one is coder fatigue and is fixed by adjudication alone.
+
+  Items requiring adjudication.................... 28
+  Items in exact agreement........................ 272
+
+--------------------------------------------------------------------------------
+RESULTS SECTION DRAFT (APA 7)
+--------------------------------------------------------------------------------
+
+Auto-composed from the recorded statistics. Treat it as a first draft: check
+every claim against the tables above, and rewrite the prose in your own voice
+before it goes near the manuscript.
+
+Obada vs Kulsawasd agree on element role beyond chance. A cohen's kappa, element
+role: obada vs kulsawasd was conducted, agreement = 0.970, p = n/a, Cohen's
+kappa = 0.962, 95% CI [0.936, 0.983], N = 300. The effect is almost perfect
+(inter-rater reliability).
+
+Obada vs automated rules agree on element role beyond chance. A cohen's kappa,
+element role: obada vs automated rules was conducted, agreement = 0.980, p =
+n/a, Cohen's kappa = 0.975, 95% CI [0.953, 0.992], N = 300. The effect is almost
+perfect (scheme validity).
+
+Kulsawasd vs automated rules agree on element role beyond chance. A cohen's
+kappa, element role: kulsawasd vs automated rules was conducted, agreement =
+0.990, p = n/a, Cohen's kappa = 0.987, 95% CI [0.971, 1.000], N = 300. The
+effect is almost perfect (scheme validity).
+
+Obada vs Kulsawasd agree on label status beyond chance. A cohen's kappa, label
+status: obada vs kulsawasd was conducted, agreement = 0.933, p = n/a, Cohen's
+kappa = 0.908, 95% CI [0.867, 0.945], N = 300. The effect is almost perfect
+(inter-rater reliability).
+
+Obada vs automated rules agree on label status beyond chance. A cohen's kappa,
+label status: obada vs automated rules was conducted, agreement = 0.973, p =
+n/a, Cohen's kappa = 0.963, 95% CI [0.936, 0.986], N = 300. The effect is almost
+perfect (scheme validity).
+
+Kulsawasd vs automated rules agree on label status beyond chance. A cohen's
+kappa, label status: kulsawasd vs automated rules was conducted, agreement =
+0.960, p = n/a, Cohen's kappa = 0.945, 95% CI [0.913, 0.977], N = 300. The
+effect is almost perfect (scheme validity).
+
+--------------------------------------------------------------------------------
+IEEE-STYLE NUMERIC SUMMARY
+--------------------------------------------------------------------------------
+
+Compact numeric summary of all tests (IEEE style).
+Test                              Stat       Value  df  p    Effect         Size   95% CI          Std. effect  N  
+--------------------------------  ---------  -----  --  ---  -------------  -----  --------------  -----------  ---
+kappa_human_human_human_role      agreement  0.970      n/a  Cohen's kappa  0.962  [0.936, 0.983]               300
+kappa_a_auto_human_role           agreement  0.980      n/a  Cohen's kappa  0.975  [0.953, 0.992]               300
+kappa_b_auto_human_role           agreement  0.990      n/a  Cohen's kappa  0.987  [0.971, 1.000]               300
+kappa_human_human_human_label_st  agreement  0.933      n/a  Cohen's kappa  0.908  [0.867, 0.945]               300
+kappa_a_auto_human_label_status   agreement  0.973      n/a  Cohen's kappa  0.963  [0.936, 0.986]               300
+kappa_b_auto_human_label_status   agreement  0.960      n/a  Cohen's kappa  0.945  [0.913, 0.977]               300
+
+Note. p reported exactly; '<.001' where smaller. Effect sizes carry 95% CIs.
+
+--------------------------------------------------------------------------------
+NOTES, ASSUMPTIONS AND LIMITATIONS
+--------------------------------------------------------------------------------
+
+Notes
+  1. Every disagreement is listed with its context in
+     codebook_irr_disagreements.csv, with blank columns for the agreed code.
+     Adjudicate them together, record the resolution there, and state in the
+     Method section how many items were resolved by discussion.
+  2. Both coded variables met the pre-set inter-rater reliability target of
+     0.80.
+
+Limitations
+  1. Kappa is sensitive to the marginal distribution of categories. The sample
+     is stratified by role and by automated label status precisely so that rare
+     categories are represented; on an unstratified draw the same rules would
+     yield a higher kappa with less information in it.
+
+================================================================================
+  END OF REPORT — codebook_irr
+================================================================================

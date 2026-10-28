@@ -1,0 +1,5 @@
+kind,key,label,value_or_statistic,n,df,p_value,effect_name,effect_size,ci_low,ci_high,interpretation
+descriptive,,Checks run,11,,,,,,,,
+descriptive,,Checks failed,0,,,,,,,,
+proportion,,"Label coverage, androidcontrol_2024",0.5726569593803673,1462544,,,,,0.5718550375881011,0.5734584994979839,
+proportion,,"Label coverage, rico_2017",0.177374971397873,502585,,,,,0.17632137395329073,0.1784335007098573,

@@ -1,0 +1,84 @@
+================================================================================
+  DATA VALIDATION
+  Parsed corpora checked against published figures and schema invariants
+================================================================================
+
+Report id      : validation
+Generated      : 2026-09-09 13:23:11
+Script         : phase4_validation/01_validate_datasets.py
+Git commit     : bb8055f (dirty)
+Environment    : Darwin 25.6.0 | python 3.13.9, numpy 2.5.3, scipy 1.18.1, pandas 2.3.3, statsmodels 0.15.0, matplotlib 3.11.1
+elements_table : /Volumes/Kraishan/Desktop/2026/AISSA26/code/accessibility-debt-agents/data/processed/elements.parquet
+rico_expected_s: 66261
+androidcontrol_:
+                 - train: 13603
+                 - validation: 137
+                 - test: 1543
+                 - total: 15283
+pilot_run      : False
+
+--------------------------------------------------------------------------------
+1. PURPOSE
+--------------------------------------------------------------------------------
+
+Every check below compares the parsed data against a figure published by the
+dataset authors or an invariant verified directly against the raw files. Their
+purpose is to catch a silent parsing error, which in this study would produce
+plausible-looking but wrong coverage rates.
+  Checks run...................................... 11
+  Checks failed................................... 0
+
+Table 1. Data validation checks.
+Check                             Observed   Expected              Status  If it fails                     
+--------------------------------  ---------  --------------------  ------  --------------------------------
+Rico screens                      66,261     66,261                PASS    Re-run phase1_collection/01_down
+Rico apps (after quarantine)      9,383      9,383 to 9,384        PASS    One malformed row is expected to
+AndroidControl episodes           7,623      15,283                PASS    Download more shards, then re-ru
+Rico zero/negative-area fraction  48.7%      40% to 56%            PASS    Far from the verified ~48% means
+Zero-area yet flagged visible     1,716      > 0                   PASS    Rico really does flag many zero-
+Distinct Rico screen widths       471        >= 2                  PASS    Screen sizes vary in Rico (1440x
+label_status vocabulary           clean      only codebook values  PASS    A value outside the codebook mea
+role vocabulary                   clean      only codebook values  PASS                                    
+'labelled' with empty descriptio  0          0                     PASS    A logical contradiction in the c
+Click hit rate                    99.9%      >= 95%                PASS    Validation runs resolved essenti
+Unified schema identical          identical  identical             PASS                                    
+
+Note. FAIL is blocking; WARN is informational. A pilot run relaxes the count checks because partial downloads legitimately fall short.
+
+  Label coverage, androidcontrol_2024............. 57.27% (837,536/1,462,544)
+      95% CI [57.19%, 57.35%]  elements requiring a content description
+  Label coverage, rico_2017....................... 17.74% (89,146/502,585)
+      95% CI [17.63%, 17.84%]  elements requiring a content description
+
+--------------------------------------------------------------------------------
+RESULTS SECTION DRAFT (APA 7)
+--------------------------------------------------------------------------------
+
+Auto-composed from the recorded statistics. Treat it as a first draft: check
+every claim against the tables above, and rewrite the prose in your own voice
+before it goes near the manuscript.
+
+(No tests recorded.)
+--------------------------------------------------------------------------------
+IEEE-STYLE NUMERIC SUMMARY
+--------------------------------------------------------------------------------
+
+Compact numeric summary of all tests (IEEE style).
+Test  Stat  Value  df  p  Effect  Size  95% CI  Std. effect  N
+----  ----  -----  --  -  ------  ----  ------  -----------  -
+
+Note. p reported exactly; '<.001' where smaller. Effect sizes carry 95% CIs.
+
+--------------------------------------------------------------------------------
+NOTES, ASSUMPTIONS AND LIMITATIONS
+--------------------------------------------------------------------------------
+
+Notes
+  1. The zero-area check exists because roughly 48% of Rico nodes have no
+     positive area while many are still flagged visible-to-user. Filtering on
+     visibility alone would silently inflate the denominator and deflate every
+     coverage estimate.
+
+================================================================================
+  END OF REPORT — validation
+================================================================================

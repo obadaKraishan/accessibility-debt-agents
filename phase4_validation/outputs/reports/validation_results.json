@@ -1,0 +1,168 @@
+{
+  "stem": "validation",
+  "title": "Data validation",
+  "subtitle": "Parsed corpora checked against published figures and schema invariants",
+  "generated_at": "2026-09-09T13:23:11",
+  "script": "phase4_validation/01_validate_datasets.py",
+  "provenance": {
+    "environment": {
+      "python": "3.13.9",
+      "platform": "Darwin 25.6.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "pandas": "2.3.3",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.1"
+    },
+    "git_commit": "bb8055f (dirty)",
+    "elements_table": "/Volumes/Kraishan/Desktop/2026/AISSA26/code/accessibility-debt-agents/data/processed/elements.parquet",
+    "rico_expected_screens": 66261,
+    "androidcontrol_expected_episodes": {
+      "train": 13603,
+      "validation": 137,
+      "test": 1543,
+      "total": 15283
+    },
+    "pilot_run": false
+  },
+  "descriptives": [
+    {
+      "label": "Checks run",
+      "value": 11,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Checks failed",
+      "value": 0,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Label coverage, androidcontrol_2024",
+      "note": "elements requiring a content description",
+      "k": 837536,
+      "n": 1462544,
+      "proportion": 0.5726569593803673,
+      "pct": 57.265695938036735,
+      "ci_low": 0.5718550375881011,
+      "ci_high": 0.5734584994979839,
+      "ci_low_pct": 57.18550375881011,
+      "ci_high_pct": 57.34584994979839,
+      "formatted": "57.27% (837,536/1,462,544)"
+    },
+    {
+      "label": "Label coverage, rico_2017",
+      "note": "elements requiring a content description",
+      "k": 89146,
+      "n": 502585,
+      "proportion": 0.177374971397873,
+      "pct": 17.7374971397873,
+      "ci_low": 0.17632137395329073,
+      "ci_high": 0.1784335007098573,
+      "ci_low_pct": 17.632137395329075,
+      "ci_high_pct": 17.843350070985732,
+      "formatted": "17.74% (89,146/502,585)"
+    }
+  ],
+  "tests": {},
+  "tables": [
+    {
+      "name": "validation_checks",
+      "number": 1,
+      "caption": "Data validation checks.",
+      "note": "FAIL is blocking; WARN is informational. A pilot run relaxes the count checks because partial downloads legitimately fall short.",
+      "headers": [
+        "Check",
+        "Observed",
+        "Expected",
+        "Status",
+        "If it fails"
+      ],
+      "rows": [
+        [
+          "Rico screens",
+          "66,261",
+          "66,261",
+          "PASS",
+          "Re-run phase1_collection/01_download_rico.py to finish extraction."
+        ],
+        [
+          "Rico apps (after quarantine)",
+          "9,383",
+          "9,383 to 9,384",
+          "PASS",
+          "One malformed row is expected to be dropped; more than a handful means the CSV reader is misparsing."
+        ],
+        [
+          "AndroidControl episodes",
+          "7,623",
+          "15,283",
+          "PASS",
+          "Download more shards, then re-run the parser."
+        ],
+        [
+          "Rico zero/negative-area fraction",
+          "48.7%",
+          "40% to 56%",
+          "PASS",
+          "Far from the verified ~48% means the bounds parse is wrong. Check that bounds is read as [x1, y1, x2, y2]."
+        ],
+        [
+          "Zero-area yet flagged visible",
+          "1,716",
+          "> 0",
+          "PASS",
+          "Rico really does flag many zero-area nodes as visible. Seeing none suggests the visibility flag is not being read."
+        ],
+        [
+          "Distinct Rico screen widths",
+          "471",
+          ">= 2",
+          "PASS",
+          "Screen sizes vary in Rico (1440x2560, 1440x2392, 411x683 and others). A single width means normalisation is hardcoded."
+        ],
+        [
+          "label_status vocabulary",
+          "clean",
+          "only codebook values",
+          "PASS",
+          "A value outside the codebook means taxonomy.py and the parser have drifted apart."
+        ],
+        [
+          "role vocabulary",
+          "clean",
+          "only codebook values",
+          "PASS",
+          ""
+        ],
+        [
+          "'labelled' with empty description",
+          "0",
+          "0",
+          "PASS",
+          "A logical contradiction in the coder. Inspect taxonomy.label_status."
+        ],
+        [
+          "Click hit rate",
+          "99.9%",
+          ">= 95%",
+          "PASS",
+          "Validation runs resolved essentially every click to a visible node. A lower rate biases RQ3; inspect resolve_click."
+        ],
+        [
+          "Unified schema identical",
+          "identical",
+          "identical",
+          "PASS",
+          ""
+        ]
+      ]
+    }
+  ],
+  "figures": [],
+  "notes": [
+    "The zero-area check exists because roughly 48% of Rico nodes have no positive area while many are still flagged visible-to-user. Filtering on visibility alone would silently inflate the denominator and deflate every coverage estimate."
+  ],
+  "limitations": []
+}

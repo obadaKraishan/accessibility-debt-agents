@@ -1,0 +1,448 @@
+{
+  "stem": "rq2",
+  "title": "RQ2: Coverage difference between corpora",
+  "subtitle": "Rico (2017) compared with AndroidControl (2024-25)",
+  "generated_at": "2026-09-10T05:05:15",
+  "script": "phase5_analysis/rq2_temporal_change/run_rq2.py",
+  "provenance": {
+    "environment": {
+      "python": "3.13.9",
+      "platform": "Darwin 25.6.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "pandas": "2.3.3",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.1"
+    },
+    "git_commit": "bb8055f (dirty)",
+    "elements_table": "/Users/obadakraishan/Desktop/AISSA26/code/accessibility-debt-agents/data/processed/elements.parquet",
+    "seed": 20260908,
+    "older_corpus": "rico_2017",
+    "newer_corpus": "androidcontrol_2024"
+  },
+  "descriptives": [
+    {
+      "label": "Coverage, rico_2017",
+      "note": "",
+      "k": 89146,
+      "n": 502585,
+      "proportion": 0.177374971397873,
+      "pct": 17.7374971397873,
+      "ci_low": 0.17632137395329073,
+      "ci_high": 0.1784335007098573,
+      "ci_low_pct": 17.632137395329075,
+      "ci_high_pct": 17.843350070985732,
+      "formatted": "17.74% (89,146/502,585)"
+    },
+    {
+      "label": "Coverage, androidcontrol_2024",
+      "note": "",
+      "k": 837536,
+      "n": 1462544,
+      "proportion": 0.5726569593803673,
+      "pct": 57.265695938036735,
+      "ci_low": 0.5718550375881011,
+      "ci_high": 0.5734584994979839,
+      "ci_low_pct": 57.18550375881011,
+      "ci_high_pct": 57.34584994979839,
+      "formatted": "57.27% (837,536/1,462,544)"
+    }
+  ],
+  "tests": {
+    "h2_1_overall": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 484.2886126252856,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.3952819879824943,
+      "ci_low": 0.39395399593988206,
+      "ci_high": 0.39660582110467363,
+      "n": 1965129,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "androidcontrol_2024": {
+          "k": 837536,
+          "n": 1462544,
+          "proportion": 0.5726569593803673,
+          "pct": 57.265695938036735,
+          "ci_low": 0.5718550375881011,
+          "ci_high": 0.5734584994979839,
+          "ci_low_pct": 57.18550375881011,
+          "ci_high_pct": 57.34584994979839,
+          "formatted": "57.27% (837,536/1,462,544)"
+        },
+        "rico_2017": {
+          "k": 89146,
+          "n": 502585,
+          "proportion": 0.177374971397873,
+          "pct": 17.7374971397873,
+          "ci_low": 0.17632137395329073,
+          "ci_high": 0.1784335007098573,
+          "ci_low_pct": 17.632137395329075,
+          "ci_high_pct": 17.843350070985732,
+          "formatted": "17.74% (89,146/502,585)"
+        },
+        "difference": 0.3952819879824943,
+        "difference_pct": 39.528198798249434
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (androidcontrol_2024 minus rico_2017). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large).",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.8471808019283134,
+      "apa": "z = 484.289, p < .001, risk difference = 0.395, 95% CI [0.394, 0.397], Cohen's h = 0.847, N = 1,965,129",
+      "significant": "True",
+      "hypothesis": "H2.1. Coverage is higher in the newer corpus.",
+      "interpretation": "large (by Cohen's h)"
+    },
+    "h2_2_role_button": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 117.09545340212615,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.2698190108100056,
+      "ci_low": 0.26538799085226916,
+      "ci_high": 0.27423669526653965,
+      "n": 184498,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "androidcontrol_2024 button": {
+          "k": 78066,
+          "n": 108037,
+          "proportion": 0.7225857807973194,
+          "pct": 72.25857807973195,
+          "ci_low": 0.719908150497084,
+          "ci_high": 0.7252475827478407,
+          "ci_low_pct": 71.9908150497084,
+          "ci_high_pct": 72.52475827478408,
+          "formatted": "72.26% (78,066/108,037)"
+        },
+        "rico_2017 button": {
+          "k": 34619,
+          "n": 76461,
+          "proportion": 0.4527667699873138,
+          "pct": 45.27667699873138,
+          "ci_low": 0.44924104363183703,
+          "ci_high": 0.4562972421711895,
+          "ci_low_pct": 44.9241043631837,
+          "ci_high_pct": 45.62972421711895,
+          "formatted": "45.28% (34,619/76,461)"
+        },
+        "difference": 0.2698190108100056,
+        "difference_pct": 26.981901081000558
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (androidcontrol_2024 button minus rico_2017 button). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.5559733743118225,
+      "apa": "z = 117.095, p < .001, risk difference = 0.270, 95% CI [0.265, 0.274], Cohen's h = 0.556, N = 184,498",
+      "significant": "True",
+      "hypothesis": "H2.2. The corpus difference for 'button' elements.",
+      "interpretation": "medium (by Cohen's h)"
+    },
+    "h2_2_role_image": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 479.91635080609956,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.4880535280482142,
+      "ci_low": 0.4866782061505358,
+      "ci_high": 0.48942063456705004,
+      "n": 1505762,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "androidcontrol_2024 image": {
+          "k": 703149,
+          "n": 1203560,
+          "proportion": 0.5842243012396557,
+          "pct": 58.42243012396557,
+          "ci_low": 0.5833435252305733,
+          "ci_high": 0.5851045396051603,
+          "ci_low_pct": 58.33435252305733,
+          "ci_high_pct": 58.51045396051603,
+          "formatted": "58.42% (703,149/1,203,560)"
+        },
+        "rico_2017 image": {
+          "k": 29063,
+          "n": 302202,
+          "proportion": 0.09617077319144149,
+          "pct": 9.61707731914415,
+          "ci_low": 0.09512475184666061,
+          "ci_high": 0.0972270610045202,
+          "ci_low_pct": 9.51247518466606,
+          "ci_high_pct": 9.722706100452019,
+          "formatted": "9.62% (29,063/302,202)"
+        },
+        "difference": 0.4880535280482142,
+        "difference_pct": 48.805352804821425
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (androidcontrol_2024 image minus rico_2017 image). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 1.109425740225653,
+      "apa": "z = 479.916, p < .001, risk difference = 0.488, 95% CI [0.487, 0.489], Cohen's h = 1.109, N = 1,505,762",
+      "significant": "True",
+      "hypothesis": "H2.2. The corpus difference for 'image' elements.",
+      "interpretation": "large (by Cohen's h)"
+    },
+    "h2_2_role_input": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 84.43935340003054,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.25014800589803504,
+      "ci_low": 0.24433432325678092,
+      "ci_high": 0.25599451082558533,
+      "n": 53818,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "androidcontrol_2024 input": {
+          "k": 6640,
+          "n": 24402,
+          "proportion": 0.272108843537415,
+          "pct": 27.210884353741495,
+          "ci_low": 0.266561108127624,
+          "ci_high": 0.27772831869808723,
+          "ci_low_pct": 26.6561108127624,
+          "ci_high_pct": 27.772831869808723,
+          "formatted": "27.21% (6,640/24,402)"
+        },
+        "rico_2017 input": {
+          "k": 646,
+          "n": 29416,
+          "proportion": 0.021960837639379928,
+          "pct": 2.196083763937993,
+          "ci_low": 0.0203474192849356,
+          "ci_high": 0.023699094719380122,
+          "ci_low_pct": 2.03474192849356,
+          "ci_high_pct": 2.369909471938012,
+          "formatted": "2.20% (646/29,416)"
+        },
+        "difference": 0.25014800589803504,
+        "difference_pct": 25.014800589803503
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (androidcontrol_2024 input minus rico_2017 input). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.8000659390291289,
+      "apa": "z = 84.439, p < .001, risk difference = 0.250, 95% CI [0.244, 0.256], Cohen's h = 0.800, N = 53,818",
+      "significant": "True",
+      "hypothesis": "H2.2. The corpus difference for 'input' elements.",
+      "interpretation": "large (by Cohen's h)"
+    },
+    "h2_2_role_other": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 59.53310415795204,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.1228379425711193,
+      "ci_low": 0.11887253403144747,
+      "ci_high": 0.12679444638116633,
+      "n": 212859,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "androidcontrol_2024 other": {
+          "k": 46654,
+          "n": 119895,
+          "proportion": 0.3891238166729221,
+          "pct": 38.912381667292216,
+          "ci_low": 0.38636767167728,
+          "ci_high": 0.39188706642933197,
+          "ci_low_pct": 38.636767167727996,
+          "ci_high_pct": 39.1887066429332,
+          "formatted": "38.91% (46,654/119,895)"
+        },
+        "rico_2017 other": {
+          "k": 24755,
+          "n": 92964,
+          "proportion": 0.2662858741018028,
+          "pct": 26.628587410180284,
+          "ci_low": 0.26345420088926264,
+          "ci_high": 0.2691368615885342,
+          "ci_low_pct": 26.345420088926264,
+          "ci_high_pct": 26.913686158853423,
+          "formatted": "26.63% (24,755/92,964)"
+        },
+        "difference": 0.1228379425711193,
+        "difference_pct": 12.28379425711193
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (androidcontrol_2024 other minus rico_2017 other). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.2627682040575161,
+      "apa": "z = 59.533, p < .001, risk difference = 0.123, 95% CI [0.119, 0.127], Cohen's h = 0.263, N = 212,859",
+      "significant": "True",
+      "hypothesis": "H2.2. The corpus difference for 'other' elements.",
+      "interpretation": "small (by Cohen's h)"
+    },
+    "h2_2_role_text": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 30.24453603886583,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.41433193879640734,
+      "ci_low": 0.3980467276666594,
+      "ci_high": 0.42920166170949015,
+      "n": 8192,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "androidcontrol_2024 text": {
+          "k": 3027,
+          "n": 6650,
+          "proportion": 0.45518796992481203,
+          "pct": 45.5187969924812,
+          "ci_low": 0.4432483202117952,
+          "ci_high": 0.46717936224975326,
+          "ci_low_pct": 44.324832021179525,
+          "ci_high_pct": 46.717936224975325,
+          "formatted": "45.52% (3,027/6,650)"
+        },
+        "rico_2017 text": {
+          "k": 63,
+          "n": 1542,
+          "proportion": 0.04085603112840467,
+          "pct": 4.085603112840467,
+          "ci_low": 0.03206312662413531,
+          "ci_high": 0.0519309065801163,
+          "ci_low_pct": 3.206312662413531,
+          "ci_high_pct": 5.19309065801163,
+          "formatted": "4.09% (63/1,542)"
+        },
+        "difference": 0.41433193879640734,
+        "difference_pct": 41.43319387964073
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (androidcontrol_2024 text minus rico_2017 text). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 1.0739897476159999,
+      "apa": "z = 30.245, p < .001, risk difference = 0.414, 95% CI [0.398, 0.429], Cohen's h = 1.074, N = 8,192",
+      "significant": "True",
+      "hypothesis": "H2.2. The corpus difference for 'text' elements.",
+      "interpretation": "large (by Cohen's h)"
+    },
+    "h2_3_icon_like": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 164.12001525851736,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.2955853636174271,
+      "ci_low": 0.2922191925747661,
+      "ci_high": 0.29894053114908375,
+      "n": 322081,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "androidcontrol_2024 icon-like": {
+          "k": 122074,
+          "n": 194529,
+          "proportion": 0.6275362542345871,
+          "pct": 62.753625423458715,
+          "ci_low": 0.6253853446962494,
+          "ci_high": 0.629682126831449,
+          "ci_low_pct": 62.53853446962494,
+          "ci_high_pct": 62.9682126831449,
+          "formatted": "62.75% (122,074/194,529)"
+        },
+        "rico_2017 icon-like": {
+          "k": 42341,
+          "n": 127552,
+          "proportion": 0.33195089061716004,
+          "pct": 33.195089061716004,
+          "ci_low": 0.3293716698116607,
+          "ci_high": 0.33454023332262356,
+          "ci_low_pct": 32.93716698116607,
+          "ci_high_pct": 33.45402333226236,
+          "formatted": "33.20% (42,341/127,552)"
+        },
+        "difference": 0.2955853636174271,
+        "difference_pct": 29.55853636174271
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (androidcontrol_2024 icon-like minus rico_2017 icon-like). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large).",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.600693730837033,
+      "apa": "z = 164.120, p < .001, risk difference = 0.296, 95% CI [0.292, 0.299], Cohen's h = 0.601, N = 322,081",
+      "significant": "True",
+      "hypothesis": "H2.3. The corpus difference holds on tappable graphics with no text, where a missing description is unambiguously a defect.",
+      "interpretation": "medium (by Cohen's h)"
+    }
+  },
+  "tables": [
+    {
+      "name": "difference_by_role",
+      "number": 1,
+      "caption": "Label coverage by element role in each corpus.",
+      "note": "Roles are assigned from the class name alone in both corpora, so neither benefits from richer metadata. Cells below 30 elements are shown but not tested.",
+      "headers": [
+        "Role",
+        "rico_2017 n",
+        "rico_2017 %",
+        "androidcontrol_2024 n",
+        "androidcontrol_2024 %",
+        "Difference (pp)"
+      ],
+      "rows": [
+        [
+          "button",
+          "76,461",
+          "45.28",
+          "108,037",
+          "72.26",
+          "+26.98"
+        ],
+        [
+          "image",
+          "302,202",
+          "9.62",
+          "1,203,560",
+          "58.42",
+          "+48.81"
+        ],
+        [
+          "input",
+          "29,416",
+          "2.20",
+          "24,402",
+          "27.21",
+          "+25.01"
+        ],
+        [
+          "other",
+          "92,964",
+          "26.63",
+          "119,895",
+          "38.91",
+          "+12.28"
+        ],
+        [
+          "text",
+          "1,542",
+          "4.09",
+          "6,650",
+          "45.52",
+          "+41.43"
+        ]
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "name": "rq2_difference_by_role",
+      "path": "/Users/obadakraishan/Desktop/AISSA26/code/accessibility-debt-agents/phase5_analysis/rq2_temporal_change/outputs/figures/rq2_difference_by_role.pdf",
+      "caption": "Coverage difference by element role, newer corpus minus older. Direction is encoded by hatching as well as colour."
+    }
+  ],
+  "notes": [
+    "H2.2 comprises 5 role comparisons; each line reports the unadjusted p with the Benjamini-Hochberg adjusted value appended.",
+    "A defensible way to state the finding is: the corpus that represents contemporary, actively maintained apps shows markedly higher coverage, and the residual debt in it is the quantity that matters for agents today."
+  ],
+  "limitations": [
+    "Corpus differences are not causal estimates of change over time. App selection, platform evolution and capture method all differ between the two datasets and cannot be separated with these data alone.",
+    "AndroidControl covers 833 apps chosen to support task demonstrations, which is a narrower and probably better-maintained population than Rico's broad 2017 crawl of 9,384 apps. That alone would push the newer corpus's coverage upward."
+  ]
+}

@@ -1,0 +1,486 @@
+================================================================================
+  REVIEWER-REQUESTED ROBUSTNESS CHECKS
+  Clustered uncertainty, paired RQ3, hit-test bias, accessible-name construct, shard selection, and split denominators
+================================================================================
+
+Report id      : reviewer_checks
+Generated      : 2026-10-06 21:02:09
+Script         : phase4_validation/03_reviewer_checks.py
+Git commit     : 426ff63 (dirty)
+Environment    : Darwin 25.6.0 | python 3.13.9, numpy 2.5.3, scipy 1.18.1, pandas 2.3.3, statsmodels 0.15.0, matplotlib 3.11.1
+elements_table : /Volumes/Kraishan/AISSA26/code/accessibility-debt-agents/data/processed/elements.parquet
+nodes_table    : /Volumes/Kraishan/AISSA26/code/accessibility-debt-agents/data/processed/androidcontrol_nodes.parquet
+seed           : 20260908
+n_boot         : 5000
+n_perm         : 10000
+system_packages: ['android', 'com.android.systemui', 'com.android.launcher3', 'com.android.intentresolver', 'com.android.permissioncontroller', 'com.android.packageinstaller', 'com.android.printspooler', 'com.android.bips', 'com.android.htmlviewer', 'com.google.android.inputmethod.latin', 'com.google.android.apps.nexuslauncher', 'com.google.android.permissioncontroller', 'com.google.android.packageinstaller', 'com.google.android.gms', 'com.google.android.ext.services', 'com.google.android.settings.intelligence', 'com.google.android.tts']
+
+--------------------------------------------------------------------------------
+1. CHECK 1: CLUSTERED UNCERTAINTY
+--------------------------------------------------------------------------------
+
+Elements are nested within screens and screens within apps (Rico) or episodes
+and apps (AndroidControl). The element-level Wilson and Newcombe intervals in
+the main text treat elements as independent. Each figure is recomputed here with
+a cluster bootstrap that resamples whole screens, and again resampling whole
+apps, 5,000 times. Wider intervals are expected; the question is whether any
+conclusion changes. AndroidControl records the app only on open_app actions, so
+an episode's app is the dominant package among its resource ids, ignoring
+platform packages (status bar, keyboard, launcher). Episodes with no such
+resource id form their own cluster.
+  AndroidControl episodes with needs-label elements 7,619
+  AndroidControl episodes whose first step names the app 2,840
+  AndroidControl episodes with an app from resource ids 7,368
+  AndroidControl needs-label elements in an app cluster 96.51% (1,411,541/1,462,544)
+      95% CI [96.48%, 96.54%]
+  AndroidControl apps identified from resource ids 700
+  Episodes whose package matches the modal package for their open_app name 90.81% (2,559/2,818)
+      95% CI [89.69%, 91.82%]  Agreement check on the episodes that also record an app name.
+  Coverage, androidcontrol_2024, screen-cluster bootstrap 95% CI 57.27% [56.99%, 57.53%], 49,745 screen clusters
+  Coverage, androidcontrol_2024, app-cluster bootstrap 95% CI 57.27% [55.65%, 58.86%], 951 app clusters
+  Coverage, androidcontrol_2024 (element-level)... 57.27% (837,536/1,462,544)
+      95% CI [57.19%, 57.35%]
+  Coverage, rico_2017, screen-cluster bootstrap 95% CI 17.74% [17.50%, 17.97%], 60,637 screen clusters
+  Coverage, rico_2017, app-cluster bootstrap 95% CI 17.74% [17.14%, 18.37%], 8,904 app clusters
+  Coverage, rico_2017 (element-level)............. 17.74% (89,146/502,585)
+      95% CI [17.63%, 17.84%]
+
+Table 1. Label coverage with cluster-bootstrap intervals, beside the element-level intervals reported in the main text.
+Dataset              Cluster  Clusters  Coverage %  Cluster-bootstrap 95% CI  Element-level Wilson 95% CI
+-------------------  -------  --------  ----------  ------------------------  ---------------------------
+androidcontrol_2024  screen   49,745    57.27       [56.99, 57.53]            [57.19, 57.35]             
+androidcontrol_2024  app      951       57.27       [55.65, 58.86]            [57.19, 57.35]             
+rico_2017            screen   60,637    17.74       [17.50, 17.97]            [17.63, 17.84]             
+rico_2017            app      8,904     17.74       [17.14, 18.37]            [17.63, 17.84]             
+
+
+The cross-corpus coverage gap survives clustering.
+  Cross-corpus gap, screen-level cluster bootstrap
+    difference = 0.395, p = n/a, risk difference = 0.395, 95% CI [0.392, 0.399], Cohen's h = 0.847, N = 1,965,129
+    Interpretation: large (by Cohen's h)
+    Note. Percentile CI from 5,000 resamples of whole screens within each
+          corpus, drawn independently.
+
+The cross-corpus coverage gap survives clustering.
+  Cross-corpus gap, app-level cluster bootstrap
+    difference = 0.395, p = n/a, risk difference = 0.395, 95% CI [0.378, 0.412], Cohen's h = 0.847, N = 1,965,129
+    Interpretation: large (by Cohen's h)
+    Note. Percentile CI from 5,000 resamples of whole apps within each corpus,
+          drawn independently.
+
+Table 2. The cross-corpus gap under cluster bootstrapping.
+Cluster  Gap (pp)  95% CI        
+-------  --------  --------------
+screen   +39.53    [39.17, 39.90]
+app      +39.53    [37.81, 41.21]
+
+
+--------------------------------------------------------------------------------
+2. CHECK 2: RQ3 WITH THE SCREEN STRUCTURE RESPECTED
+--------------------------------------------------------------------------------
+
+Three re-analyses of the touched-versus-background comparison. (a) A screen-
+level cluster bootstrap of the pooled difference. (b) A paired comparison on
+screens that contain both a touched and a background element in the population:
+the mean of per-screen differences, with a screen bootstrap. (c) A stratified
+permutation test that shuffles the touched flag only within each screen, so the
+null preserves which screens were visited and how many elements each
+contributed. That null is centred on the difference screen composition alone
+would produce, not on zero, because touched and background elements are spread
+over the screens in different proportions. The centre is reported, and the
+pooled difference splits into that composition part and a within-screen part; p
+measures the within-screen part.
+
+Touched elements are labelled at a different rate from background elements on
+the same screens.
+  RQ3 all requiring a label: screen-level cluster bootstrap
+    difference = -0.027, p = .144, risk difference = -0.027, 95% CI [-0.040, -0.015], N = 767,648
+    Interpretation: see estimate and interval
+    screens: 26,184
+    paired_screens: 6,406
+    paired_mean_diff: -0.0063
+    composition_only_diff: -0.0194
+    Note. CI from 5,000 screen resamples; p from 10,000 within-screen
+          permutations of the touched flag, two-sided around the null centre,
+          (r+1)/(m+1) convention.
+  RQ3 all requiring a label: paired within-screen difference -0.63 pp [-1.79, 0.52], 6,406 of 26,184 screens
+      Mean of per-screen touched-minus-background rates on screens with both; CI from a screen bootstrap.
+  RQ3 all requiring a label: difference expected from screen composition alone -1.94 pp
+      The centre of the stratified null: the pooled difference if touched elements were labelled at their own screen's rate. Observed minus this is the within-screen part.
+  RQ3 all requiring a label: within-screen part of the pooled difference -0.80 pp
+
+Touched elements are labelled at a different rate from background elements on
+the same screens.
+  RQ3 clickable only: screen-level cluster bootstrap
+    difference = 0.033, p < .001, risk difference = 0.033, 95% CI [0.022, 0.045], N = 165,879
+    Interpretation: see estimate and interval
+    screens: 23,139
+    paired_screens: 6,020
+    paired_mean_diff: 0.0235
+    composition_only_diff: 0.0132
+    Note. CI from 5,000 screen resamples; p from 10,000 within-screen
+          permutations of the touched flag, two-sided around the null centre,
+          (r+1)/(m+1) convention.
+  RQ3 clickable only: paired within-screen difference +2.35 pp [1.43, 3.27], 6,020 of 23,139 screens
+      Mean of per-screen touched-minus-background rates on screens with both; CI from a screen bootstrap.
+  RQ3 clickable only: difference expected from screen composition alone +1.32 pp
+      The centre of the stratified null: the pooled difference if touched elements were labelled at their own screen's rate. Observed minus this is the within-screen part.
+  RQ3 clickable only: within-screen part of the pooled difference +1.99 pp
+
+Touched elements are labelled at a different rate from background elements on
+the same screens.
+  RQ3 icon-like only: screen-level cluster bootstrap
+    difference = 0.090, p < .001, risk difference = 0.090, 95% CI [0.075, 0.105], N = 101,667
+    Interpretation: see estimate and interval
+    screens: 20,877
+    paired_screens: 3,251
+    paired_mean_diff: 0.0452
+    composition_only_diff: 0.0547
+    Note. CI from 5,000 screen resamples; p from 10,000 within-screen
+          permutations of the touched flag, two-sided around the null centre,
+          (r+1)/(m+1) convention.
+  RQ3 icon-like only: paired within-screen difference +4.52 pp [3.43, 5.62], 3,251 of 20,877 screens
+      Mean of per-screen touched-minus-background rates on screens with both; CI from a screen bootstrap.
+  RQ3 icon-like only: difference expected from screen composition alone +5.47 pp
+      The centre of the stratified null: the pooled difference if touched elements were labelled at their own screen's rate. Observed minus this is the within-screen part.
+  RQ3 icon-like only: within-screen part of the pooled difference +3.52 pp
+
+Table 3. RQ3 recomputed with screen-level clustering, within-screen pairing, and a screen-stratified permutation test.
+Population             Screens  Paired screens  Pooled diff (pp)  Screen-bootstrap 95% CI  Paired diff (pp)  Paired 95% CI  Composition alone (pp)  Stratified perm. p
+---------------------  -------  --------------  ----------------  -----------------------  ----------------  -------------  ----------------------  ------------------
+all requiring a label  26,184   6,406           -2.74             [-3.95, -1.47]           -0.63             [-1.79, 0.52]  -1.94                   0.1443            
+clickable only         23,139   6,020           +3.31             [2.15, 4.51]             +2.35             [1.43, 3.27]   +1.32                   0.0001            
+icon-like only         20,877   3,251           +9.00             [7.47, 10.51]            +4.52             [3.43, 5.62]   +5.47                   0.0001            
+
+
+--------------------------------------------------------------------------------
+3. CHECK 3: DOES HIT TESTING FAVOUR LARGE TARGETS?
+--------------------------------------------------------------------------------
+
+The hit-test rule takes the deepest visible node containing the click, breaking
+ties on drawing order and then toward the smaller area, so its first choice is
+the most specific target. When that node is not clickable, the rule climbs to
+the nearest clickable ancestor, which is larger by construction. Three
+quantities bear on the resulting bias: how often the fallback fired, whether
+touched icon-like elements are larger than background ones, and whether RQ3
+holds once fallback touches are removed. The steps table's
+used_ancestor_fallback column records whether the final element was non-
+clickable, not whether the fallback fired, so the fallback is reconstructed here
+from node depths: a click used it exactly when its resolved node is not the
+deepest visible node containing the click in the top window.
+  Clicks and long presses resolved to any element. 99.92% (26,228/26,248)
+      95% CI [99.88%, 99.95%]
+  Resolved clicks that used the clickable-ancestor fallback 43.71% (11,464/26,228)
+      95% CI [43.11%, 44.31%]
+  Resolved clicks ending on a non-clickable element 18.42% (4,832/26,228)
+      95% CI [17.96%, 18.90%]  No clickable ancestor existed; this is what the steps table's used_ancestor_fallback column records.
+  Median area, touched icon-like elements......... 17,424px^2
+  Median area, background icon-like elements...... 16,002px^2
+
+Touched elements differ in size from background elements.
+  Area of touched vs background icon-like elements
+    Cliff's delta = 0.176, p = n/a, Cliff's delta = 0.176, 95% CI [0.157, 0.194], N = 101,667
+    Interpretation: small
+    Note. Computed on log(1 + area); CI from 5,000 screen resamples. Positive
+          means touched elements are larger.
+  RQ3 all requiring a label: touched elements reached via fallback 34.72% (2,225/6,408)
+      95% CI [33.57%, 35.90%]
+  RQ3 all requiring a label: label rate, touches resolved directly 59.53% (2,490/4,183)
+      95% CI [58.03%, 61.00%]
+  RQ3 all requiring a label: label rate, touches via fallback 44.00% (979/2,225)
+      95% CI [41.95%, 46.07%]
+
+The RQ3 difference does not depend on the fallback.
+  RQ3 all requiring a label, fallback touches removed: screen-level cluster bootstrap
+    difference = 0.027, p = n/a, risk difference = 0.027, 95% CI [0.011, 0.042], N = 765,423
+    Interpretation: see estimate and interval
+    touched_kept: 4,183
+    touched_dropped: 2,225
+    Note. Touched elements reached through the clickable-ancestor fallback are
+          removed; background unchanged, so elements like the removed ones stay
+          in the background. Read as a bound on direction, not as a cleaner
+          estimate. CI from 5,000 screen resamples.
+  RQ3 clickable only: touched elements reached via fallback 36.18% (2,225/6,150)
+      95% CI [34.99%, 37.39%]
+  RQ3 clickable only: label rate, touches resolved directly 62.65% (2,459/3,925)
+      95% CI [61.12%, 64.15%]
+  RQ3 clickable only: label rate, touches via fallback 44.00% (979/2,225)
+      95% CI [41.95%, 46.07%]
+
+The RQ3 difference does not depend on the fallback.
+  RQ3 clickable only, fallback touches removed: screen-level cluster bootstrap
+    difference = 0.101, p = n/a, risk difference = 0.101, 95% CI [0.086, 0.116], N = 163,654
+    Interpretation: see estimate and interval
+    touched_kept: 3,925
+    touched_dropped: 2,225
+    Note. Touched elements reached through the clickable-ancestor fallback are
+          removed; background unchanged, so elements like the removed ones stay
+          in the background. Read as a bound on direction, not as a cleaner
+          estimate. CI from 5,000 screen resamples.
+  RQ3 icon-like only: touched elements reached via fallback 17.66% (598/3,386)
+      95% CI [16.41%, 18.98%]
+  RQ3 icon-like only: label rate, touches resolved directly 68.40% (1,907/2,788)
+      95% CI [66.65%, 70.10%]
+  RQ3 icon-like only: label rate, touches via fallback 77.26% (462/598)
+      95% CI [73.73%, 80.44%]
+
+The RQ3 difference does not depend on the fallback.
+  RQ3 icon-like only, fallback touches removed: screen-level cluster bootstrap
+    difference = 0.074, p = n/a, risk difference = 0.074, 95% CI [0.058, 0.091], N = 101,069
+    Interpretation: see estimate and interval
+    touched_kept: 2,788
+    touched_dropped: 598
+    Note. Touched elements reached through the clickable-ancestor fallback are
+          removed; background unchanged, so elements like the removed ones stay
+          in the background. Read as a bound on direction, not as a cleaner
+          estimate. CI from 5,000 screen resamples.
+
+Table 4. RQ3 with touches resolved through the clickable-ancestor fallback removed.
+Population             Touched  Via fallback  Via fallback %  Labelled, direct %  Labelled, via fallback %  Diff without them (pp)  Screen-bootstrap 95% CI
+---------------------  -------  ------------  --------------  ------------------  ------------------------  ----------------------  -----------------------
+all requiring a label  6,408    2,225         34.72           59.53               44.00                     +2.65                   [1.15, 4.18]           
+clickable only         6,150    2,225         36.18           62.65               44.00                     +10.06                  [8.57, 11.60]          
+icon-like only         3,386    598           17.66           68.40               77.26                     +7.43                   [5.77, 9.06]           
+
+Note. The background is not filtered in the same way, so the last two columns are lopsided by design; the label-rate columns are the direct evidence on whether the fallback inflates the result.
+
+
+--------------------------------------------------------------------------------
+4. CHECK 4: CONTENT DESCRIPTION VERSUS THE ACCESSIBLE NAME
+--------------------------------------------------------------------------------
+
+A screen reader's accessible name can come from fields other than the content
+description. On Android the most common is the hint text of an input field.
+AndroidControl's accessibility forest records hint_text; Rico's view hierarchies
+do not. Variant F below recomputes AndroidControl coverage treating a non-empty
+hint as a label. The primary measure, content-description coverage, remains the
+paper's construct; this check bounds how far the accessible-name reading differs
+from it.
+  AndroidControl coverage, content description only (all) 57.27% (837,536/1,462,544)
+      95% CI [57.19%, 57.35%]
+  AndroidControl coverage, description or hint (all) 57.33% (838,541/1,462,544)
+      95% CI [57.25%, 57.41%]
+  AndroidControl coverage, content description only (button) 72.26% (78,066/108,037)
+      95% CI [71.99%, 72.52%]
+  AndroidControl coverage, description or hint (button) 72.32% (78,127/108,037)
+      95% CI [72.05%, 72.58%]
+  AndroidControl coverage, content description only (image) 58.42% (703,149/1,203,560)
+      95% CI [58.33%, 58.51%]
+  AndroidControl coverage, description or hint (image) 58.42% (703,152/1,203,560)
+      95% CI [58.33%, 58.51%]
+  AndroidControl coverage, content description only (input) 27.21% (6,640/24,402)
+      95% CI [26.66%, 27.77%]
+  AndroidControl coverage, description or hint (input) 30.99% (7,562/24,402)
+      95% CI [30.41%, 31.57%]
+  AndroidControl coverage, content description only (other) 38.91% (46,654/119,895)
+      95% CI [38.64%, 39.19%]
+  AndroidControl coverage, description or hint (other) 38.93% (46,673/119,895)
+      95% CI [38.65%, 39.20%]
+  AndroidControl coverage, content description only (text) 45.52% (3,027/6,650)
+      95% CI [44.32%, 46.72%]
+  AndroidControl coverage, description or hint (text) 45.52% (3,027/6,650)
+      95% CI [44.32%, 46.72%]
+
+Table 5. AndroidControl coverage when a non-empty hint_text counts as a label.
+Role    Needs label  Desc only %  Desc or hint %  Change (pp)  Hint only (n)
+------  -----------  -----------  --------------  -----------  -------------
+all     1,462,544    57.27        57.33           +0.07        1,005        
+button  108,037      72.26        72.32           +0.06        61           
+image   1,203,560    58.42        58.42           +0.00        3            
+input   24,402       27.21        30.99           +3.78        922          
+other   119,895      38.91        38.93           +0.02        19           
+text    6,650        45.52        45.52           +0.00        0            
+
+Note. Rico carries no hint field, so the cross-corpus gap under this variant uses the primary Rico figure.
+
+  Variant F AndroidControl coverage (description or hint) 57.33%
+
+--------------------------------------------------------------------------------
+5. CHECK 5: WHICH ANDROIDCONTROL SHARDS WERE USED
+--------------------------------------------------------------------------------
+
+Phase 2 parsed every complete shard on disk, in filename order. The parse report
+lists the shards used and any partial download it skipped. The release
+interleaves episode ids across shards, so a shard is not a selection by app,
+split or date. The tables below show per-shard coverage, and compare the parsed
+episodes with the published splits and with the full episode-id range.
+  AndroidControl shards used...................... android_control-00000-of-00020, android_control-00001-of-00020, android_control-00002-of-00020, android_control-00003-of-00020, android_control-00004-of-00020, android_control-00005-of-00020, android_control-00006-of-00020, android_control-00007-of-00020, android_control-00008-of-00020, android_control-00009-of-00020
+  AndroidControl shards skipped as incomplete..... android_control-00010-of-00020.part
+  AndroidControl shards used, count............... 10
+  Elements parsed, rico_2017...................... 6,371,389
+      data/interim/rico_parse_report.json, totals.nodes
+  Elements parsed, androidcontrol_2024............ 11,002,225
+      data/interim/androidcontrol_parse_report.json, totals.elements
+
+Table 6. AndroidControl shards used, with per-shard coverage.
+Shard                           Episodes  Needs label  Coverage %
+------------------------------  --------  -----------  ----------
+android_control-00000-of-00020  784       147,701      57.12     
+android_control-00001-of-00020  760       145,883      57.40     
+android_control-00002-of-00020  776       151,710      57.34     
+android_control-00003-of-00020  750       145,469      57.01     
+android_control-00004-of-00020  763       144,179      57.32     
+android_control-00005-of-00020  751       145,035      58.07     
+android_control-00006-of-00020  760       141,636      55.84     
+android_control-00007-of-00020  766       150,236      56.85     
+android_control-00008-of-00020  757       151,810      59.23     
+android_control-00009-of-00020  756       138,885      56.34     
+
+  Per-shard coverage, min......................... 55.84%
+  Per-shard coverage, max......................... 59.23%
+  Per-shard coverage, SD.......................... 0.926pp
+
+Table 7. Parsed AndroidControl episodes against the published splits.
+Split       Parsed episodes  Released episodes  Parsed %
+----------  ---------------  -----------------  --------
+train       6,769            13,603             49.76   
+validation  71               137                51.82   
+test        783              1,543              50.75   
+
+  Parsed share of released train episodes......... 49.76% (6,769 of 13,603)
+  Parsed share of released validation episodes.... 51.82% (71 of 137)
+  Parsed share of released test episodes.......... 50.75% (783 of 1,543)
+  Parsed share of each episode-id decile, min..... 48.95%
+  Parsed share of each episode-id decile, max..... 50.82%
+
+--------------------------------------------------------------------------------
+6. CHECK 6: WHY TABLE IV HAS FEWER EPISODES THAN THE RQ4 MODEL
+--------------------------------------------------------------------------------
+
+AndroidControl publishes its generalisation subsplits (IDD, unseen category,
+unseen app, unseen task) only for test episodes; training and validation
+episodes carry no subsplit label. Table IV can therefore use only the test
+episodes, while the RQ4 regression uses every episode. The subsplits also
+overlap, so Table IV's rows sum to more than the number of distinct test
+episodes.
+  RQ4 episodes (at least one element needing a label) 7,619
+  RQ4 model episodes (at least one step).......... 7,615
+  RQ4 episodes in published split 'train'......... 6,768
+  RQ4 episodes in published split 'test'.......... 780
+  RQ4 episodes in published split 'validation'.... 71
+  RQ4 test episodes in subsplit 'IDD'............. 364
+  RQ4 test episodes in subsplit 'category_unseen'. 349
+  RQ4 test episodes in subsplit 'app_unseen'...... 318
+  RQ4 test episodes in subsplit 'task_unseen'..... 401
+  Distinct RQ4 test episodes in any subsplit...... 780
+  Sum of subsplit memberships (Table IV rows)..... 1,432
+
+Table 8. RQ4 episodes per published split.
+Split       Episodes
+----------  --------
+train       6,768   
+test        780     
+validation  71      
+
+
+Table 9. RQ4 test episodes per subsplit; the subsplits overlap.
+Subsplit         Episodes
+---------------  --------
+IDD              364     
+category_unseen  349     
+app_unseen       318     
+task_unseen      401     
+
+Note. 1,432 memberships over 780 distinct test episodes.
+
+
+--------------------------------------------------------------------------------
+RESULTS SECTION DRAFT (APA 7)
+--------------------------------------------------------------------------------
+
+Auto-composed from the recorded statistics. Treat it as a first draft: check
+every claim against the tables above, and rewrite the prose in your own voice
+before it goes near the manuscript.
+
+The cross-corpus coverage gap survives clustering. A cross-corpus gap, screen-
+level cluster bootstrap was conducted, difference = 0.395, p = n/a, risk
+difference = 0.395, 95% CI [0.392, 0.399], Cohen's h = 0.847, N = 1,965,129. The
+effect is large (by Cohen's h).
+
+The cross-corpus coverage gap survives clustering. A cross-corpus gap, app-level
+cluster bootstrap was conducted, difference = 0.395, p = n/a, risk difference =
+0.395, 95% CI [0.378, 0.412], Cohen's h = 0.847, N = 1,965,129. The effect is
+large (by Cohen's h).
+
+Touched elements are labelled at a different rate from background elements on
+the same screens. A rq3 all requiring a label: screen-level cluster bootstrap
+was conducted, difference = -0.027, p = .144, risk difference = -0.027, 95% CI
+[-0.040, -0.015], N = 767,648. The magnitude should be read from the estimate
+and its confidence interval rather than a conventional benchmark.
+
+Touched elements are labelled at a different rate from background elements on
+the same screens. A rq3 clickable only: screen-level cluster bootstrap was
+conducted, difference = 0.033, p < .001, risk difference = 0.033, 95% CI [0.022,
+0.045], N = 165,879. The magnitude should be read from the estimate and its
+confidence interval rather than a conventional benchmark.
+
+Touched elements are labelled at a different rate from background elements on
+the same screens. A rq3 icon-like only: screen-level cluster bootstrap was
+conducted, difference = 0.090, p < .001, risk difference = 0.090, 95% CI [0.075,
+0.105], N = 101,667. The magnitude should be read from the estimate and its
+confidence interval rather than a conventional benchmark.
+
+Touched elements differ in size from background elements. A area of touched vs
+background icon-like elements was conducted, Cliff's delta = 0.176, p = n/a,
+Cliff's delta = 0.176, 95% CI [0.157, 0.194], N = 101,667. The effect is small.
+
+The RQ3 difference does not depend on the fallback. A rq3 all requiring a label,
+fallback touches removed: screen-level cluster bootstrap was conducted,
+difference = 0.027, p = n/a, risk difference = 0.027, 95% CI [0.011, 0.042], N =
+765,423. The magnitude should be read from the estimate and its confidence
+interval rather than a conventional benchmark.
+
+The RQ3 difference does not depend on the fallback. A rq3 clickable only,
+fallback touches removed: screen-level cluster bootstrap was conducted,
+difference = 0.101, p = n/a, risk difference = 0.101, 95% CI [0.086, 0.116], N =
+163,654. The magnitude should be read from the estimate and its confidence
+interval rather than a conventional benchmark.
+
+The RQ3 difference does not depend on the fallback. A rq3 icon-like only,
+fallback touches removed: screen-level cluster bootstrap was conducted,
+difference = 0.074, p = n/a, risk difference = 0.074, 95% CI [0.058, 0.091], N =
+101,069. The magnitude should be read from the estimate and its confidence
+interval rather than a conventional benchmark.
+
+--------------------------------------------------------------------------------
+IEEE-STYLE NUMERIC SUMMARY
+--------------------------------------------------------------------------------
+
+Compact numeric summary of all tests (IEEE style).
+Test                       Stat           Value   df  p       Effect           Size    95% CI            Std. effect        N        
+-------------------------  -------------  ------  --  ------  ---------------  ------  ----------------  -----------------  ---------
+gap_cluster_screen         difference     0.395       n/a     risk difference  0.395   [0.392, 0.399]    Cohen's h = 0.847  1,965,129
+gap_cluster_app            difference     0.395       n/a     risk difference  0.395   [0.378, 0.412]    Cohen's h = 0.847  1,965,129
+rq3_clustered_all          difference     -0.027      .144    risk difference  -0.027  [-0.040, -0.015]                     767,648  
+rq3_clustered_clickable    difference     0.033       < .001  risk difference  0.033   [0.022, 0.045]                       165,879  
+rq3_clustered_icon-like    difference     0.090       < .001  risk difference  0.090   [0.075, 0.105]                       101,667  
+hit_test_area              Cliff's delta  0.176       n/a     Cliff's delta    0.176   [0.157, 0.194]                       101,667  
+rq3_no_fallback_all        difference     0.027       n/a     risk difference  0.027   [0.011, 0.042]                       765,423  
+rq3_no_fallback_clickable  difference     0.101       n/a     risk difference  0.101   [0.086, 0.116]                       163,654  
+rq3_no_fallback_icon-like  difference     0.074       n/a     risk difference  0.074   [0.058, 0.091]                       101,069  
+
+Note. p reported exactly; '<.001' where smaller. Effect sizes carry 95% CIs.
+
+--------------------------------------------------------------------------------
+NOTES, ASSUMPTIONS AND LIMITATIONS
+--------------------------------------------------------------------------------
+
+Limitations
+  1. Variant F treats any non-empty hint as an accessible name. Hints can be
+     placeholders ('Enter text'), so this is an upper bound on what a screen
+     reader would usefully announce, as the primary measure is a lower bound.
+  2. The fallback flag is reconstructed from node depths, not read from the
+     parse, because the parser's used_ancestor_fallback column records a non-
+     clickable result instead. The reconstruction applies the parser's own rule
+     to the stored nodes; the script stops if any resolved click contradicts it.
+  3. The fallback-free RQ3 rows drop fallback touches from the touched set only.
+     The background keeps elements of the same kind, mostly clickable wrappers
+     of role 'other', so those rows bound the direction of any fallback bias
+     rather than estimate a bias-free difference.
+  4. AndroidControl app identity comes from resource-id packages. An app whose
+     views carry no resource ids, or one that spans several packages, can be
+     split across clusters, which would narrow the app-level interval slightly.
+
+================================================================================
+  END OF REPORT — reviewer_checks
+================================================================================

@@ -1,0 +1,349 @@
+{
+  "stem": "codebook_irr",
+  "title": "Inter-rater reliability",
+  "subtitle": "Obada and Kulsawasd coding independently, plus each coder against the automated rules",
+  "generated_at": "2026-09-10T11:46:37",
+  "script": "phase3_codebook/03_coder_agreement.py",
+  "provenance": {
+    "environment": {
+      "python": "3.13.9",
+      "platform": "Darwin 25.6.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "pandas": "2.3.3",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.1"
+    },
+    "git_commit": "bb8055f (dirty)",
+    "coder_a": "phase3_codebook/outputs/coded_obada.csv",
+    "coder_b": "phase3_codebook/outputs/coded_kulsawasd.csv",
+    "seed": 20260908,
+    "codebook": "phase3_codebook/CODEBOOK.md",
+    "target_kappa": 0.8
+  },
+  "descriptives": [
+    {
+      "label": "Items double-coded",
+      "value": 300,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Items coded by Obada only",
+      "value": 0,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Items coded by Kulsawasd only",
+      "value": 0,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Items requiring adjudication",
+      "value": 28,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Items in exact agreement",
+      "value": 272,
+      "unit": "",
+      "note": ""
+    }
+  ],
+  "tests": {
+    "kappa_human_human_human_role": {
+      "name": "Cohen's kappa, element role: Obada vs Kulsawasd",
+      "statistic_name": "agreement",
+      "statistic": 0.97,
+      "p_value": NaN,
+      "effect_name": "Cohen's kappa",
+      "effect_size": 0.961973973297279,
+      "ci_low": 0.9359337583332663,
+      "ci_high": 0.9832694435204613,
+      "n": 300,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "raw_agreement_pct": 97.0,
+        "comparison": "inter-rater reliability",
+        "n_categories": 7
+      },
+      "note": "Percentile CI from 2,000 bootstrap replicates of the double-coded items. Chance-corrected; raw agreement alone overstates reliability.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "agreement = 0.970, p = n/a, Cohen's kappa = 0.962, 95% CI [0.936, 0.983], N = 300",
+      "significant": false,
+      "hypothesis": "Obada vs Kulsawasd agree on element role beyond chance.",
+      "interpretation": "almost perfect (inter-rater reliability)"
+    },
+    "kappa_a_auto_human_role": {
+      "name": "Cohen's kappa, element role: Obada vs automated rules",
+      "statistic_name": "agreement",
+      "statistic": 0.98,
+      "p_value": NaN,
+      "effect_name": "Cohen's kappa",
+      "effect_size": 0.9746685805961327,
+      "ci_low": 0.9532249759469479,
+      "ci_high": 0.9916266400510474,
+      "n": 300,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "raw_agreement_pct": 98.0,
+        "comparison": "scheme validity",
+        "n_categories": 7
+      },
+      "note": "Percentile CI from 2,000 bootstrap replicates of the double-coded items. Chance-corrected; raw agreement alone overstates reliability.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "agreement = 0.980, p = n/a, Cohen's kappa = 0.975, 95% CI [0.953, 0.992], N = 300",
+      "significant": false,
+      "hypothesis": "Obada vs automated rules agree on element role beyond chance.",
+      "interpretation": "almost perfect (scheme validity)"
+    },
+    "kappa_b_auto_human_role": {
+      "name": "Cohen's kappa, element role: Kulsawasd vs automated rules",
+      "statistic_name": "agreement",
+      "statistic": 0.99,
+      "p_value": NaN,
+      "effect_name": "Cohen's kappa",
+      "effect_size": 0.9873613256565089,
+      "ci_low": 0.97062763465311,
+      "ci_high": 1.0,
+      "n": 300,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "raw_agreement_pct": 99.0,
+        "comparison": "scheme validity",
+        "n_categories": 7
+      },
+      "note": "Percentile CI from 2,000 bootstrap replicates of the double-coded items. Chance-corrected; raw agreement alone overstates reliability.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "agreement = 0.990, p = n/a, Cohen's kappa = 0.987, 95% CI [0.971, 1.000], N = 300",
+      "significant": false,
+      "hypothesis": "Kulsawasd vs automated rules agree on element role beyond chance.",
+      "interpretation": "almost perfect (scheme validity)"
+    },
+    "kappa_human_human_human_label_status": {
+      "name": "Cohen's kappa, label status: Obada vs Kulsawasd",
+      "statistic_name": "agreement",
+      "statistic": 0.9333333333333333,
+      "p_value": NaN,
+      "effect_name": "Cohen's kappa",
+      "effect_size": 0.9084235107373434,
+      "ci_low": 0.8667860995139456,
+      "ci_high": 0.9453225530456537,
+      "n": 300,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "raw_agreement_pct": 93.33333333333333,
+        "comparison": "inter-rater reliability",
+        "n_categories": 4
+      },
+      "note": "Percentile CI from 2,000 bootstrap replicates of the double-coded items. Chance-corrected; raw agreement alone overstates reliability.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "agreement = 0.933, p = n/a, Cohen's kappa = 0.908, 95% CI [0.867, 0.945], N = 300",
+      "significant": false,
+      "hypothesis": "Obada vs Kulsawasd agree on label status beyond chance.",
+      "interpretation": "almost perfect (inter-rater reliability)"
+    },
+    "kappa_a_auto_human_label_status": {
+      "name": "Cohen's kappa, label status: Obada vs automated rules",
+      "statistic_name": "agreement",
+      "statistic": 0.9733333333333334,
+      "p_value": NaN,
+      "effect_name": "Cohen's kappa",
+      "effect_size": 0.9634864367326447,
+      "ci_low": 0.9362989165336324,
+      "ci_high": 0.9863106107065538,
+      "n": 300,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "raw_agreement_pct": 97.33333333333334,
+        "comparison": "scheme validity",
+        "n_categories": 4
+      },
+      "note": "Percentile CI from 2,000 bootstrap replicates of the double-coded items. Chance-corrected; raw agreement alone overstates reliability.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "agreement = 0.973, p = n/a, Cohen's kappa = 0.963, 95% CI [0.936, 0.986], N = 300",
+      "significant": false,
+      "hypothesis": "Obada vs automated rules agree on label status beyond chance.",
+      "interpretation": "almost perfect (scheme validity)"
+    },
+    "kappa_b_auto_human_label_status": {
+      "name": "Cohen's kappa, label status: Kulsawasd vs automated rules",
+      "statistic_name": "agreement",
+      "statistic": 0.96,
+      "p_value": NaN,
+      "effect_name": "Cohen's kappa",
+      "effect_size": 0.9452904167046594,
+      "ci_low": 0.913302050895332,
+      "ci_high": 0.9768069863402948,
+      "n": 300,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "raw_agreement_pct": 96.0,
+        "comparison": "scheme validity",
+        "n_categories": 4
+      },
+      "note": "Percentile CI from 2,000 bootstrap replicates of the double-coded items. Chance-corrected; raw agreement alone overstates reliability.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "agreement = 0.960, p = n/a, Cohen's kappa = 0.945, 95% CI [0.913, 0.977], N = 300",
+      "significant": false,
+      "hypothesis": "Kulsawasd vs automated rules agree on label status beyond chance.",
+      "interpretation": "almost perfect (scheme validity)"
+    }
+  },
+  "tables": [
+    {
+      "name": "irr_confusion_human_role",
+      "number": 1,
+      "caption": "Confusion matrix for element role between the two human coders. Rows are Obada, columns are Kulsawasd.",
+      "note": "Off-diagonal cells are the items to adjudicate. A disagreement concentrated in one cell is an ambiguous rule worth rewording in the codebook; a scattered one is coder fatigue and is fixed by adjudication alone.",
+      "headers": [
+        "Obada \\ Kulsawasd",
+        "button",
+        "container",
+        "image",
+        "input",
+        "other",
+        "text",
+        "web"
+      ],
+      "rows": [
+        [
+          "button",
+          18,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          "container",
+          0,
+          81,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          "image",
+          2,
+          0,
+          68,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          "input",
+          0,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ],
+        [
+          "other",
+          0,
+          0,
+          1,
+          0,
+          44,
+          0,
+          0
+        ],
+        [
+          "text",
+          0,
+          0,
+          0,
+          0,
+          0,
+          67,
+          0
+        ],
+        [
+          "web",
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          5
+        ]
+      ]
+    },
+    {
+      "name": "irr_confusion_human_label_status",
+      "number": 2,
+      "caption": "Confusion matrix for label status between the two human coders. Rows are Obada, columns are Kulsawasd.",
+      "note": "Off-diagonal cells are the items to adjudicate. A disagreement concentrated in one cell is an ambiguous rule worth rewording in the codebook; a scattered one is coder fatigue and is fixed by adjudication alone.",
+      "headers": [
+        "Obada \\ Kulsawasd",
+        "labelled",
+        "named_by_text",
+        "not_applicable",
+        "unlabelled"
+      ],
+      "rows": [
+        [
+          "labelled",
+          69,
+          1,
+          4,
+          0
+        ],
+        [
+          "named_by_text",
+          3,
+          69,
+          0,
+          0
+        ],
+        [
+          "not_applicable",
+          0,
+          1,
+          101,
+          7
+        ],
+        [
+          "unlabelled",
+          0,
+          0,
+          4,
+          41
+        ]
+      ]
+    }
+  ],
+  "figures": [],
+  "notes": [
+    "Every disagreement is listed with its context in codebook_irr_disagreements.csv, with blank columns for the agreed code. Adjudicate them together, record the resolution there, and state in the Method section how many items were resolved by discussion.",
+    "Both coded variables met the pre-set inter-rater reliability target of 0.80."
+  ],
+  "limitations": [
+    "Kappa is sensitive to the marginal distribution of categories. The sample is stratified by role and by automated label status precisely so that rare categories are represented; on an unstratified draw the same rules would yield a higher kappa with less information in it."
+  ]
+}

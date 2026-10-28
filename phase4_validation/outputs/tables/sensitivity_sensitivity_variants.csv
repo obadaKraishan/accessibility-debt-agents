@@ -1,0 +1,11 @@
+Variant,Dataset,Needs label,Labelled,Coverage %,95% CI
+A. Primary specification,androidcontrol_2024,"1,462,544","837,536",57.27,"[57.19, 57.35]"
+A. Primary specification,rico_2017,"502,585","89,146",17.74,"[17.63, 17.84]"
+B. Exclude disabled elements,androidcontrol_2024,"1,458,599","835,805",57.30,"[57.22, 57.38]"
+B. Exclude disabled elements,rico_2017,"498,893","88,637",17.77,"[17.66, 17.87]"
+C. Icon-like elements only,androidcontrol_2024,"194,529","122,074",62.75,"[62.54, 62.97]"
+C. Icon-like elements only,rico_2017,"127,552","42,341",33.20,"[32.94, 33.45]"
+D. Rico via superclass chain,androidcontrol_2024,"1,462,544","837,536",57.27,"[57.19, 57.35]"
+D. Rico via superclass chain,rico_2017,"462,341","89,500",19.36,"[19.24, 19.47]"
+E. Uninformative labels count as absent,androidcontrol_2024,"1,462,544","821,226",56.15,"[56.07, 56.23]"
+E. Uninformative labels count as absent,rico_2017,"502,585","80,005",15.92,"[15.82, 16.02]"

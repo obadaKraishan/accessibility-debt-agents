@@ -1,0 +1,1303 @@
+{
+  "stem": "reviewer_checks",
+  "title": "Reviewer-requested robustness checks",
+  "subtitle": "Clustered uncertainty, paired RQ3, hit-test bias, accessible-name construct, shard selection, and split denominators",
+  "generated_at": "2026-10-06T21:02:09",
+  "script": "phase4_validation/03_reviewer_checks.py",
+  "provenance": {
+    "environment": {
+      "python": "3.13.9",
+      "platform": "Darwin 25.6.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "pandas": "2.3.3",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.1"
+    },
+    "git_commit": "426ff63 (dirty)",
+    "elements_table": "/Volumes/Kraishan/AISSA26/code/accessibility-debt-agents/data/processed/elements.parquet",
+    "nodes_table": "/Volumes/Kraishan/AISSA26/code/accessibility-debt-agents/data/processed/androidcontrol_nodes.parquet",
+    "seed": 20260908,
+    "n_boot": 5000,
+    "n_perm": 10000,
+    "system_packages": [
+      "android",
+      "com.android.systemui",
+      "com.android.launcher3",
+      "com.android.intentresolver",
+      "com.android.permissioncontroller",
+      "com.android.packageinstaller",
+      "com.android.printspooler",
+      "com.android.bips",
+      "com.android.htmlviewer",
+      "com.google.android.inputmethod.latin",
+      "com.google.android.apps.nexuslauncher",
+      "com.google.android.permissioncontroller",
+      "com.google.android.packageinstaller",
+      "com.google.android.gms",
+      "com.google.android.ext.services",
+      "com.google.android.settings.intelligence",
+      "com.google.android.tts"
+    ]
+  },
+  "descriptives": [
+    {
+      "label": "AndroidControl episodes with needs-label elements",
+      "value": 7619,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "AndroidControl episodes whose first step names the app",
+      "value": 2840,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "AndroidControl episodes with an app from resource ids",
+      "value": 7368,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "AndroidControl needs-label elements in an app cluster",
+      "note": "",
+      "k": 1411541,
+      "n": 1462544,
+      "proportion": 0.9651272030106445,
+      "pct": 96.51272030106445,
+      "ci_low": 0.9648286556736001,
+      "ci_high": 0.9654233069855696,
+      "ci_low_pct": 96.48286556736001,
+      "ci_high_pct": 96.54233069855695,
+      "formatted": "96.51% (1,411,541/1,462,544)"
+    },
+    {
+      "label": "AndroidControl apps identified from resource ids",
+      "value": 700,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Episodes whose package matches the modal package for their open_app name",
+      "note": "Agreement check on the episodes that also record an app name.",
+      "k": 2559,
+      "n": 2818,
+      "proportion": 0.9080908445706175,
+      "pct": 90.80908445706174,
+      "ci_low": 0.8968616009340407,
+      "ci_high": 0.9182089951869823,
+      "ci_low_pct": 89.68616009340407,
+      "ci_high_pct": 91.82089951869823,
+      "formatted": "90.81% (2,559/2,818)"
+    },
+    {
+      "label": "Coverage, androidcontrol_2024, screen-cluster bootstrap 95% CI",
+      "value": "57.27% [56.99%, 57.53%], 49,745 screen clusters",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Coverage, androidcontrol_2024, app-cluster bootstrap 95% CI",
+      "value": "57.27% [55.65%, 58.86%], 951 app clusters",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Coverage, androidcontrol_2024 (element-level)",
+      "note": "",
+      "k": 837536,
+      "n": 1462544,
+      "proportion": 0.5726569593803673,
+      "pct": 57.265695938036735,
+      "ci_low": 0.5718550375881011,
+      "ci_high": 0.5734584994979839,
+      "ci_low_pct": 57.18550375881011,
+      "ci_high_pct": 57.34584994979839,
+      "formatted": "57.27% (837,536/1,462,544)"
+    },
+    {
+      "label": "Coverage, rico_2017, screen-cluster bootstrap 95% CI",
+      "value": "17.74% [17.50%, 17.97%], 60,637 screen clusters",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Coverage, rico_2017, app-cluster bootstrap 95% CI",
+      "value": "17.74% [17.14%, 18.37%], 8,904 app clusters",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Coverage, rico_2017 (element-level)",
+      "note": "",
+      "k": 89146,
+      "n": 502585,
+      "proportion": 0.177374971397873,
+      "pct": 17.7374971397873,
+      "ci_low": 0.17632137395329073,
+      "ci_high": 0.1784335007098573,
+      "ci_low_pct": 17.632137395329075,
+      "ci_high_pct": 17.843350070985732,
+      "formatted": "17.74% (89,146/502,585)"
+    },
+    {
+      "label": "RQ3 all requiring a label: paired within-screen difference",
+      "value": "-0.63 pp [-1.79, 0.52], 6,406 of 26,184 screens",
+      "unit": "",
+      "note": "Mean of per-screen touched-minus-background rates on screens with both; CI from a screen bootstrap."
+    },
+    {
+      "label": "RQ3 all requiring a label: difference expected from screen composition alone",
+      "value": "-1.94 pp",
+      "unit": "",
+      "note": "The centre of the stratified null: the pooled difference if touched elements were labelled at their own screen's rate. Observed minus this is the within-screen part."
+    },
+    {
+      "label": "RQ3 all requiring a label: within-screen part of the pooled difference",
+      "value": "-0.80 pp",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "RQ3 clickable only: paired within-screen difference",
+      "value": "+2.35 pp [1.43, 3.27], 6,020 of 23,139 screens",
+      "unit": "",
+      "note": "Mean of per-screen touched-minus-background rates on screens with both; CI from a screen bootstrap."
+    },
+    {
+      "label": "RQ3 clickable only: difference expected from screen composition alone",
+      "value": "+1.32 pp",
+      "unit": "",
+      "note": "The centre of the stratified null: the pooled difference if touched elements were labelled at their own screen's rate. Observed minus this is the within-screen part."
+    },
+    {
+      "label": "RQ3 clickable only: within-screen part of the pooled difference",
+      "value": "+1.99 pp",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "RQ3 icon-like only: paired within-screen difference",
+      "value": "+4.52 pp [3.43, 5.62], 3,251 of 20,877 screens",
+      "unit": "",
+      "note": "Mean of per-screen touched-minus-background rates on screens with both; CI from a screen bootstrap."
+    },
+    {
+      "label": "RQ3 icon-like only: difference expected from screen composition alone",
+      "value": "+5.47 pp",
+      "unit": "",
+      "note": "The centre of the stratified null: the pooled difference if touched elements were labelled at their own screen's rate. Observed minus this is the within-screen part."
+    },
+    {
+      "label": "RQ3 icon-like only: within-screen part of the pooled difference",
+      "value": "+3.52 pp",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Clicks and long presses resolved to any element",
+      "note": "",
+      "k": 26228,
+      "n": 26248,
+      "proportion": 0.9992380371837855,
+      "pct": 99.92380371837854,
+      "ci_low": 0.9988232951124475,
+      "ci_high": 0.9995066712295532,
+      "ci_low_pct": 99.88232951124475,
+      "ci_high_pct": 99.95066712295532,
+      "formatted": "99.92% (26,228/26,248)"
+    },
+    {
+      "label": "Resolved clicks that used the clickable-ancestor fallback",
+      "note": "",
+      "k": 11464,
+      "n": 26228,
+      "proportion": 0.43709013268262925,
+      "pct": 43.70901326826292,
+      "ci_low": 0.431096748944131,
+      "ci_high": 0.443101941789022,
+      "ci_low_pct": 43.109674894413104,
+      "ci_high_pct": 44.3101941789022,
+      "formatted": "43.71% (11,464/26,228)"
+    },
+    {
+      "label": "Resolved clicks ending on a non-clickable element",
+      "note": "No clickable ancestor existed; this is what the steps table's used_ancestor_fallback column records.",
+      "k": 4832,
+      "n": 26228,
+      "proportion": 0.1842305932591124,
+      "pct": 18.42305932591124,
+      "ci_low": 0.17958525260160652,
+      "ci_high": 0.18896841809655918,
+      "ci_low_pct": 17.958525260160652,
+      "ci_high_pct": 18.896841809655918,
+      "formatted": "18.42% (4,832/26,228)"
+    },
+    {
+      "label": "Median area, touched icon-like elements",
+      "value": 17424.0,
+      "unit": "px^2",
+      "note": ""
+    },
+    {
+      "label": "Median area, background icon-like elements",
+      "value": 16002.0,
+      "unit": "px^2",
+      "note": ""
+    },
+    {
+      "label": "RQ3 all requiring a label: touched elements reached via fallback",
+      "note": "",
+      "k": 2225,
+      "n": 6408,
+      "proportion": 0.3472222222222222,
+      "pct": 34.72222222222222,
+      "ci_low": 0.33566025015698986,
+      "ci_high": 0.3589672585587158,
+      "ci_low_pct": 33.56602501569898,
+      "ci_high_pct": 35.89672585587158,
+      "formatted": "34.72% (2,225/6,408)"
+    },
+    {
+      "label": "RQ3 all requiring a label: label rate, touches resolved directly",
+      "note": "",
+      "k": 2490,
+      "n": 4183,
+      "proportion": 0.5952665551039924,
+      "pct": 59.52665551039924,
+      "ci_low": 0.5803111447921656,
+      "ci_high": 0.6100471498408706,
+      "ci_low_pct": 58.03111447921656,
+      "ci_high_pct": 61.00471498408706,
+      "formatted": "59.53% (2,490/4,183)"
+    },
+    {
+      "label": "RQ3 all requiring a label: label rate, touches via fallback",
+      "note": "",
+      "k": 979,
+      "n": 2225,
+      "proportion": 0.44,
+      "pct": 44.0,
+      "ci_low": 0.4194954836618612,
+      "ci_high": 0.460711339060616,
+      "ci_low_pct": 41.94954836618612,
+      "ci_high_pct": 46.071133906061604,
+      "formatted": "44.00% (979/2,225)"
+    },
+    {
+      "label": "RQ3 clickable only: touched elements reached via fallback",
+      "note": "",
+      "k": 2225,
+      "n": 6150,
+      "proportion": 0.3617886178861789,
+      "pct": 36.17886178861789,
+      "ci_low": 0.34986896271406626,
+      "ci_high": 0.37388082652314575,
+      "ci_low_pct": 34.98689627140663,
+      "ci_high_pct": 37.38808265231457,
+      "formatted": "36.18% (2,225/6,150)"
+    },
+    {
+      "label": "RQ3 clickable only: label rate, touches resolved directly",
+      "note": "",
+      "k": 2459,
+      "n": 3925,
+      "proportion": 0.6264968152866242,
+      "pct": 62.64968152866242,
+      "ci_low": 0.6112466843786435,
+      "ci_high": 0.6414995794774869,
+      "ci_low_pct": 61.12466843786435,
+      "ci_high_pct": 64.14995794774869,
+      "formatted": "62.65% (2,459/3,925)"
+    },
+    {
+      "label": "RQ3 clickable only: label rate, touches via fallback",
+      "note": "",
+      "k": 979,
+      "n": 2225,
+      "proportion": 0.44,
+      "pct": 44.0,
+      "ci_low": 0.4194954836618612,
+      "ci_high": 0.460711339060616,
+      "ci_low_pct": 41.94954836618612,
+      "ci_high_pct": 46.071133906061604,
+      "formatted": "44.00% (979/2,225)"
+    },
+    {
+      "label": "RQ3 icon-like only: touched elements reached via fallback",
+      "note": "",
+      "k": 598,
+      "n": 3386,
+      "proportion": 0.1766095688127584,
+      "pct": 17.66095688127584,
+      "ci_low": 0.16413366926493483,
+      "ci_high": 0.1898184176973008,
+      "ci_low_pct": 16.413366926493484,
+      "ci_high_pct": 18.981841769730078,
+      "formatted": "17.66% (598/3,386)"
+    },
+    {
+      "label": "RQ3 icon-like only: label rate, touches resolved directly",
+      "note": "",
+      "k": 1907,
+      "n": 2788,
+      "proportion": 0.6840028694404591,
+      "pct": 68.40028694404592,
+      "ci_low": 0.6665024317263138,
+      "ci_high": 0.7009969464201063,
+      "ci_low_pct": 66.65024317263139,
+      "ci_high_pct": 70.09969464201063,
+      "formatted": "68.40% (1,907/2,788)"
+    },
+    {
+      "label": "RQ3 icon-like only: label rate, touches via fallback",
+      "note": "",
+      "k": 462,
+      "n": 598,
+      "proportion": 0.7725752508361204,
+      "pct": 77.25752508361204,
+      "ci_low": 0.7373017367222103,
+      "ci_high": 0.8043691555403396,
+      "ci_low_pct": 73.73017367222103,
+      "ci_high_pct": 80.43691555403396,
+      "formatted": "77.26% (462/598)"
+    },
+    {
+      "label": "AndroidControl coverage, content description only (all)",
+      "note": "",
+      "k": 837536,
+      "n": 1462544,
+      "proportion": 0.5726569593803673,
+      "pct": 57.265695938036735,
+      "ci_low": 0.5718550375881011,
+      "ci_high": 0.5734584994979839,
+      "ci_low_pct": 57.18550375881011,
+      "ci_high_pct": 57.34584994979839,
+      "formatted": "57.27% (837,536/1,462,544)"
+    },
+    {
+      "label": "AndroidControl coverage, description or hint (all)",
+      "note": "",
+      "k": 838541,
+      "n": 1462544,
+      "proportion": 0.573344118194051,
+      "pct": 57.33441181940509,
+      "ci_low": 0.5725423589523391,
+      "ci_high": 0.5741454921513958,
+      "ci_low_pct": 57.254235895233904,
+      "ci_high_pct": 57.41454921513957,
+      "formatted": "57.33% (838,541/1,462,544)"
+    },
+    {
+      "label": "AndroidControl coverage, content description only (button)",
+      "note": "",
+      "k": 78066,
+      "n": 108037,
+      "proportion": 0.7225857807973194,
+      "pct": 72.25857807973195,
+      "ci_low": 0.719908150497084,
+      "ci_high": 0.7252475827478407,
+      "ci_low_pct": 71.9908150497084,
+      "ci_high_pct": 72.52475827478408,
+      "formatted": "72.26% (78,066/108,037)"
+    },
+    {
+      "label": "AndroidControl coverage, description or hint (button)",
+      "note": "",
+      "k": 78127,
+      "n": 108037,
+      "proportion": 0.723150402177032,
+      "pct": 72.3150402177032,
+      "ci_low": 0.7204744281690295,
+      "ci_high": 0.7258105076843969,
+      "ci_low_pct": 72.04744281690296,
+      "ci_high_pct": 72.5810507684397,
+      "formatted": "72.32% (78,127/108,037)"
+    },
+    {
+      "label": "AndroidControl coverage, content description only (image)",
+      "note": "",
+      "k": 703149,
+      "n": 1203560,
+      "proportion": 0.5842243012396557,
+      "pct": 58.42243012396557,
+      "ci_low": 0.5833435252305733,
+      "ci_high": 0.5851045396051603,
+      "ci_low_pct": 58.33435252305733,
+      "ci_high_pct": 58.51045396051603,
+      "formatted": "58.42% (703,149/1,203,560)"
+    },
+    {
+      "label": "AndroidControl coverage, description or hint (image)",
+      "note": "",
+      "k": 703152,
+      "n": 1203560,
+      "proportion": 0.5842267938449267,
+      "pct": 58.422679384492675,
+      "ci_low": 0.5833460185888985,
+      "ci_high": 0.5851070314414656,
+      "ci_low_pct": 58.33460185888985,
+      "ci_high_pct": 58.51070314414656,
+      "formatted": "58.42% (703,152/1,203,560)"
+    },
+    {
+      "label": "AndroidControl coverage, content description only (input)",
+      "note": "",
+      "k": 6640,
+      "n": 24402,
+      "proportion": 0.272108843537415,
+      "pct": 27.210884353741495,
+      "ci_low": 0.266561108127624,
+      "ci_high": 0.27772831869808723,
+      "ci_low_pct": 26.6561108127624,
+      "ci_high_pct": 27.772831869808723,
+      "formatted": "27.21% (6,640/24,402)"
+    },
+    {
+      "label": "AndroidControl coverage, description or hint (input)",
+      "note": "",
+      "k": 7562,
+      "n": 24402,
+      "proportion": 0.3098926317514958,
+      "pct": 30.989263175149578,
+      "ci_low": 0.3041206452429747,
+      "ci_high": 0.3157244637382291,
+      "ci_low_pct": 30.41206452429747,
+      "ci_high_pct": 31.57244637382291,
+      "formatted": "30.99% (7,562/24,402)"
+    },
+    {
+      "label": "AndroidControl coverage, content description only (other)",
+      "note": "",
+      "k": 46654,
+      "n": 119895,
+      "proportion": 0.3891238166729221,
+      "pct": 38.912381667292216,
+      "ci_low": 0.38636767167728,
+      "ci_high": 0.39188706642933197,
+      "ci_low_pct": 38.636767167727996,
+      "ci_high_pct": 39.1887066429332,
+      "formatted": "38.91% (46,654/119,895)"
+    },
+    {
+      "label": "AndroidControl coverage, description or hint (other)",
+      "note": "",
+      "k": 46673,
+      "n": 119895,
+      "proportion": 0.38928228866925224,
+      "pct": 38.928228866925224,
+      "ci_low": 0.3865259347653603,
+      "ci_high": 0.39204573717929087,
+      "ci_low_pct": 38.652593476536026,
+      "ci_high_pct": 39.20457371792909,
+      "formatted": "38.93% (46,673/119,895)"
+    },
+    {
+      "label": "AndroidControl coverage, content description only (text)",
+      "note": "",
+      "k": 3027,
+      "n": 6650,
+      "proportion": 0.45518796992481203,
+      "pct": 45.5187969924812,
+      "ci_low": 0.4432483202117952,
+      "ci_high": 0.46717936224975326,
+      "ci_low_pct": 44.324832021179525,
+      "ci_high_pct": 46.717936224975325,
+      "formatted": "45.52% (3,027/6,650)"
+    },
+    {
+      "label": "AndroidControl coverage, description or hint (text)",
+      "note": "",
+      "k": 3027,
+      "n": 6650,
+      "proportion": 0.45518796992481203,
+      "pct": 45.5187969924812,
+      "ci_low": 0.4432483202117952,
+      "ci_high": 0.46717936224975326,
+      "ci_low_pct": 44.324832021179525,
+      "ci_high_pct": 46.717936224975325,
+      "formatted": "45.52% (3,027/6,650)"
+    },
+    {
+      "label": "Variant F AndroidControl coverage (description or hint)",
+      "value": 57.33,
+      "unit": "%",
+      "note": ""
+    },
+    {
+      "label": "AndroidControl shards used",
+      "value": "android_control-00000-of-00020, android_control-00001-of-00020, android_control-00002-of-00020, android_control-00003-of-00020, android_control-00004-of-00020, android_control-00005-of-00020, android_control-00006-of-00020, android_control-00007-of-00020, android_control-00008-of-00020, android_control-00009-of-00020",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "AndroidControl shards skipped as incomplete",
+      "value": "android_control-00010-of-00020.part",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "AndroidControl shards used, count",
+      "value": 10,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Elements parsed, rico_2017",
+      "value": 6371389,
+      "unit": "",
+      "note": "data/interim/rico_parse_report.json, totals.nodes"
+    },
+    {
+      "label": "Elements parsed, androidcontrol_2024",
+      "value": 11002225,
+      "unit": "",
+      "note": "data/interim/androidcontrol_parse_report.json, totals.elements"
+    },
+    {
+      "label": "Per-shard coverage, min",
+      "value": 55.84,
+      "unit": "%",
+      "note": ""
+    },
+    {
+      "label": "Per-shard coverage, max",
+      "value": 59.23,
+      "unit": "%",
+      "note": ""
+    },
+    {
+      "label": "Per-shard coverage, SD",
+      "value": 0.926,
+      "unit": "pp",
+      "note": ""
+    },
+    {
+      "label": "Parsed share of released train episodes",
+      "value": "49.76% (6,769 of 13,603)",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Parsed share of released validation episodes",
+      "value": "51.82% (71 of 137)",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Parsed share of released test episodes",
+      "value": "50.75% (783 of 1,543)",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Parsed share of each episode-id decile, min",
+      "value": 48.95,
+      "unit": "%",
+      "note": ""
+    },
+    {
+      "label": "Parsed share of each episode-id decile, max",
+      "value": 50.82,
+      "unit": "%",
+      "note": ""
+    },
+    {
+      "label": "RQ4 episodes (at least one element needing a label)",
+      "value": 7619,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "RQ4 model episodes (at least one step)",
+      "value": 7615,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "RQ4 episodes in published split 'train'",
+      "value": 6768,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "RQ4 episodes in published split 'test'",
+      "value": 780,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "RQ4 episodes in published split 'validation'",
+      "value": 71,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "RQ4 test episodes in subsplit 'IDD'",
+      "value": "364",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "RQ4 test episodes in subsplit 'category_unseen'",
+      "value": "349",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "RQ4 test episodes in subsplit 'app_unseen'",
+      "value": "318",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "RQ4 test episodes in subsplit 'task_unseen'",
+      "value": "401",
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Distinct RQ4 test episodes in any subsplit",
+      "value": 780,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Sum of subsplit memberships (Table IV rows)",
+      "value": 1432,
+      "unit": "",
+      "note": ""
+    }
+  ],
+  "tests": {
+    "gap_cluster_screen": {
+      "name": "Cross-corpus gap, screen-level cluster bootstrap",
+      "statistic_name": "difference",
+      "statistic": 0.3952819879824943,
+      "p_value": NaN,
+      "effect_name": "risk difference",
+      "effect_size": 0.3952819879824943,
+      "ci_low": 0.39169978640423,
+      "ci_high": 0.399031292178928,
+      "n": 1965129,
+      "df": null,
+      "conf": 0.95,
+      "groups": {},
+      "note": "Percentile CI from 5,000 resamples of whole screens within each corpus, drawn independently.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.8471808019283134,
+      "apa": "difference = 0.395, p = n/a, risk difference = 0.395, 95% CI [0.392, 0.399], Cohen's h = 0.847, N = 1,965,129",
+      "significant": false,
+      "hypothesis": "The cross-corpus coverage gap survives clustering.",
+      "interpretation": "large (by Cohen's h)"
+    },
+    "gap_cluster_app": {
+      "name": "Cross-corpus gap, app-level cluster bootstrap",
+      "statistic_name": "difference",
+      "statistic": 0.3952819879824943,
+      "p_value": NaN,
+      "effect_name": "risk difference",
+      "effect_size": 0.3952819879824943,
+      "ci_low": 0.3781190298522477,
+      "ci_high": 0.41208330038439417,
+      "n": 1965129,
+      "df": null,
+      "conf": 0.95,
+      "groups": {},
+      "note": "Percentile CI from 5,000 resamples of whole apps within each corpus, drawn independently.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.8471808019283134,
+      "apa": "difference = 0.395, p = n/a, risk difference = 0.395, 95% CI [0.378, 0.412], Cohen's h = 0.847, N = 1,965,129",
+      "significant": false,
+      "hypothesis": "The cross-corpus coverage gap survives clustering.",
+      "interpretation": "large (by Cohen's h)"
+    },
+    "rq3_clustered_all": {
+      "name": "RQ3 all requiring a label: screen-level cluster bootstrap",
+      "statistic_name": "difference",
+      "statistic": -0.02740036936909096,
+      "p_value": 0.14428557144285573,
+      "effect_name": "risk difference",
+      "effect_size": -0.02740036936909096,
+      "ci_low": -0.039500720001139175,
+      "ci_high": -0.01467565595020903,
+      "n": 767648,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "screens": 26184,
+        "paired_screens": 6406,
+        "paired_mean_diff": -0.006314971206935354,
+        "paired_ci": [
+          -0.017866974986043584,
+          0.005217837734715188
+        ],
+        "composition_only_diff": -0.01941732001332941
+      },
+      "note": "CI from 5,000 screen resamples; p from 10,000 within-screen permutations of the touched flag, two-sided around the null centre, (r+1)/(m+1) convention.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "difference = -0.027, p = .144, risk difference = -0.027, 95% CI [-0.040, -0.015], N = 767,648",
+      "significant": false,
+      "hypothesis": "Touched elements are labelled at a different rate from background elements on the same screens.",
+      "interpretation": "see estimate and interval"
+    },
+    "rq3_clustered_clickable": {
+      "name": "RQ3 clickable only: screen-level cluster bootstrap",
+      "statistic_name": "difference",
+      "statistic": 0.033139923428233464,
+      "p_value": 9.999000099990002e-05,
+      "effect_name": "risk difference",
+      "effect_size": 0.033139923428233464,
+      "ci_low": 0.02154735657073207,
+      "ci_high": 0.04513755576574251,
+      "n": 165879,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "screens": 23139,
+        "paired_screens": 6020,
+        "paired_mean_diff": 0.023472385773019116,
+        "paired_ci": [
+          0.014336394546555687,
+          0.03268325645950524
+        ],
+        "composition_only_diff": 0.013224188318049612
+      },
+      "note": "CI from 5,000 screen resamples; p from 10,000 within-screen permutations of the touched flag, two-sided around the null centre, (r+1)/(m+1) convention.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "difference = 0.033, p < .001, risk difference = 0.033, 95% CI [0.022, 0.045], N = 165,879",
+      "significant": true,
+      "hypothesis": "Touched elements are labelled at a different rate from background elements on the same screens.",
+      "interpretation": "see estimate and interval"
+    },
+    "rq3_clustered_icon-like": {
+      "name": "RQ3 icon-like only: screen-level cluster bootstrap",
+      "statistic_name": "difference",
+      "statistic": 0.08995501843854758,
+      "p_value": 9.999000099990002e-05,
+      "effect_name": "risk difference",
+      "effect_size": 0.08995501843854758,
+      "ci_low": 0.07473326545903905,
+      "ci_high": 0.10508814199962788,
+      "n": 101667,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "screens": 20877,
+        "paired_screens": 3251,
+        "paired_mean_diff": 0.04516464848433279,
+        "paired_ci": [
+          0.03434298732558504,
+          0.056152336362609225
+        ],
+        "composition_only_diff": 0.05473671559997362
+      },
+      "note": "CI from 5,000 screen resamples; p from 10,000 within-screen permutations of the touched flag, two-sided around the null centre, (r+1)/(m+1) convention.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "difference = 0.090, p < .001, risk difference = 0.090, 95% CI [0.075, 0.105], N = 101,667",
+      "significant": true,
+      "hypothesis": "Touched elements are labelled at a different rate from background elements on the same screens.",
+      "interpretation": "see estimate and interval"
+    },
+    "hit_test_area": {
+      "name": "Area of touched vs background icon-like elements",
+      "statistic_name": "Cliff's delta",
+      "statistic": 0.17604847650065047,
+      "p_value": NaN,
+      "effect_name": "Cliff's delta",
+      "effect_size": 0.17604847650065047,
+      "ci_low": 0.15711560694829618,
+      "ci_high": 0.19434282610093723,
+      "n": 101667,
+      "df": null,
+      "conf": 0.95,
+      "groups": {},
+      "note": "Computed on log(1 + area); CI from 5,000 screen resamples. Positive means touched elements are larger.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "Cliff's delta = 0.176, p = n/a, Cliff's delta = 0.176, 95% CI [0.157, 0.194], N = 101,667",
+      "significant": false,
+      "hypothesis": "Touched elements differ in size from background elements.",
+      "interpretation": "small"
+    },
+    "rq3_no_fallback_all": {
+      "name": "RQ3 all requiring a label, fallback touches removed: screen-level cluster bootstrap",
+      "statistic_name": "difference",
+      "statistic": 0.026511628930906417,
+      "p_value": NaN,
+      "effect_name": "risk difference",
+      "effect_size": 0.026511628930906417,
+      "ci_low": 0.011488447539231861,
+      "ci_high": 0.04175070312111437,
+      "n": 765423,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "touched_kept": 4183,
+        "touched_dropped": 2225
+      },
+      "note": "Touched elements reached through the clickable-ancestor fallback are removed; background unchanged, so elements like the removed ones stay in the background. Read as a bound on direction, not as a cleaner estimate. CI from 5,000 screen resamples.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "difference = 0.027, p = n/a, risk difference = 0.027, 95% CI [0.011, 0.042], N = 765,423",
+      "significant": false,
+      "hypothesis": "The RQ3 difference does not depend on the fallback.",
+      "interpretation": "see estimate and interval"
+    },
+    "rq3_no_fallback_clickable": {
+      "name": "RQ3 clickable only, fallback touches removed: screen-level cluster bootstrap",
+      "statistic_name": "difference",
+      "statistic": 0.10061234847095513,
+      "p_value": NaN,
+      "effect_name": "risk difference",
+      "effect_size": 0.10061234847095513,
+      "ci_low": 0.08574006476493819,
+      "ci_high": 0.11596115153625422,
+      "n": 163654,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "touched_kept": 3925,
+        "touched_dropped": 2225
+      },
+      "note": "Touched elements reached through the clickable-ancestor fallback are removed; background unchanged, so elements like the removed ones stay in the background. Read as a bound on direction, not as a cleaner estimate. CI from 5,000 screen resamples.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "difference = 0.101, p = n/a, risk difference = 0.101, 95% CI [0.086, 0.116], N = 163,654",
+      "significant": false,
+      "hypothesis": "The RQ3 difference does not depend on the fallback.",
+      "interpretation": "see estimate and interval"
+    },
+    "rq3_no_fallback_icon-like": {
+      "name": "RQ3 icon-like only, fallback touches removed: screen-level cluster bootstrap",
+      "statistic_name": "difference",
+      "statistic": 0.07431228835154058,
+      "p_value": NaN,
+      "effect_name": "risk difference",
+      "effect_size": 0.07431228835154058,
+      "ci_low": 0.05773666662234897,
+      "ci_high": 0.09064133052312026,
+      "n": 101069,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "touched_kept": 2788,
+        "touched_dropped": 598
+      },
+      "note": "Touched elements reached through the clickable-ancestor fallback are removed; background unchanged, so elements like the removed ones stay in the background. Read as a bound on direction, not as a cleaner estimate. CI from 5,000 screen resamples.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "difference = 0.074, p = n/a, risk difference = 0.074, 95% CI [0.058, 0.091], N = 101,069",
+      "significant": false,
+      "hypothesis": "The RQ3 difference does not depend on the fallback.",
+      "interpretation": "see estimate and interval"
+    }
+  },
+  "tables": [
+    {
+      "name": "clustered_coverage",
+      "number": 1,
+      "caption": "Label coverage with cluster-bootstrap intervals, beside the element-level intervals reported in the main text.",
+      "note": "",
+      "headers": [
+        "Dataset",
+        "Cluster",
+        "Clusters",
+        "Coverage %",
+        "Cluster-bootstrap 95% CI",
+        "Element-level Wilson 95% CI"
+      ],
+      "rows": [
+        [
+          "androidcontrol_2024",
+          "screen",
+          "49,745",
+          "57.27",
+          "[56.99, 57.53]",
+          "[57.19, 57.35]"
+        ],
+        [
+          "androidcontrol_2024",
+          "app",
+          "951",
+          "57.27",
+          "[55.65, 58.86]",
+          "[57.19, 57.35]"
+        ],
+        [
+          "rico_2017",
+          "screen",
+          "60,637",
+          "17.74",
+          "[17.50, 17.97]",
+          "[17.63, 17.84]"
+        ],
+        [
+          "rico_2017",
+          "app",
+          "8,904",
+          "17.74",
+          "[17.14, 18.37]",
+          "[17.63, 17.84]"
+        ]
+      ]
+    },
+    {
+      "name": "clustered_gap",
+      "number": 2,
+      "caption": "The cross-corpus gap under cluster bootstrapping.",
+      "note": "",
+      "headers": [
+        "Cluster",
+        "Gap (pp)",
+        "95% CI"
+      ],
+      "rows": [
+        [
+          "screen",
+          "+39.53",
+          "[39.17, 39.90]"
+        ],
+        [
+          "app",
+          "+39.53",
+          "[37.81, 41.21]"
+        ]
+      ]
+    },
+    {
+      "name": "rq3_clustered",
+      "number": 3,
+      "caption": "RQ3 recomputed with screen-level clustering, within-screen pairing, and a screen-stratified permutation test.",
+      "note": "",
+      "headers": [
+        "Population",
+        "Screens",
+        "Paired screens",
+        "Pooled diff (pp)",
+        "Screen-bootstrap 95% CI",
+        "Paired diff (pp)",
+        "Paired 95% CI",
+        "Composition alone (pp)",
+        "Stratified perm. p"
+      ],
+      "rows": [
+        [
+          "all requiring a label",
+          "26,184",
+          "6,406",
+          "-2.74",
+          "[-3.95, -1.47]",
+          "-0.63",
+          "[-1.79, 0.52]",
+          "-1.94",
+          "0.1443"
+        ],
+        [
+          "clickable only",
+          "23,139",
+          "6,020",
+          "+3.31",
+          "[2.15, 4.51]",
+          "+2.35",
+          "[1.43, 3.27]",
+          "+1.32",
+          "0.0001"
+        ],
+        [
+          "icon-like only",
+          "20,877",
+          "3,251",
+          "+9.00",
+          "[7.47, 10.51]",
+          "+4.52",
+          "[3.43, 5.62]",
+          "+5.47",
+          "0.0001"
+        ]
+      ]
+    },
+    {
+      "name": "rq3_no_fallback",
+      "number": 4,
+      "caption": "RQ3 with touches resolved through the clickable-ancestor fallback removed.",
+      "note": "The background is not filtered in the same way, so the last two columns are lopsided by design; the label-rate columns are the direct evidence on whether the fallback inflates the result.",
+      "headers": [
+        "Population",
+        "Touched",
+        "Via fallback",
+        "Via fallback %",
+        "Labelled, direct %",
+        "Labelled, via fallback %",
+        "Diff without them (pp)",
+        "Screen-bootstrap 95% CI"
+      ],
+      "rows": [
+        [
+          "all requiring a label",
+          "6,408",
+          "2,225",
+          "34.72",
+          "59.53",
+          "44.00",
+          "+2.65",
+          "[1.15, 4.18]"
+        ],
+        [
+          "clickable only",
+          "6,150",
+          "2,225",
+          "36.18",
+          "62.65",
+          "44.00",
+          "+10.06",
+          "[8.57, 11.60]"
+        ],
+        [
+          "icon-like only",
+          "3,386",
+          "598",
+          "17.66",
+          "68.40",
+          "77.26",
+          "+7.43",
+          "[5.77, 9.06]"
+        ]
+      ]
+    },
+    {
+      "name": "hint_variant",
+      "number": 5,
+      "caption": "AndroidControl coverage when a non-empty hint_text counts as a label.",
+      "note": "Rico carries no hint field, so the cross-corpus gap under this variant uses the primary Rico figure.",
+      "headers": [
+        "Role",
+        "Needs label",
+        "Desc only %",
+        "Desc or hint %",
+        "Change (pp)",
+        "Hint only (n)"
+      ],
+      "rows": [
+        [
+          "all",
+          "1,462,544",
+          "57.27",
+          "57.33",
+          "+0.07",
+          "1,005"
+        ],
+        [
+          "button",
+          "108,037",
+          "72.26",
+          "72.32",
+          "+0.06",
+          "61"
+        ],
+        [
+          "image",
+          "1,203,560",
+          "58.42",
+          "58.42",
+          "+0.00",
+          "3"
+        ],
+        [
+          "input",
+          "24,402",
+          "27.21",
+          "30.99",
+          "+3.78",
+          "922"
+        ],
+        [
+          "other",
+          "119,895",
+          "38.91",
+          "38.93",
+          "+0.02",
+          "19"
+        ],
+        [
+          "text",
+          "6,650",
+          "45.52",
+          "45.52",
+          "+0.00",
+          "0"
+        ]
+      ]
+    },
+    {
+      "name": "shards",
+      "number": 6,
+      "caption": "AndroidControl shards used, with per-shard coverage.",
+      "note": "",
+      "headers": [
+        "Shard",
+        "Episodes",
+        "Needs label",
+        "Coverage %"
+      ],
+      "rows": [
+        [
+          "android_control-00000-of-00020",
+          "784",
+          "147,701",
+          "57.12"
+        ],
+        [
+          "android_control-00001-of-00020",
+          "760",
+          "145,883",
+          "57.40"
+        ],
+        [
+          "android_control-00002-of-00020",
+          "776",
+          "151,710",
+          "57.34"
+        ],
+        [
+          "android_control-00003-of-00020",
+          "750",
+          "145,469",
+          "57.01"
+        ],
+        [
+          "android_control-00004-of-00020",
+          "763",
+          "144,179",
+          "57.32"
+        ],
+        [
+          "android_control-00005-of-00020",
+          "751",
+          "145,035",
+          "58.07"
+        ],
+        [
+          "android_control-00006-of-00020",
+          "760",
+          "141,636",
+          "55.84"
+        ],
+        [
+          "android_control-00007-of-00020",
+          "766",
+          "150,236",
+          "56.85"
+        ],
+        [
+          "android_control-00008-of-00020",
+          "757",
+          "151,810",
+          "59.23"
+        ],
+        [
+          "android_control-00009-of-00020",
+          "756",
+          "138,885",
+          "56.34"
+        ]
+      ]
+    },
+    {
+      "name": "parsed_vs_released",
+      "number": 7,
+      "caption": "Parsed AndroidControl episodes against the published splits.",
+      "note": "",
+      "headers": [
+        "Split",
+        "Parsed episodes",
+        "Released episodes",
+        "Parsed %"
+      ],
+      "rows": [
+        [
+          "train",
+          "6,769",
+          "13,603",
+          "49.76"
+        ],
+        [
+          "validation",
+          "71",
+          "137",
+          "51.82"
+        ],
+        [
+          "test",
+          "783",
+          "1,543",
+          "50.75"
+        ]
+      ]
+    },
+    {
+      "name": "splits",
+      "number": 8,
+      "caption": "RQ4 episodes per published split.",
+      "note": "",
+      "headers": [
+        "Split",
+        "Episodes"
+      ],
+      "rows": [
+        [
+          "train",
+          "6,768"
+        ],
+        [
+          "test",
+          "780"
+        ],
+        [
+          "validation",
+          "71"
+        ]
+      ]
+    },
+    {
+      "name": "subsplits",
+      "number": 9,
+      "caption": "RQ4 test episodes per subsplit; the subsplits overlap.",
+      "note": "1,432 memberships over 780 distinct test episodes.",
+      "headers": [
+        "Subsplit",
+        "Episodes"
+      ],
+      "rows": [
+        [
+          "IDD",
+          "364"
+        ],
+        [
+          "category_unseen",
+          "349"
+        ],
+        [
+          "app_unseen",
+          "318"
+        ],
+        [
+          "task_unseen",
+          "401"
+        ]
+      ]
+    }
+  ],
+  "figures": [],
+  "notes": [],
+  "limitations": [
+    "Variant F treats any non-empty hint as an accessible name. Hints can be placeholders ('Enter text'), so this is an upper bound on what a screen reader would usefully announce, as the primary measure is a lower bound.",
+    "The fallback flag is reconstructed from node depths, not read from the parse, because the parser's used_ancestor_fallback column records a non-clickable result instead. The reconstruction applies the parser's own rule to the stored nodes; the script stops if any resolved click contradicts it.",
+    "The fallback-free RQ3 rows drop fallback touches from the touched set only. The background keeps elements of the same kind, mostly clickable wrappers of role 'other', so those rows bound the direction of any fallback bias rather than estimate a bias-free difference.",
+    "AndroidControl app identity comes from resource-id packages. An app whose views carry no resource ids, or one that spans several packages, can be split across clusters, which would narrow the app-level interval slightly."
+  ]
+}

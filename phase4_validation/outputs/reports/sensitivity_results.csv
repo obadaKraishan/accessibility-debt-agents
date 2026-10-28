@@ -1,0 +1,11 @@
+kind,key,label,value_or_statistic,n,df,p_value,effect_name,effect_size,ci_low,ci_high,interpretation
+descriptive,,Rico elements classified differently with ancestors,320059,,,,,,,,
+proportion,,Share of included Rico elements affected,0.11180557520525641,2862639,,,,,0.11144104752199967,0.11217114474597138,
+proportion,,"Rico coverage, class name only",0.177374971397873,502585,,,,,0.17632137395329073,0.1784335007098573,
+proportion,,"Rico coverage, superclass chain",0.19358006320010554,462341,,,,,0.19244373138075835,0.1947214868879609,
+descriptive,,Movement in Rico coverage,1.621,,,,,,,,
+test,gap_a,Two-proportion z test,-484.2886126252856,1965129,,0.0,risk difference,-0.3952819879824943,-0.39660582110467363,-0.39395399593988206,large (by Cohen's h)
+test,gap_b,Two-proportion z test,-482.84167526338666,1957492,,0.0,risk difference,-0.39535168534902126,-0.3966797591006955,-0.3940194214123498,large (by Cohen's h)
+test,gap_c,Two-proportion z test,-164.12001525851736,322081,,0.0,risk difference,-0.2955853636174271,-0.29894053114908375,-0.2922191925747661,medium (by Cohen's h)
+test,gap_d,Two-proportion z test,-449.6604299179392,1924885,,0.0,risk difference,-0.37907689618026175,-0.3804674775564529,-0.37768193145091955,large (by Cohen's h)
+test,gap_e,Two-proportion z test,-493.80597170845596,1965129,,0.0,risk difference,-0.4023181549419237,-0.4036082018855164,-0.40102382889032745,large (by Cohen's h)

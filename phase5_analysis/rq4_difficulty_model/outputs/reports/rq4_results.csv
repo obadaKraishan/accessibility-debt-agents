@@ -1,0 +1,21 @@
+kind,key,label,value_or_statistic,n,df,p_value,effect_name,effect_size,ci_low,ci_high,interpretation
+descriptive,,Episodes analysed,7619,,,,,,,,
+descriptive,,Median steps per episode,5.0,,,,,,,,
+descriptive,,Median label density,0.5061224489795918,,,,,,,,
+descriptive,,"Mean steps, lower density",5.708,,,,,,,,
+descriptive,,"Mean steps, higher density",5.386,,,,,,,,
+descriptive,,Model episodes (at least one step),7615,,,,,,,,
+descriptive,,Episodes where screens visited equals steps plus one,7615,,,,,,,,
+descriptive,,Correlation of log episode-total elements with log steps,0.8,,,,,,,,
+descriptive,,Episodes whose first action is open_app,2840,,,,,,,,
+descriptive,,Model 3 episodes (first in-app screen has >= 5 needs-label elements),7407,,,,,,,,
+descriptive,,Model 3 episodes dropped,208,,,,,,,,
+descriptive,,Check A and D episodes (first screen has >= 5 needs-label elements),7520,,,,,,,,
+test,h4_1_density_steps,"Permutation test, steps by label density group",0.3224955537685643,7619,,0.000999900009999,difference in mean steps,0.3224955537685643,0.13008858698385997,0.5033466100112389,see estimate and interval
+test,h4_2_density_adjusted,Negative binomial regression (adjusted),-8.954313864100836,7615,,3.418550060021561e-19,incidence rate ratio,0.8179128772589536,0.782707663847953,0.8547015772110479,see estimate and interval
+test,h4_2_model_2,"Negative binomial, Model 2",-3.8658085246438265,7615,,0.00011072178154353072,incidence rate ratio,0.8187581851701404,0.7398178125629027,0.9061216888801316,see estimate and interval
+test,h4_2_model_3,"Negative binomial, Model 3",-0.2832680519610411,7407,,0.7769713655617102,incidence rate ratio,0.9861158406761974,0.8951871800344674,1.0862805823415413,see estimate and interval
+test,h4_2_check_a,"Negative binomial, Check A",3.664276330721197,7520,,0.00024803888538659896,incidence rate ratio,1.176349482217369,1.0784670375530232,1.2831158080202683,see estimate and interval
+test,h4_2_check_b,"Negative binomial, Check B",-3.4244730552558287,7407,,0.0006159929255700599,incidence rate ratio,0.8555577334067453,0.7824780506069382,0.9354627067485402,see estimate and interval
+test,h4_2_check_d,"Negative binomial, Check D",-2.7610089277437257,7520,,0.00576231011999225,incidence rate ratio,0.8927866799309018,0.8237287301312536,0.9676341575885512,see estimate and interval
+test,h4_3_subsplit_density,Chi-square test of independence,38.084449379931165,236348,3.0,2.712474606917611e-08,Cramer's V,0.012693981898970147,0.00910657338769225,0.017304386654942643,negligible

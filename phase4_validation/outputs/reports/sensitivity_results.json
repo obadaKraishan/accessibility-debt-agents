@@ -1,0 +1,498 @@
+{
+  "stem": "sensitivity",
+  "title": "Sensitivity to coding decisions",
+  "subtitle": "How far the headline coverage figures move under alternative rules",
+  "generated_at": "2026-09-10T11:52:34",
+  "script": "phase4_validation/02_sensitivity_checks.py",
+  "provenance": {
+    "environment": {
+      "python": "3.13.9",
+      "platform": "Darwin 25.6.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "pandas": "2.3.3",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.1"
+    },
+    "git_commit": "bb8055f (dirty)",
+    "elements_table": "/Users/obadakraishan/Desktop/AISSA26/code/accessibility-debt-agents/data/processed/elements.parquet",
+    "variants": [
+      "A. Primary specification",
+      "B. Exclude disabled elements",
+      "C. Icon-like elements only",
+      "D. Rico via superclass chain",
+      "E. Uninformative labels count as absent"
+    ]
+  },
+  "descriptives": [
+    {
+      "label": "Rico elements classified differently with ancestors",
+      "value": 320059,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Share of included Rico elements affected",
+      "note": "",
+      "k": 320059,
+      "n": 2862639,
+      "proportion": 0.11180557520525641,
+      "pct": 11.18055752052564,
+      "ci_low": 0.11144104752199967,
+      "ci_high": 0.11217114474597138,
+      "ci_low_pct": 11.144104752199967,
+      "ci_high_pct": 11.217114474597139,
+      "formatted": "11.18% (320,059/2,862,639)"
+    },
+    {
+      "label": "Rico coverage, class name only",
+      "note": "",
+      "k": 89146,
+      "n": 502585,
+      "proportion": 0.177374971397873,
+      "pct": 17.7374971397873,
+      "ci_low": 0.17632137395329073,
+      "ci_high": 0.1784335007098573,
+      "ci_low_pct": 17.632137395329075,
+      "ci_high_pct": 17.843350070985732,
+      "formatted": "17.74% (89,146/502,585)"
+    },
+    {
+      "label": "Rico coverage, superclass chain",
+      "note": "",
+      "k": 89500,
+      "n": 462341,
+      "proportion": 0.19358006320010554,
+      "pct": 19.358006320010556,
+      "ci_low": 0.19244373138075835,
+      "ci_high": 0.1947214868879609,
+      "ci_low_pct": 19.244373138075836,
+      "ci_high_pct": 19.47214868879609,
+      "formatted": "19.36% (89,500/462,341)"
+    },
+    {
+      "label": "Movement in Rico coverage",
+      "value": 1.621,
+      "unit": "pp",
+      "note": ""
+    }
+  ],
+  "tests": {
+    "gap_a": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -484.2886126252856,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": -0.3952819879824943,
+      "ci_low": -0.39660582110467363,
+      "ci_high": -0.39395399593988206,
+      "n": 1965129,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "rico_2017": {
+          "k": 89146,
+          "n": 502585,
+          "proportion": 0.177374971397873,
+          "pct": 17.7374971397873,
+          "ci_low": 0.17632137395329073,
+          "ci_high": 0.1784335007098573,
+          "ci_low_pct": 17.632137395329075,
+          "ci_high_pct": 17.843350070985732,
+          "formatted": "17.74% (89,146/502,585)"
+        },
+        "androidcontrol_2024": {
+          "k": 837536,
+          "n": 1462544,
+          "proportion": 0.5726569593803673,
+          "pct": 57.265695938036735,
+          "ci_low": 0.5718550375881011,
+          "ci_high": 0.5734584994979839,
+          "ci_low_pct": 57.18550375881011,
+          "ci_high_pct": 57.34584994979839,
+          "formatted": "57.27% (837,536/1,462,544)"
+        },
+        "difference": -0.3952819879824943,
+        "difference_pct": -39.528198798249434
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (rico_2017 minus androidcontrol_2024). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large).",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.8471808019283134,
+      "apa": "z = -484.289, p < .001, risk difference = -0.395, 95% CI [-0.397, -0.394], Cohen's h = -0.847, N = 1,965,129",
+      "significant": "True",
+      "hypothesis": "Variant A. Primary specification: the cross-corpus coverage gap.",
+      "interpretation": "large (by Cohen's h)"
+    },
+    "gap_b": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -482.84167526338666,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": -0.39535168534902126,
+      "ci_low": -0.3966797591006955,
+      "ci_high": -0.3940194214123498,
+      "n": 1957492,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "rico_2017": {
+          "k": 88637,
+          "n": 498893,
+          "proportion": 0.17766735552513263,
+          "pct": 17.766735552513264,
+          "ci_low": 0.17660918894326247,
+          "ci_high": 0.17873048596917798,
+          "ci_low_pct": 17.660918894326247,
+          "ci_high_pct": 17.873048596917798,
+          "formatted": "17.77% (88,637/498,893)"
+        },
+        "androidcontrol_2024": {
+          "k": 835805,
+          "n": 1458599,
+          "proportion": 0.5730190408741539,
+          "pct": 57.30190408741539,
+          "ci_low": 0.5722161206689658,
+          "ci_high": 0.5738215764652022,
+          "ci_low_pct": 57.221612066896576,
+          "ci_high_pct": 57.38215764652021,
+          "formatted": "57.30% (835,805/1,458,599)"
+        },
+        "difference": -0.39535168534902126,
+        "difference_pct": -39.53516853490213
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (rico_2017 minus androidcontrol_2024). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large).",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.8471475884453155,
+      "apa": "z = -482.842, p < .001, risk difference = -0.395, 95% CI [-0.397, -0.394], Cohen's h = -0.847, N = 1,957,492",
+      "significant": "True",
+      "hypothesis": "Variant B. Exclude disabled elements: the cross-corpus coverage gap.",
+      "interpretation": "large (by Cohen's h)"
+    },
+    "gap_c": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -164.12001525851736,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": -0.2955853636174271,
+      "ci_low": -0.29894053114908375,
+      "ci_high": -0.2922191925747661,
+      "n": 322081,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "rico_2017": {
+          "k": 42341,
+          "n": 127552,
+          "proportion": 0.33195089061716004,
+          "pct": 33.195089061716004,
+          "ci_low": 0.3293716698116607,
+          "ci_high": 0.33454023332262356,
+          "ci_low_pct": 32.93716698116607,
+          "ci_high_pct": 33.45402333226236,
+          "formatted": "33.20% (42,341/127,552)"
+        },
+        "androidcontrol_2024": {
+          "k": 122074,
+          "n": 194529,
+          "proportion": 0.6275362542345871,
+          "pct": 62.753625423458715,
+          "ci_low": 0.6253853446962494,
+          "ci_high": 0.629682126831449,
+          "ci_low_pct": 62.53853446962494,
+          "ci_high_pct": 62.9682126831449,
+          "formatted": "62.75% (122,074/194,529)"
+        },
+        "difference": -0.2955853636174271,
+        "difference_pct": -29.55853636174271
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (rico_2017 minus androidcontrol_2024). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large).",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.600693730837033,
+      "apa": "z = -164.120, p < .001, risk difference = -0.296, 95% CI [-0.299, -0.292], Cohen's h = -0.601, N = 322,081",
+      "significant": "True",
+      "hypothesis": "Variant C. Icon-like elements only: the cross-corpus coverage gap.",
+      "interpretation": "medium (by Cohen's h)"
+    },
+    "gap_d": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -449.6604299179392,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": -0.37907689618026175,
+      "ci_low": -0.3804674775564529,
+      "ci_high": -0.37768193145091955,
+      "n": 1924885,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "rico_2017": {
+          "k": 89500,
+          "n": 462341,
+          "proportion": 0.19358006320010554,
+          "pct": 19.358006320010556,
+          "ci_low": 0.19244373138075835,
+          "ci_high": 0.1947214868879609,
+          "ci_low_pct": 19.244373138075836,
+          "ci_high_pct": 19.47214868879609,
+          "formatted": "19.36% (89,500/462,341)"
+        },
+        "androidcontrol_2024": {
+          "k": 837536,
+          "n": 1462544,
+          "proportion": 0.5726569593803673,
+          "pct": 57.265695938036735,
+          "ci_low": 0.5718550375881011,
+          "ci_high": 0.5734584994979839,
+          "ci_low_pct": 57.18550375881011,
+          "ci_high_pct": 57.34584994979839,
+          "formatted": "57.27% (837,536/1,462,544)"
+        },
+        "difference": -0.37907689618026175,
+        "difference_pct": -37.907689618026176
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (rico_2017 minus androidcontrol_2024). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large).",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.8054796903823702,
+      "apa": "z = -449.660, p < .001, risk difference = -0.379, 95% CI [-0.380, -0.378], Cohen's h = -0.805, N = 1,924,885",
+      "significant": "True",
+      "hypothesis": "Variant D. Rico via superclass chain: the cross-corpus coverage gap.",
+      "interpretation": "large (by Cohen's h)"
+    },
+    "gap_e": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -493.80597170845596,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": -0.4023181549419237,
+      "ci_low": -0.4036082018855164,
+      "ci_high": -0.40102382889032745,
+      "n": 1965129,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "rico_2017": {
+          "k": 80005,
+          "n": 502585,
+          "proportion": 0.15918700319348966,
+          "pct": 15.918700319348966,
+          "ci_low": 0.15817815301314703,
+          "ci_high": 0.16020106327498723,
+          "ci_low_pct": 15.817815301314702,
+          "ci_high_pct": 16.020106327498723,
+          "formatted": "15.92% (80,005/502,585)"
+        },
+        "androidcontrol_2024": {
+          "k": 821226,
+          "n": 1462544,
+          "proportion": 0.5615051581354134,
+          "pct": 56.15051581354134,
+          "ci_low": 0.5607008186057657,
+          "ci_high": 0.5623091745719963,
+          "ci_low_pct": 56.07008186057657,
+          "ci_high_pct": 56.230917457199624,
+          "formatted": "56.15% (821,226/1,462,544)"
+        },
+        "difference": -0.4023181549419237,
+        "difference_pct": -40.23181549419237
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (rico_2017 minus androidcontrol_2024). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large).",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.8733052226780763,
+      "apa": "z = -493.806, p < .001, risk difference = -0.402, 95% CI [-0.404, -0.401], Cohen's h = -0.873, N = 1,965,129",
+      "significant": "True",
+      "hypothesis": "Variant E. Uninformative labels count as absent: the cross-corpus coverage gap.",
+      "interpretation": "large (by Cohen's h)"
+    }
+  },
+  "tables": [
+    {
+      "name": "sensitivity_variants",
+      "number": 1,
+      "caption": "Label coverage under alternative coding specifications.",
+      "note": "Variant C is the strictest unit and the one to quote when a reviewer challenges the broader definitions. Variant D is the specification most favourable to Rico and variant E the one most hostile to the 2024 corpus, so a gap surviving both is not an artifact of either.",
+      "headers": [
+        "Variant",
+        "Dataset",
+        "Needs label",
+        "Labelled",
+        "Coverage %",
+        "95% CI"
+      ],
+      "rows": [
+        [
+          "A. Primary specification",
+          "androidcontrol_2024",
+          "1,462,544",
+          "837,536",
+          "57.27",
+          "[57.19, 57.35]"
+        ],
+        [
+          "A. Primary specification",
+          "rico_2017",
+          "502,585",
+          "89,146",
+          "17.74",
+          "[17.63, 17.84]"
+        ],
+        [
+          "B. Exclude disabled elements",
+          "androidcontrol_2024",
+          "1,458,599",
+          "835,805",
+          "57.30",
+          "[57.22, 57.38]"
+        ],
+        [
+          "B. Exclude disabled elements",
+          "rico_2017",
+          "498,893",
+          "88,637",
+          "17.77",
+          "[17.66, 17.87]"
+        ],
+        [
+          "C. Icon-like elements only",
+          "androidcontrol_2024",
+          "194,529",
+          "122,074",
+          "62.75",
+          "[62.54, 62.97]"
+        ],
+        [
+          "C. Icon-like elements only",
+          "rico_2017",
+          "127,552",
+          "42,341",
+          "33.20",
+          "[32.94, 33.45]"
+        ],
+        [
+          "D. Rico via superclass chain",
+          "androidcontrol_2024",
+          "1,462,544",
+          "837,536",
+          "57.27",
+          "[57.19, 57.35]"
+        ],
+        [
+          "D. Rico via superclass chain",
+          "rico_2017",
+          "462,341",
+          "89,500",
+          "19.36",
+          "[19.24, 19.47]"
+        ],
+        [
+          "E. Uninformative labels count as absent",
+          "androidcontrol_2024",
+          "1,462,544",
+          "821,226",
+          "56.15",
+          "[56.07, 56.23]"
+        ],
+        [
+          "E. Uninformative labels count as absent",
+          "rico_2017",
+          "502,585",
+          "80,005",
+          "15.92",
+          "[15.82, 16.02]"
+        ]
+      ]
+    },
+    {
+      "name": "sensitivity_gap",
+      "number": 2,
+      "caption": "The cross-corpus coverage gap under each specification.",
+      "note": "Read down the Gap column. The claim is robust to the extent that this column does not change sign or order of magnitude.",
+      "headers": [
+        "Variant",
+        "androidcontrol %",
+        "rico %",
+        "Gap (pp)",
+        "Cohen's h"
+      ],
+      "rows": [
+        [
+          "A",
+          "57.27",
+          "17.74",
+          "+39.53",
+          "-0.395"
+        ],
+        [
+          "B",
+          "57.30",
+          "17.77",
+          "+39.54",
+          "-0.395"
+        ],
+        [
+          "C",
+          "62.75",
+          "33.20",
+          "+29.56",
+          "-0.296"
+        ],
+        [
+          "D",
+          "57.27",
+          "19.36",
+          "+37.91",
+          "-0.379"
+        ],
+        [
+          "E",
+          "56.15",
+          "15.92",
+          "+40.23",
+          "-0.402"
+        ]
+      ]
+    },
+    {
+      "name": "sensitivity_uninformative",
+      "number": 3,
+      "caption": "Content descriptions that name the widget rather than its function, echo the resource id, or are a single character or bare number.",
+      "note": "Counted among elements that need a label and were coded 'labelled', which is the only place such a string can inflate coverage.",
+      "headers": [
+        "Dataset",
+        "Labelled (needs a label)",
+        "Uninformative",
+        "Share %"
+      ],
+      "rows": [
+        [
+          "androidcontrol_2024",
+          "837,536",
+          "16,310",
+          "1.95"
+        ],
+        [
+          "rico_2017",
+          "89,146",
+          "9,141",
+          "10.25"
+        ]
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "name": "sensitivity_coverage",
+      "path": "/Users/obadakraishan/Desktop/AISSA26/code/accessibility-debt-agents/phase4_validation/outputs/figures/sensitivity_coverage.pdf",
+      "caption": "Coverage under each specification, by corpus. Hatching duplicates the colour encoding so the figure survives greyscale printing."
+    }
+  ],
+  "notes": [],
+  "limitations": [
+    "The uninformative-description list is a conservative keyword rule, not a semantic judgement. It will miss a description that is fluent but wrong ('Search' on a settings button), and that class of error cannot be detected from the view hierarchy at all. Variant E is therefore a lower bound on low-quality labelling.",
+    "None of these variants can distinguish a decorative image from a meaningful one, because the view hierarchy does not encode that. The estimates are therefore upper bounds on genuine debt, which is the conservative direction for the paper's claim."
+  ]
+}

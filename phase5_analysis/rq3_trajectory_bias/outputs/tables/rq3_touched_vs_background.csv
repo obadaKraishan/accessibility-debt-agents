@@ -1,0 +1,4 @@
+Comparison,Touched n,Touched %,Background n,Background %,Difference (pp)
+all elements requiring a label,"6,408",54.14,"761,240",56.88,-2.74
+clickable elements only,"6,150",55.90,"159,729",52.59,+3.31
+icon-like elements only,"3,386",69.96,"98,281",60.97,+9.00

@@ -1,0 +1,2059 @@
+{
+  "stem": "rq1",
+  "title": "RQ1: Label coverage in GUI corpora",
+  "subtitle": "Content-description coverage by element role, app category and rating",
+  "generated_at": "2026-09-10T05:04:34",
+  "script": "phase5_analysis/rq1_label_coverage/run_rq1.py",
+  "provenance": {
+    "environment": {
+      "python": "3.13.9",
+      "platform": "Darwin 25.6.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "pandas": "2.3.3",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.1"
+    },
+    "git_commit": "bb8055f (dirty)",
+    "elements_table": "/Users/obadakraishan/Desktop/AISSA26/code/accessibility-debt-agents/data/processed/elements.parquet",
+    "seed": 20260908,
+    "inclusion_rule": {
+      "require_visible_to_user": true,
+      "require_positive_area": true,
+      "require_enabled": false
+    },
+    "codebook": "phase3_codebook/CODEBOOK.md"
+  },
+  "descriptives": [
+    {
+      "label": "Elements parsed",
+      "value": 17373614,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Elements in the analysis population",
+      "value": 9693702,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Excluded by the inclusion rule",
+      "value": 7679912,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Screens or observations",
+      "value": 116083,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Datasets",
+      "value": 2,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Label coverage, androidcontrol_2024",
+      "note": "among elements requiring a content description",
+      "k": 837536,
+      "n": 1462544,
+      "proportion": 0.5726569593803673,
+      "pct": 57.265695938036735,
+      "ci_low": 0.5718550375881011,
+      "ci_high": 0.5734584994979839,
+      "ci_low_pct": 57.18550375881011,
+      "ci_high_pct": 57.34584994979839,
+      "formatted": "57.27% (837,536/1,462,544)"
+    },
+    {
+      "label": "Icon-like coverage, androidcontrol_2024",
+      "note": "tappable graphics with no text of their own",
+      "k": 122074,
+      "n": 194529,
+      "proportion": 0.6275362542345871,
+      "pct": 62.753625423458715,
+      "ci_low": 0.6253853446962494,
+      "ci_high": 0.629682126831449,
+      "ci_low_pct": 62.53853446962494,
+      "ci_high_pct": 62.9682126831449,
+      "formatted": "62.75% (122,074/194,529)"
+    },
+    {
+      "label": "Label coverage, rico_2017",
+      "note": "among elements requiring a content description",
+      "k": 89146,
+      "n": 502585,
+      "proportion": 0.177374971397873,
+      "pct": 17.7374971397873,
+      "ci_low": 0.17632137395329073,
+      "ci_high": 0.1784335007098573,
+      "ci_low_pct": 17.632137395329075,
+      "ci_high_pct": 17.843350070985732,
+      "formatted": "17.74% (89,146/502,585)"
+    },
+    {
+      "label": "Icon-like coverage, rico_2017",
+      "note": "tappable graphics with no text of their own",
+      "k": 42341,
+      "n": 127552,
+      "proportion": 0.33195089061716004,
+      "pct": 33.195089061716004,
+      "ci_low": 0.3293716698116607,
+      "ci_high": 0.33454023332262356,
+      "ci_low_pct": 32.93716698116607,
+      "ci_high_pct": 33.45402333226236,
+      "formatted": "33.20% (42,341/127,552)"
+    }
+  ],
+  "tests": {
+    "h1_1_role_dependence_androidcontrol_2024": {
+      "name": "Chi-square test of independence",
+      "statistic_name": "chi2",
+      "statistic": 36466.57256310552,
+      "p_value": 0.0,
+      "effect_name": "Cramer's V",
+      "effect_size": 0.15790395324158993,
+      "ci_low": 0.1562861888437527,
+      "ci_high": 0.1594950023760326,
+      "n": 1462544,
+      "df": 4.0,
+      "conf": 0.95,
+      "groups": {
+        "table": [
+          [
+            78066,
+            29971
+          ],
+          [
+            703149,
+            500411
+          ],
+          [
+            6640,
+            17762
+          ],
+          [
+            46654,
+            73241
+          ],
+          [
+            3027,
+            3623
+          ]
+        ],
+        "row_labels": [
+          "button",
+          "image",
+          "input",
+          "other",
+          "text"
+        ],
+        "col_labels": [
+          "labelled",
+          "unlabelled"
+        ],
+        "dropped_empty": {
+          "rows": [],
+          "cols": []
+        }
+      },
+      "note": "Cramer's V CI from 2,000 parametric bootstrap replicates.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "chi2 (4) = 36,466.6, p < .001, Cramer's V = 0.158, 95% CI [0.156, 0.159], N = 1,462,544",
+      "significant": true,
+      "hypothesis": "H1.1 (androidcontrol_2024). Label status is not independent of element role.",
+      "interpretation": "small"
+    },
+    "h1_1_role_dependence_rico_2017": {
+      "name": "Chi-square test of independence",
+      "statistic_name": "chi2",
+      "statistic": 63501.78847762553,
+      "p_value": 0.0,
+      "effect_name": "Cramer's V",
+      "effect_size": 0.3554579379731823,
+      "ci_low": 0.35268136438628694,
+      "ci_high": 0.3584715818079228,
+      "n": 502585,
+      "df": 4.0,
+      "conf": 0.95,
+      "groups": {
+        "table": [
+          [
+            34619,
+            41842
+          ],
+          [
+            29063,
+            273139
+          ],
+          [
+            646,
+            28770
+          ],
+          [
+            24755,
+            68209
+          ],
+          [
+            63,
+            1479
+          ]
+        ],
+        "row_labels": [
+          "button",
+          "image",
+          "input",
+          "other",
+          "text"
+        ],
+        "col_labels": [
+          "labelled",
+          "unlabelled"
+        ],
+        "dropped_empty": {
+          "rows": [],
+          "cols": []
+        }
+      },
+      "note": "Cramer's V CI from 2,000 parametric bootstrap replicates.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "chi2 (4) = 63,501.8, p < .001, Cramer's V = 0.355, 95% CI [0.353, 0.358], N = 502,585",
+      "significant": true,
+      "hypothesis": "H1.1 (rico_2017). Label status is not independent of element role.",
+      "interpretation": "medium"
+    },
+    "h1_2_icon_gap_androidcontrol_2024": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 52.54814443437063,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.063298449476757,
+      "ci_low": 0.060980918688094826,
+      "ci_high": 0.06561145145485844,
+      "n": 1462544,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "androidcontrol_2024 icon-like": {
+          "k": 122074,
+          "n": 194529,
+          "proportion": 0.6275362542345871,
+          "pct": 62.753625423458715,
+          "ci_low": 0.6253853446962494,
+          "ci_high": 0.629682126831449,
+          "ci_low_pct": 62.53853446962494,
+          "ci_high_pct": 62.9682126831449,
+          "formatted": "62.75% (122,074/194,529)"
+        },
+        "androidcontrol_2024 other": {
+          "k": 715462,
+          "n": 1268015,
+          "proportion": 0.5642378047578301,
+          "pct": 56.42378047578301,
+          "ci_low": 0.56337454990048,
+          "ci_high": 0.5651006703987528,
+          "ci_low_pct": 56.337454990047995,
+          "ci_high_pct": 56.51006703987528,
+          "formatted": "56.42% (715,462/1,268,015)"
+        },
+        "difference": 0.063298449476757,
+        "difference_pct": 6.3298449476757
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (androidcontrol_2024 icon-like minus androidcontrol_2024 other). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large).",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.12909099458772455,
+      "apa": "z = 52.548, p < .001, risk difference = 0.063, 95% CI [0.061, 0.066], Cohen's h = 0.129, N = 1,462,544",
+      "significant": "True",
+      "hypothesis": "H1.2 (androidcontrol_2024). Coverage among icon-like elements differs from coverage among other elements needing a label.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_2_icon_gap_rico_2017": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 167.30478601378732,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.20714853989069065,
+      "ci_low": 0.20435939375641166,
+      "ci_high": 0.2099441421212797,
+      "n": 502585,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "rico_2017 icon-like": {
+          "k": 42341,
+          "n": 127552,
+          "proportion": 0.33195089061716004,
+          "pct": 33.195089061716004,
+          "ci_low": 0.3293716698116607,
+          "ci_high": 0.33454023332262356,
+          "ci_low_pct": 32.93716698116607,
+          "ci_high_pct": 33.45402333226236,
+          "formatted": "33.20% (42,341/127,552)"
+        },
+        "rico_2017 other": {
+          "k": 46805,
+          "n": 375033,
+          "proportion": 0.1248023507264694,
+          "pct": 12.48023507264694,
+          "ci_low": 0.12374845500803358,
+          "ci_high": 0.12586393265681814,
+          "ci_low_pct": 12.374845500803358,
+          "ci_high_pct": 12.586393265681814,
+          "formatted": "12.48% (46,805/375,033)"
+        },
+        "difference": 0.20714853989069065,
+        "difference_pct": 20.714853989069066
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (rico_2017 icon-like minus rico_2017 other). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large).",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.5058888774654455,
+      "apa": "z = 167.305, p < .001, risk difference = 0.207, 95% CI [0.204, 0.210], Cohen's h = 0.506, N = 502,585",
+      "significant": "True",
+      "hypothesis": "H1.2 (rico_2017). Coverage among icon-like elements differs from coverage among other elements needing a label.",
+      "interpretation": "medium (by Cohen's h)"
+    },
+    "h1_3_category_art_&_design": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -1.8787503335248616,
+      "p_value": 0.0602785915597861,
+      "effect_name": "risk difference",
+      "effect_size": -0.01375475458986955,
+      "ci_low": -0.02718481284213416,
+      "ci_high": 0.0006149201251312245,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Art & Design": {
+          "k": 448,
+          "n": 2737,
+          "proportion": 0.1636828644501279,
+          "pct": 16.36828644501279,
+          "ci_low": 0.15029482933932567,
+          "ci_high": 0.1780136380931067,
+          "ci_low_pct": 15.029482933932567,
+          "ci_high_pct": 17.80136380931067,
+          "formatted": "16.37% (448/2,737)"
+        },
+        "all other categories": {
+          "k": 88689,
+          "n": 499832,
+          "proportion": 0.17743761903999744,
+          "pct": 17.743761903999744,
+          "ci_low": 0.17638098371566047,
+          "ci_high": 0.17849921243256717,
+          "ci_low_pct": 17.638098371566045,
+          "ci_high_pct": 17.849921243256716,
+          "formatted": "17.74% (88,689/499,832)"
+        },
+        "difference": -0.01375475458986955,
+        "difference_pct": -1.375475458986955
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Art & Design minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0678.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.03657644276127647,
+      "apa": "z = -1.879, p = .060, risk difference = -0.014, 95% CI [-0.027, 0.001], Cohen's h = -0.037, N = 502,569",
+      "significant": "False",
+      "hypothesis": "H1.3. Coverage in 'Art & Design' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_auto_&_vehicles": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 2.1783560727784534,
+      "p_value": 0.029379537566169844,
+      "effect_name": "risk difference",
+      "effect_size": 0.011899612441512164,
+      "ci_low": 0.0011670019717533071,
+      "ci_high": 0.023112750595258767,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Auto & Vehicles": {
+          "k": 934,
+          "n": 4938,
+          "proportion": 0.18914540299716484,
+          "pct": 18.914540299716485,
+          "ci_low": 0.17846561342123052,
+          "ci_high": 0.20030846794466267,
+          "ci_low_pct": 17.846561342123053,
+          "ci_high_pct": 20.030846794466267,
+          "formatted": "18.91% (934/4,938)"
+        },
+        "all other categories": {
+          "k": 88203,
+          "n": 497631,
+          "proportion": 0.17724579055565268,
+          "pct": 17.72457905556527,
+          "ci_low": 0.17618727828224579,
+          "ci_high": 0.17830928578805477,
+          "ci_low_pct": 17.61872782822458,
+          "ci_high_pct": 17.830928578805477,
+          "formatted": "17.72% (88,203/497,631)"
+        },
+        "difference": 0.011899612441512164,
+        "difference_pct": 1.1899612441512164
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Auto & Vehicles minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0345.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.030765775594325806,
+      "apa": "z = 2.178, p = .029, risk difference = 0.012, 95% CI [0.001, 0.023], Cohen's h = 0.031, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Auto & Vehicles' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_beauty": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -6.697933143705962,
+      "p_value": 2.1138868433467906e-11,
+      "effect_name": "risk difference",
+      "effect_size": -0.041552897286182805,
+      "ci_low": -0.052116240911885936,
+      "ci_high": -0.030262392099022716,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Beauty": {
+          "k": 520,
+          "n": 3820,
+          "proportion": 0.13612565445026178,
+          "pct": 13.612565445026178,
+          "ci_low": 0.12561596370375844,
+          "ci_high": 0.1473664468019909,
+          "ci_low_pct": 12.561596370375844,
+          "ci_high_pct": 14.73664468019909,
+          "formatted": "13.61% (520/3,820)"
+        },
+        "all other categories": {
+          "k": 88617,
+          "n": 498749,
+          "proportion": 0.1776785517364446,
+          "pct": 17.76785517364446,
+          "ci_low": 0.176620206477752,
+          "ci_high": 0.17874186211801008,
+          "ci_low_pct": 17.6620206477752,
+          "ci_high_pct": 17.874186211801007,
+          "formatted": "17.77% (88,617/498,749)"
+        },
+        "difference": -0.041552897286182805,
+        "difference_pct": -4.15528972861828
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Beauty minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.11447759552007053,
+      "apa": "z = -6.698, p < .001, risk difference = -0.042, 95% CI [-0.052, -0.030], Cohen's h = -0.114, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Beauty' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_books_&_reference": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 18.807307297321504,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.04885668282643793,
+      "ci_low": 0.04336604786431898,
+      "ci_high": 0.054438158632781106,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Books & Reference": {
+          "k": 5072,
+          "n": 22641,
+          "proportion": 0.22401837374674263,
+          "pct": 22.401837374674262,
+          "ci_low": 0.2186345997234151,
+          "ci_high": 0.2294957825216712,
+          "ci_low_pct": 21.86345997234151,
+          "ci_high_pct": 22.949578252167118,
+          "formatted": "22.40% (5,072/22,641)"
+        },
+        "all other categories": {
+          "k": 84065,
+          "n": 479928,
+          "proportion": 0.1751616909203047,
+          "pct": 17.51616909203047,
+          "ci_low": 0.17408890702355295,
+          "ci_high": 0.17623967494290732,
+          "ci_low_pct": 17.408890702355293,
+          "ci_high_pct": 17.62396749429073,
+          "formatted": "17.52% (84,065/479,928)"
+        },
+        "difference": 0.04885668282643793,
+        "difference_pct": 4.885668282643793
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Books & Reference minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.12244217537192303,
+      "apa": "z = 18.807, p < .001, risk difference = 0.049, 95% CI [0.043, 0.054], Cohen's h = 0.122, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Books & Reference' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_business": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 6.842412727222922,
+      "p_value": 7.787104294720848e-12,
+      "effect_name": "risk difference",
+      "effect_size": 0.022587681510841978,
+      "ci_low": 0.01591177322102361,
+      "ci_high": 0.029428430750327063,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Business": {
+          "k": 2744,
+          "n": 13766,
+          "proportion": 0.19933168676449223,
+          "pct": 19.933168676449224,
+          "ci_low": 0.19274239247420397,
+          "ci_high": 0.2060887396956386,
+          "ci_low_pct": 19.274239247420397,
+          "ci_high_pct": 20.60887396956386,
+          "formatted": "19.93% (2,744/13,766)"
+        },
+        "all other categories": {
+          "k": 86393,
+          "n": 488803,
+          "proportion": 0.17674400525365025,
+          "pct": 17.674400525365023,
+          "ci_low": 0.1756771941910895,
+          "ci_high": 0.17781589715586807,
+          "ci_low_pct": 17.567719419108947,
+          "ci_high_pct": 17.781589715586808,
+          "formatted": "17.67% (86,393/488,803)"
+        },
+        "difference": 0.022587681510841978,
+        "difference_pct": 2.258768151084198
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Business minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.05783056962019051,
+      "apa": "z = 6.842, p < .001, risk difference = 0.023, 95% CI [0.016, 0.029], Cohen's h = 0.058, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Business' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_comics": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -6.010920959801432,
+      "p_value": 1.844723263033643e-09,
+      "effect_name": "risk difference",
+      "effect_size": -0.02453861556042386,
+      "ci_low": -0.03194535404689318,
+      "ci_high": -0.016836820921752316,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Comics": {
+          "k": 1366,
+          "n": 8913,
+          "proportion": 0.1532592841916302,
+          "pct": 15.32592841916302,
+          "ci_low": 0.14593010579040444,
+          "ci_high": 0.16088722088913993,
+          "ci_low_pct": 14.593010579040444,
+          "ci_high_pct": 16.088722088913993,
+          "formatted": "15.33% (1,366/8,913)"
+        },
+        "all other categories": {
+          "k": 87771,
+          "n": 493656,
+          "proportion": 0.17779789975205407,
+          "pct": 17.779789975205407,
+          "ci_low": 0.1767338403575397,
+          "ci_high": 0.17886697363628823,
+          "ci_low_pct": 17.67338403575397,
+          "ci_high_pct": 17.886697363628823,
+          "formatted": "17.78% (87,771/493,656)"
+        },
+        "difference": -0.02453861556042386,
+        "difference_pct": -2.453861556042386
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Comics minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.06606613959468344,
+      "apa": "z = -6.011, p < .001, risk difference = -0.025, 95% CI [-0.032, -0.017], Cohen's h = -0.066, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Comics' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_communication": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 5.7835520481668805,
+      "p_value": 7.313954331067407e-09,
+      "effect_name": "risk difference",
+      "effect_size": 0.014508736148509116,
+      "ci_low": 0.009501588052717409,
+      "ci_high": 0.019609883498241665,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Communication": {
+          "k": 4658,
+          "n": 24366,
+          "proportion": 0.1911680210128868,
+          "pct": 19.11680210128868,
+          "ci_low": 0.18627951509717833,
+          "ci_high": 0.1961538903301419,
+          "ci_low_pct": 18.627951509717832,
+          "ci_high_pct": 19.615389033014193,
+          "formatted": "19.12% (4,658/24,366)"
+        },
+        "all other categories": {
+          "k": 84479,
+          "n": 478203,
+          "proportion": 0.17665928486437768,
+          "pct": 17.665928486437767,
+          "ci_low": 0.1755809475169129,
+          "ci_high": 0.17774281703523087,
+          "ci_low_pct": 17.55809475169129,
+          "ci_high_pct": 17.774281703523087,
+          "formatted": "17.67% (84,479/478,203)"
+        },
+        "difference": 0.014508736148509116,
+        "difference_pct": 1.4508736148509116
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Communication minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.03745679800033974,
+      "apa": "z = 5.784, p < .001, risk difference = 0.015, 95% CI [0.010, 0.020], Cohen's h = 0.037, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Communication' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_dating": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -13.10789045472688,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": -0.05513073379753225,
+      "ci_low": -0.062073993605006796,
+      "ci_high": -0.04784711884644349,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Dating": {
+          "k": 1033,
+          "n": 8388,
+          "proportion": 0.12315212207916071,
+          "pct": 12.31521220791607,
+          "ci_low": 0.11629174819650995,
+          "ci_high": 0.13035750858193842,
+          "ci_low_pct": 11.629174819650995,
+          "ci_high_pct": 13.035750858193843,
+          "formatted": "12.32% (1,033/8,388)"
+        },
+        "all other categories": {
+          "k": 88104,
+          "n": 494181,
+          "proportion": 0.17828285587669296,
+          "pct": 17.828285587669296,
+          "ci_low": 0.17721821880176444,
+          "ci_high": 0.17935249457472832,
+          "ci_low_pct": 17.721821880176446,
+          "ci_high_pct": 17.935249457472832,
+          "formatted": "17.83% (88,104/494,181)"
+        },
+        "difference": -0.05513073379753225,
+        "difference_pct": -5.513073379753225
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Dating minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.15469120003921533,
+      "apa": "z = -13.108, p < .001, risk difference = -0.055, 95% CI [-0.062, -0.048], Cohen's h = -0.155, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Dating' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_education": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -1.806905397904361,
+      "p_value": 0.07077703076692221,
+      "effect_name": "risk difference",
+      "effect_size": -0.004079395868549579,
+      "ci_low": -0.008429663674106589,
+      "ci_high": 0.0003492895194529954,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Education": {
+          "k": 5288,
+          "n": 30473,
+          "proportion": 0.17353066649164833,
+          "pct": 17.353066649164834,
+          "ci_low": 0.16931989777419204,
+          "ci_high": 0.17782373497777237,
+          "ci_low_pct": 16.931989777419204,
+          "ci_high_pct": 17.782373497777236,
+          "formatted": "17.35% (5,288/30,473)"
+        },
+        "all other categories": {
+          "k": 83849,
+          "n": 472096,
+          "proportion": 0.1776100623601979,
+          "pct": 17.761006236019792,
+          "ci_low": 0.1765224883446219,
+          "ci_high": 0.17870288292559613,
+          "ci_low_pct": 17.65224883446219,
+          "ci_high_pct": 17.870288292559614,
+          "formatted": "17.76% (83,849/472,096)"
+        },
+        "difference": -0.004079395868549579,
+        "difference_pct": -0.4079395868549579
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Education minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0739.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.010722599090099427,
+      "apa": "z = -1.807, p = .071, risk difference = -0.004, 95% CI [-0.008, 0.000], Cohen's h = -0.011, N = 502,569",
+      "significant": "False",
+      "hypothesis": "H1.3. Coverage in 'Education' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_entertainment": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -1.8046722402318371,
+      "p_value": 0.07112598624606292,
+      "effect_name": "risk difference",
+      "effect_size": -0.003670364192144643,
+      "ci_low": -0.007598077223941047,
+      "ci_high": 0.00031889873681889124,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Entertainment": {
+          "k": 6641,
+          "n": 38173,
+          "proportion": 0.17397113142797266,
+          "pct": 17.397113142797267,
+          "ci_low": 0.17020116382380637,
+          "ci_high": 0.17780671087560837,
+          "ci_low_pct": 17.02011638238064,
+          "ci_high_pct": 17.780671087560837,
+          "formatted": "17.40% (6,641/38,173)"
+        },
+        "all other categories": {
+          "k": 82496,
+          "n": 464396,
+          "proportion": 0.1776414956201173,
+          "pct": 17.76414956201173,
+          "ci_low": 0.17654488766041737,
+          "ci_high": 0.17874343660024283,
+          "ci_low_pct": 17.654488766041737,
+          "ci_high_pct": 17.874343660024284,
+          "formatted": "17.76% (82,496/464,396)"
+        },
+        "difference": -0.003670364192144643,
+        "difference_pct": -0.3670364192144643
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Entertainment minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0739.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.009642344137574699,
+      "apa": "z = -1.805, p = .071, risk difference = -0.004, 95% CI [-0.008, 0.000], Cohen's h = -0.010, N = 502,569",
+      "significant": "False",
+      "hypothesis": "H1.3. Coverage in 'Entertainment' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_events": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 0.04624179231020579,
+      "p_value": 0.9631175326373043,
+      "effect_name": "risk difference",
+      "effect_size": 0.0005410611277529009,
+      "ci_low": -0.02125414209216923,
+      "ci_high": 0.02464236005470545,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Events": {
+          "k": 190,
+          "n": 1068,
+          "proportion": 0.17790262172284643,
+          "pct": 17.790262172284645,
+          "ci_low": 0.15613319275170512,
+          "ci_high": 0.20198083209952622,
+          "ci_low_pct": 15.613319275170511,
+          "ci_high_pct": 20.19808320995262,
+          "formatted": "17.79% (190/1,068)"
+        },
+        "all other categories": {
+          "k": 88947,
+          "n": 501501,
+          "proportion": 0.17736156059509353,
+          "pct": 17.73615605950935,
+          "ci_low": 0.1763068592048062,
+          "ci_high": 0.17842120471843742,
+          "ci_low_pct": 17.63068592048062,
+          "ci_high_pct": 17.842120471843742,
+          "formatted": "17.74% (88,947/501,501)"
+        },
+        "difference": 0.0005410611277529009,
+        "difference_pct": 0.054106112775290094
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Events minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.9631.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.0014156394460221877,
+      "apa": "z = 0.046, p = .963, risk difference = 0.001, 95% CI [-0.021, 0.025], Cohen's h = 0.001, N = 502,569",
+      "significant": "False",
+      "hypothesis": "H1.3. Coverage in 'Events' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_finance": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 7.629490012367143,
+      "p_value": 2.353672812205332e-14,
+      "effect_name": "risk difference",
+      "effect_size": 0.02307893943310599,
+      "ci_low": 0.016951948198442632,
+      "ci_high": 0.029342857703231095,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Finance": {
+          "k": 3292,
+          "n": 16486,
+          "proportion": 0.1996845808564843,
+          "pct": 19.96845808564843,
+          "ci_low": 0.19365255539074686,
+          "ci_high": 0.2058565287488552,
+          "ci_low_pct": 19.365255539074685,
+          "ci_high_pct": 20.585652874885522,
+          "formatted": "19.97% (3,292/16,486)"
+        },
+        "all other categories": {
+          "k": 85845,
+          "n": 486083,
+          "proportion": 0.1766056414233783,
+          "pct": 17.66056414233783,
+          "ci_low": 0.17553618768026205,
+          "ci_high": 0.17768020662397646,
+          "ci_low_pct": 17.553618768026205,
+          "ci_high_pct": 17.768020662397646,
+          "formatted": "17.66% (85,845/486,083)"
+        },
+        "difference": 0.02307893943310599,
+        "difference_pct": 2.307893943310599
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Finance minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.0590764055568731,
+      "apa": "z = 7.629, p < .001, risk difference = 0.023, 95% CI [0.017, 0.029], Cohen's h = 0.059, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Finance' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_food_&_drink": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -3.2212298942278403,
+      "p_value": 0.0012764171524020096,
+      "effect_name": "risk difference",
+      "effect_size": -0.010324389788570254,
+      "ci_low": -0.016381905352026754,
+      "ci_high": -0.004095780967731435,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Food & Drink": {
+          "k": 2448,
+          "n": 14629,
+          "proportion": 0.1673388474947023,
+          "pct": 16.73388474947023,
+          "ci_low": 0.1613774853980359,
+          "ci_high": 0.17347487206170162,
+          "ci_low_pct": 16.13774853980359,
+          "ci_high_pct": 17.34748720617016,
+          "formatted": "16.73% (2,448/14,629)"
+        },
+        "all other categories": {
+          "k": 86689,
+          "n": 487940,
+          "proportion": 0.17766323728327255,
+          "pct": 17.766323728327254,
+          "ci_low": 0.17659329786619704,
+          "ci_high": 0.17873825205244875,
+          "ci_low_pct": 17.659329786619704,
+          "ci_high_pct": 17.873825205244877,
+          "formatted": "17.77% (86,689/487,940)"
+        },
+        "difference": -0.010324389788570254,
+        "difference_pct": -1.0324389788570254
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Food & Drink minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0016.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.02732931776324765,
+      "apa": "z = -3.221, p = .001, risk difference = -0.010, 95% CI [-0.016, -0.004], Cohen's h = -0.027, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Food & Drink' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_health_&_fitness": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -9.555709700383174,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": -0.02320377104535007,
+      "ci_low": -0.027682488779359495,
+      "ci_high": -0.018627834752717704,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Health & Fitness": {
+          "k": 4055,
+          "n": 26100,
+          "proportion": 0.1553639846743295,
+          "pct": 15.53639846743295,
+          "ci_low": 0.15101994547484093,
+          "ci_high": 0.15980945760824294,
+          "ci_low_pct": 15.101994547484093,
+          "ci_high_pct": 15.980945760824294,
+          "formatted": "15.54% (4,055/26,100)"
+        },
+        "all other categories": {
+          "k": 85082,
+          "n": 476469,
+          "proportion": 0.17856775571967956,
+          "pct": 17.856775571967955,
+          "ci_low": 0.17748287630330511,
+          "ci_high": 0.1796578180913984,
+          "ci_low_pct": 17.748287630330513,
+          "ci_high_pct": 17.96578180913984,
+          "formatted": "17.86% (85,082/476,469)"
+        },
+        "difference": -0.02320377104535007,
+        "difference_pct": -2.320377104535007
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Health & Fitness minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.06225172364559328,
+      "apa": "z = -9.556, p < .001, risk difference = -0.023, 95% CI [-0.028, -0.019], Cohen's h = -0.062, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Health & Fitness' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_house_&_home": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 18.31263414209274,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.10501121688448892,
+      "ci_low": 0.09198680676601789,
+      "ci_high": 0.11840877060809518,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "House & Home": {
+          "k": 1260,
+          "n": 4477,
+          "proportion": 0.28143846325664507,
+          "pct": 28.14384632566451,
+          "ci_low": 0.26845734765006,
+          "ci_high": 0.29479432773613856,
+          "ci_low_pct": 26.845734765006,
+          "ci_high_pct": 29.479432773613855,
+          "formatted": "28.14% (1,260/4,477)"
+        },
+        "all other categories": {
+          "k": 87877,
+          "n": 498092,
+          "proportion": 0.17642724637215615,
+          "pct": 17.642724637215615,
+          "ci_low": 0.17537115462314953,
+          "ci_high": 0.17748832909400417,
+          "ci_low_pct": 17.537115462314954,
+          "ci_high_pct": 17.748832909400416,
+          "formatted": "17.64% (87,877/498,092)"
+        },
+        "difference": 0.10501121688448892,
+        "difference_pct": 10.501121688448892
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (House & Home minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.2514367398703914,
+      "apa": "z = 18.313, p < .001, risk difference = 0.105, 95% CI [0.092, 0.118], Cohen's h = 0.251, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'House & Home' differs from all other categories.",
+      "interpretation": "small (by Cohen's h)"
+    },
+    "h1_3_category_lifestyle": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 7.77432110246623,
+      "p_value": 7.549516567451064e-15,
+      "effect_name": "risk difference",
+      "effect_size": 0.018287696473010484,
+      "ci_low": 0.01355910791860868,
+      "ci_high": 0.023096914182574233,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Lifestyle": {
+          "k": 5434,
+          "n": 27919,
+          "proportion": 0.19463447831226047,
+          "pct": 19.46344783122605,
+          "ci_low": 0.1900324860203748,
+          "ci_high": 0.19932049135672986,
+          "ci_low_pct": 19.00324860203748,
+          "ci_high_pct": 19.932049135672987,
+          "formatted": "19.46% (5,434/27,919)"
+        },
+        "all other categories": {
+          "k": 83703,
+          "n": 474650,
+          "proportion": 0.17634678183924998,
+          "pct": 17.634678183924997,
+          "ci_low": 0.17526518268751015,
+          "ci_high": 0.1774336197582815,
+          "ci_low_pct": 17.526518268751015,
+          "ci_high_pct": 17.74336197582815,
+          "formatted": "17.63% (83,703/474,650)"
+        },
+        "difference": 0.018287696473010484,
+        "difference_pct": 1.8287696473010484
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Lifestyle minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.04706183059512625,
+      "apa": "z = 7.774, p < .001, risk difference = 0.018, 95% CI [0.014, 0.023], Cohen's h = 0.047, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Lifestyle' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_maps_&_navigation": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 17.479966914141464,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.059044039995169134,
+      "ci_low": 0.05179235496643991,
+      "ci_high": 0.0664484181331837,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Maps & Navigation": {
+          "k": 3084,
+          "n": 13131,
+          "proportion": 0.23486406214302033,
+          "pct": 23.486406214302033,
+          "ci_low": 0.2276916031137379,
+          "ci_high": 0.2421916062245825,
+          "ci_low_pct": 22.76916031137379,
+          "ci_high_pct": 24.21916062245825,
+          "formatted": "23.49% (3,084/13,131)"
+        },
+        "all other categories": {
+          "k": 86053,
+          "n": 489438,
+          "proportion": 0.1758200221478512,
+          "pct": 17.58200221478512,
+          "ci_low": 0.17475610798614866,
+          "ci_high": 0.1768890250613928,
+          "ci_low_pct": 17.475610798614866,
+          "ci_high_pct": 17.688902506139282,
+          "formatted": "17.58% (86,053/489,438)"
+        },
+        "difference": 0.059044039995169134,
+        "difference_pct": 5.904403999516913
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Maps & Navigation minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.1465070769139507,
+      "apa": "z = 17.480, p < .001, risk difference = 0.059, 95% CI [0.052, 0.066], Cohen's h = 0.147, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Maps & Navigation' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_medical": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 15.933740646886596,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.057641364475989165,
+      "ci_low": 0.049892393464314275,
+      "ci_high": 0.06556727003248594,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Medical": {
+          "k": 2666,
+          "n": 11408,
+          "proportion": 0.23369565217391305,
+          "pct": 23.369565217391305,
+          "ci_low": 0.22602058758468868,
+          "ci_high": 0.24155000372390312,
+          "ci_low_pct": 22.602058758468868,
+          "ci_high_pct": 24.15500037239031,
+          "formatted": "23.37% (2,666/11,408)"
+        },
+        "all other categories": {
+          "k": 86471,
+          "n": 491161,
+          "proportion": 0.1760542876979239,
+          "pct": 17.60542876979239,
+          "ci_low": 0.17499167741203575,
+          "ci_high": 0.1771219652199369,
+          "ci_low_pct": 17.499167741203575,
+          "ci_high_pct": 17.71219652199369,
+          "formatted": "17.61% (86,471/491,161)"
+        },
+        "difference": 0.057641364475989165,
+        "difference_pct": 5.764136447598917
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Medical minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.14313320253552175,
+      "apa": "z = 15.934, p < .001, risk difference = 0.058, 95% CI [0.050, 0.066], Cohen's h = 0.143, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Medical' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_music_&_audio": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -4.447761487747394,
+      "p_value": 8.6769799028108e-06,
+      "effect_name": "risk difference",
+      "effect_size": -0.010620500392449106,
+      "ci_low": -0.015154542304533034,
+      "ci_high": -0.005995899322450837,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Music & Audio": {
+          "k": 4525,
+          "n": 27045,
+          "proportion": 0.16731373636531707,
+          "pct": 16.731373636531707,
+          "ci_low": 0.16291257480727225,
+          "ci_high": 0.17180939369567874,
+          "ci_low_pct": 16.291257480727225,
+          "ci_high_pct": 17.180939369567874,
+          "formatted": "16.73% (4,525/27,045)"
+        },
+        "all other categories": {
+          "k": 84612,
+          "n": 475524,
+          "proportion": 0.17793423675776618,
+          "pct": 17.793423675776616,
+          "ci_low": 0.17684980131727443,
+          "ci_high": 0.17902387568902836,
+          "ci_low_pct": 17.684980131727443,
+          "ci_high_pct": 17.902387568902835,
+          "formatted": "17.79% (84,612/475,524)"
+        },
+        "difference": -0.010620500392449106,
+        "difference_pct": -1.0620500392449106
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Music & Audio minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.028105377585452507,
+      "apa": "z = -4.448, p < .001, risk difference = -0.011, 95% CI [-0.015, -0.006], Cohen's h = -0.028, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Music & Audio' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_news_&_magazines": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 9.1967996231671,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.020666879311851294,
+      "ci_low": 0.016130627185769804,
+      "ci_high": 0.025275393434836108,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "News & Magazines": {
+          "k": 6056,
+          "n": 30778,
+          "proportion": 0.1967639222821496,
+          "pct": 19.676392228214958,
+          "ci_low": 0.1923604569596552,
+          "ci_high": 0.20124307306401196,
+          "ci_low_pct": 19.23604569596552,
+          "ci_high_pct": 20.124307306401196,
+          "formatted": "19.68% (6,056/30,778)"
+        },
+        "all other categories": {
+          "k": 83081,
+          "n": 471791,
+          "proportion": 0.1760970429702983,
+          "pct": 17.60970429702983,
+          "ci_low": 0.17501278714481602,
+          "ci_high": 0.17718657337600904,
+          "ci_low_pct": 17.501278714481604,
+          "ci_high_pct": 17.718657337600906,
+          "formatted": "17.61% (83,081/471,791)"
+        },
+        "difference": 0.020666879311851294,
+        "difference_pct": 2.0666879311851294
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (News & Magazines minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.05308469701428464,
+      "apa": "z = 9.197, p < .001, risk difference = 0.021, 95% CI [0.016, 0.025], Cohen's h = 0.053, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'News & Magazines' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_parenting": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -6.162339865370805,
+      "p_value": 7.16777970311e-10,
+      "effect_name": "risk difference",
+      "effect_size": -0.03050854209691578,
+      "ci_low": -0.03929548184710516,
+      "ci_high": -0.021275765815437858,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Parenting": {
+          "k": 887,
+          "n": 6025,
+          "proportion": 0.14721991701244813,
+          "pct": 14.721991701244812,
+          "ci_low": 0.13849785303409176,
+          "ci_high": 0.15639155000694607,
+          "ci_low_pct": 13.849785303409176,
+          "ci_high_pct": 15.639155000694608,
+          "formatted": "14.72% (887/6,025)"
+        },
+        "all other categories": {
+          "k": 88250,
+          "n": 496544,
+          "proportion": 0.1777284591093639,
+          "pct": 17.772845910936393,
+          "ci_low": 0.1766676546608165,
+          "ci_high": 0.1787942499570054,
+          "ci_low_pct": 17.66676546608165,
+          "ci_high_pct": 17.87942499570054,
+          "formatted": "17.77% (88,250/496,544)"
+        },
+        "difference": -0.03050854209691578,
+        "difference_pct": -3.050854209691578
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Parenting minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.08278778787911956,
+      "apa": "z = -6.162, p < .001, risk difference = -0.031, 95% CI [-0.039, -0.021], Cohen's h = -0.083, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Parenting' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_shopping": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 5.037076285744418,
+      "p_value": 4.726964257795174e-07,
+      "effect_name": "risk difference",
+      "effect_size": 0.01042652965331603,
+      "ci_low": 0.0063224818668538236,
+      "ci_high": 0.014592272258490236,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Shopping": {
+          "k": 6871,
+          "n": 36738,
+          "proportion": 0.18702705645380804,
+          "pct": 18.702705645380803,
+          "ci_low": 0.18307253729036832,
+          "ci_high": 0.191047019951385,
+          "ci_low_pct": 18.30725372903683,
+          "ci_high_pct": 19.1047019951385,
+          "formatted": "18.70% (6,871/36,738)"
+        },
+        "all other categories": {
+          "k": 82266,
+          "n": 465831,
+          "proportion": 0.176600526800492,
+          "pct": 17.6600526800492,
+          "ci_low": 0.17550814182681637,
+          "ci_high": 0.17769824553475563,
+          "ci_low_pct": 17.550814182681638,
+          "ci_high_pct": 17.769824553475562,
+          "formatted": "17.66% (82,266/465,831)"
+        },
+        "difference": 0.01042652965331603,
+        "difference_pct": 1.042652965331603
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Shopping minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.0270358813126631,
+      "apa": "z = 5.037, p < .001, risk difference = 0.010, 95% CI [0.006, 0.015], Cohen's h = 0.027, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Shopping' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_social": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -16.76569971242137,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": -0.03741650815134173,
+      "ci_low": -0.04140095283943625,
+      "ci_high": -0.033348831139468064,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Social": {
+          "k": 4444,
+          "n": 31236,
+          "proportion": 0.14227173773850685,
+          "pct": 14.227173773850685,
+          "ci_low": 0.13844175990947502,
+          "ci_high": 0.14618969286347258,
+          "ci_low_pct": 13.844175990947502,
+          "ci_high_pct": 14.618969286347259,
+          "formatted": "14.23% (4,444/31,236)"
+        },
+        "all other categories": {
+          "k": 84693,
+          "n": 471333,
+          "proportion": 0.17968824588984858,
+          "pct": 17.96882458898486,
+          "ci_low": 0.178594800001073,
+          "ci_high": 0.1807869129466084,
+          "ci_low_pct": 17.8594800001073,
+          "ci_high_pct": 18.07869129466084,
+          "formatted": "17.97% (84,693/471,333)"
+        },
+        "difference": -0.03741650815134173,
+        "difference_pct": -3.7416508151341734
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Social minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.10196731572737572,
+      "apa": "z = -16.766, p < .001, risk difference = -0.037, 95% CI [-0.041, -0.033], Cohen's h = -0.102, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Social' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_sports": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 2.684274927003935,
+      "p_value": 0.007268730645562993,
+      "effect_name": "risk difference",
+      "effect_size": 0.00588646928714312,
+      "ci_low": 0.0015760901497150577,
+      "ci_high": 0.01026823289990526,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Sports": {
+          "k": 5931,
+          "n": 32433,
+          "proportion": 0.18286929978725372,
+          "pct": 18.28692997872537,
+          "ci_low": 0.17869995629446497,
+          "ci_high": 0.18711375814763473,
+          "ci_low_pct": 17.869995629446496,
+          "ci_high_pct": 18.71137581476347,
+          "formatted": "18.29% (5,931/32,433)"
+        },
+        "all other categories": {
+          "k": 83206,
+          "n": 470136,
+          "proportion": 0.1769828305001106,
+          "pct": 17.69828305001106,
+          "ci_low": 0.1758945173167309,
+          "ci_high": 0.1780764223561132,
+          "ci_low_pct": 17.58945173167309,
+          "ci_high_pct": 17.807642235611322,
+          "formatted": "17.70% (83,206/470,136)"
+        },
+        "difference": 0.00588646928714312,
+        "difference_pct": 0.588646928714312
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Sports minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0089.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.015324786724527084,
+      "apa": "z = 2.684, p = .007, risk difference = 0.006, 95% CI [0.002, 0.010], Cohen's h = 0.015, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Sports' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_travel_&_local": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 9.998344802571479,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.024790148758791597,
+      "ci_low": 0.0197492247448938,
+      "ci_high": 0.029919855664537347,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Travel & Local": {
+          "k": 5018,
+          "n": 24975,
+          "proportion": 0.20092092092092093,
+          "pct": 20.09209209209209,
+          "ci_low": 0.19599769830177624,
+          "ci_high": 0.20593613339222175,
+          "ci_low_pct": 19.599769830177625,
+          "ci_high_pct": 20.593613339222173,
+          "formatted": "20.09% (5,018/24,975)"
+        },
+        "all other categories": {
+          "k": 84119,
+          "n": 477594,
+          "proportion": 0.17613077216212933,
+          "pct": 17.613077216212933,
+          "ci_low": 0.1750530259923081,
+          "ci_high": 0.17721372828138515,
+          "ci_low_pct": 17.50530259923081,
+          "ci_high_pct": 17.721372828138517,
+          "formatted": "17.61% (84,119/477,594)"
+        },
+        "difference": 0.024790148758791597,
+        "difference_pct": 2.4790148758791597
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Travel & Local minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.06341144775359853,
+      "apa": "z = 9.998, p < .001, risk difference = 0.025, 95% CI [0.020, 0.030], Cohen's h = 0.063, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Travel & Local' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_video_players_&_editors": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 7.712730271872202,
+      "p_value": 1.2212453270876722e-14,
+      "effect_name": "risk difference",
+      "effect_size": 0.03141855848653996,
+      "ci_low": 0.023065088455966047,
+      "ci_high": 0.040019722974399784,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Video Players & Editors": {
+          "k": 1864,
+          "n": 8952,
+          "proportion": 0.20822162645218945,
+          "pct": 20.822162645218945,
+          "ci_low": 0.19993655288932566,
+          "ci_high": 0.21675700694866895,
+          "ci_low_pct": 19.993655288932565,
+          "ci_high_pct": 21.675700694866894,
+          "formatted": "20.82% (1,864/8,952)"
+        },
+        "all other categories": {
+          "k": 87273,
+          "n": 493617,
+          "proportion": 0.17680306796564949,
+          "pct": 17.68030679656495,
+          "ci_low": 0.17574131925360026,
+          "ci_high": 0.1778698470475742,
+          "ci_low_pct": 17.574131925360025,
+          "ci_high_pct": 17.78698470475742,
+          "formatted": "17.68% (87,273/493,617)"
+        },
+        "difference": 0.03141855848653996,
+        "difference_pct": 3.141855848653996
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Video Players & Editors minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.07974701017464803,
+      "apa": "z = 7.713, p < .001, risk difference = 0.031, 95% CI [0.023, 0.040], Cohen's h = 0.080, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Video Players & Editors' differs from all other categories.",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h1_3_category_weather": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -47.34291112716884,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": -0.10610502889469367,
+      "ci_low": -0.10923920846268126,
+      "ci_high": -0.1028743869917434,
+      "n": 502569,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "Weather": {
+          "k": 2408,
+          "n": 30954,
+          "proportion": 0.0777928539122569,
+          "pct": 7.77928539122569,
+          "ci_low": 0.07486114136627837,
+          "ci_high": 0.08082934710760055,
+          "ci_low_pct": 7.486114136627838,
+          "ci_high_pct": 8.082934710760055,
+          "formatted": "7.78% (2,408/30,954)"
+        },
+        "all other categories": {
+          "k": 86729,
+          "n": 471615,
+          "proportion": 0.18389788280695057,
+          "pct": 18.389788280695058,
+          "ci_low": 0.182794816091049,
+          "ci_high": 0.1850060989917011,
+          "ci_low_pct": 18.2794816091049,
+          "ci_high_pct": 18.500609899170108,
+          "formatted": "18.39% (86,729/471,615)"
+        },
+        "difference": -0.10610502889469367,
+        "difference_pct": -10.610502889469368
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (Weather minus all other categories). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.3210760314771759,
+      "apa": "z = -47.343, p < .001, risk difference = -0.106, 95% CI [-0.109, -0.103], Cohen's h = -0.321, N = 502,569",
+      "significant": "True",
+      "hypothesis": "H1.3. Coverage in 'Weather' differs from all other categories.",
+      "interpretation": "small (by Cohen's h)"
+    },
+    "h1_4_rating_association": {
+      "name": "Chi-square test of independence",
+      "statistic_name": "chi2",
+      "statistic": 88.08857805734722,
+      "p_value": 5.637116964855693e-19,
+      "effect_name": "Cramer's V",
+      "effect_size": 0.013243990216592599,
+      "ci_low": 0.010668560316595329,
+      "ci_high": 0.01610223805917966,
+      "n": 502206,
+      "df": 3.0,
+      "conf": 0.95,
+      "groups": {
+        "table": [
+          [
+            3794,
+            15787
+          ],
+          [
+            13500,
+            59084
+          ],
+          [
+            50868,
+            240233
+          ],
+          [
+            20944,
+            97996
+          ]
+        ],
+        "row_labels": [
+          "< 3.5",
+          "3.5-4.0",
+          "4.0-4.5",
+          "> 4.5"
+        ],
+        "col_labels": [
+          "labelled",
+          "unlabelled"
+        ],
+        "dropped_empty": {
+          "rows": [],
+          "cols": []
+        }
+      },
+      "note": "Cramer's V CI from 2,000 parametric bootstrap replicates.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "chi2 (3) = 88.089, p < .001, Cramer's V = 0.013, 95% CI [0.011, 0.016], N = 502,206",
+      "significant": true,
+      "hypothesis": "H1.4. Label coverage is associated with app rating.",
+      "interpretation": "negligible"
+    }
+  },
+  "tables": [
+    {
+      "name": "overall_coverage",
+      "number": 1,
+      "caption": "Overall label coverage by corpus.",
+      "note": "'Needs label' excludes containers, web views, and elements named by their own visible text. Icon-like is the strictest subpopulation: a tappable graphic with no text.",
+      "headers": [
+        "Dataset",
+        "Elements",
+        "Needs label",
+        "Labelled",
+        "Coverage %",
+        "Icon-like n",
+        "Icon-like coverage %"
+      ],
+      "rows": [
+        [
+          "androidcontrol_2024",
+          "6,831,063",
+          "1,462,544",
+          "837,536",
+          "57.27",
+          "194,529",
+          "62.75"
+        ],
+        [
+          "rico_2017",
+          "2,862,639",
+          "502,585",
+          "89,146",
+          "17.74",
+          "127,552",
+          "33.20"
+        ]
+      ]
+    },
+    {
+      "name": "coverage_by_role",
+      "number": 2,
+      "caption": "Label coverage by element role and corpus.",
+      "note": "Roles are assigned from the class name alone in both corpora, so the two are classified from identical information. Containers and web views are exempt from labelling and therefore have no denominator; they are omitted rather than shown at a spurious 100%.",
+      "headers": [
+        "Dataset",
+        "Role",
+        "Elements",
+        "Needs label",
+        "Labelled",
+        "Coverage %",
+        "95% CI"
+      ],
+      "rows": [
+        [
+          "androidcontrol_2024",
+          "button",
+          "163,597",
+          "108,037",
+          "78,066",
+          "72.26",
+          "[71.99, 72.52]"
+        ],
+        [
+          "androidcontrol_2024",
+          "image",
+          "1,203,565",
+          "1,203,560",
+          "703,149",
+          "58.42",
+          "[58.33, 58.51]"
+        ],
+        [
+          "androidcontrol_2024",
+          "input",
+          "53,939",
+          "24,402",
+          "6,640",
+          "27.21",
+          "[26.66, 27.77]"
+        ],
+        [
+          "androidcontrol_2024",
+          "other",
+          "718,893",
+          "119,895",
+          "46,654",
+          "38.91",
+          "[38.64, 39.19]"
+        ],
+        [
+          "androidcontrol_2024",
+          "text",
+          "1,121,644",
+          "6,650",
+          "3,027",
+          "45.52",
+          "[44.32, 46.72]"
+        ],
+        [
+          "rico_2017",
+          "button",
+          "116,430",
+          "76,461",
+          "34,619",
+          "45.28",
+          "[44.92, 45.63]"
+        ],
+        [
+          "rico_2017",
+          "image",
+          "303,160",
+          "302,202",
+          "29,063",
+          "9.62",
+          "[9.51, 9.72]"
+        ],
+        [
+          "rico_2017",
+          "input",
+          "44,008",
+          "29,416",
+          "646",
+          "2.20",
+          "[2.03, 2.37]"
+        ],
+        [
+          "rico_2017",
+          "other",
+          "502,165",
+          "92,964",
+          "24,755",
+          "26.63",
+          "[26.35, 26.91]"
+        ],
+        [
+          "rico_2017",
+          "text",
+          "521,528",
+          "1,542",
+          "63",
+          "4.09",
+          "[3.21, 5.19]"
+        ]
+      ]
+    },
+    {
+      "name": "coverage_by_category",
+      "number": 3,
+      "caption": "Label coverage by Play Store category (Rico only).",
+      "note": "Sorted by coverage. Categories are self-reported by developers and are not mutually exclusive in practice.",
+      "headers": [
+        "App category",
+        "Apps",
+        "Needs label",
+        "Labelled",
+        "Coverage %",
+        "95% CI"
+      ],
+      "rows": [
+        [
+          "House & Home",
+          "73",
+          "4,477",
+          "1,260",
+          "28.14",
+          "[26.85, 29.48]"
+        ],
+        [
+          "Maps & Navigation",
+          "259",
+          "13,131",
+          "3,084",
+          "23.49",
+          "[22.77, 24.22]"
+        ],
+        [
+          "Medical",
+          "298",
+          "11,408",
+          "2,666",
+          "23.37",
+          "[22.60, 24.16]"
+        ],
+        [
+          "Books & Reference",
+          "524",
+          "22,641",
+          "5,072",
+          "22.40",
+          "[21.86, 22.95]"
+        ],
+        [
+          "Video Players & Editors",
+          "174",
+          "8,952",
+          "1,864",
+          "20.82",
+          "[19.99, 21.68]"
+        ],
+        [
+          "Travel & Local",
+          "433",
+          "24,975",
+          "5,018",
+          "20.09",
+          "[19.60, 20.59]"
+        ],
+        [
+          "Finance",
+          "407",
+          "16,486",
+          "3,292",
+          "19.97",
+          "[19.37, 20.59]"
+        ],
+        [
+          "Business",
+          "355",
+          "13,766",
+          "2,744",
+          "19.93",
+          "[19.27, 20.61]"
+        ],
+        [
+          "News & Magazines",
+          "409",
+          "30,778",
+          "6,056",
+          "19.68",
+          "[19.24, 20.12]"
+        ],
+        [
+          "Lifestyle",
+          "562",
+          "27,919",
+          "5,434",
+          "19.46",
+          "[19.00, 19.93]"
+        ],
+        [
+          "Communication",
+          "592",
+          "24,366",
+          "4,658",
+          "19.12",
+          "[18.63, 19.62]"
+        ],
+        [
+          "Auto & Vehicles",
+          "125",
+          "4,938",
+          "934",
+          "18.91",
+          "[17.85, 20.03]"
+        ],
+        [
+          "Shopping",
+          "433",
+          "36,738",
+          "6,871",
+          "18.70",
+          "[18.31, 19.10]"
+        ],
+        [
+          "Sports",
+          "400",
+          "32,433",
+          "5,931",
+          "18.29",
+          "[17.87, 18.71]"
+        ],
+        [
+          "Events",
+          "33",
+          "1,068",
+          "190",
+          "17.79",
+          "[15.61, 20.20]"
+        ],
+        [
+          "Entertainment",
+          "945",
+          "38,173",
+          "6,641",
+          "17.40",
+          "[17.02, 17.78]"
+        ],
+        [
+          "Education",
+          "515",
+          "30,473",
+          "5,288",
+          "17.35",
+          "[16.93, 17.78]"
+        ],
+        [
+          "Food & Drink",
+          "216",
+          "14,629",
+          "2,448",
+          "16.73",
+          "[16.14, 17.35]"
+        ],
+        [
+          "Music & Audio",
+          "436",
+          "27,045",
+          "4,525",
+          "16.73",
+          "[16.29, 17.18]"
+        ],
+        [
+          "Art & Design",
+          "74",
+          "2,737",
+          "448",
+          "16.37",
+          "[15.03, 17.80]"
+        ],
+        [
+          "Health & Fitness",
+          "434",
+          "26,100",
+          "4,055",
+          "15.54",
+          "[15.10, 15.98]"
+        ],
+        [
+          "Comics",
+          "313",
+          "8,913",
+          "1,366",
+          "15.33",
+          "[14.59, 16.09]"
+        ],
+        [
+          "Parenting",
+          "100",
+          "6,025",
+          "887",
+          "14.72",
+          "[13.85, 15.64]"
+        ],
+        [
+          "Social",
+          "593",
+          "31,236",
+          "4,444",
+          "14.23",
+          "[13.84, 14.62]"
+        ],
+        [
+          "Beauty",
+          "98",
+          "3,820",
+          "520",
+          "13.61",
+          "[12.56, 14.74]"
+        ],
+        [
+          "Dating",
+          "156",
+          "8,388",
+          "1,033",
+          "12.32",
+          "[11.63, 13.04]"
+        ],
+        [
+          "Weather",
+          "419",
+          "30,954",
+          "2,408",
+          "7.78",
+          "[7.49, 8.08]"
+        ]
+      ]
+    },
+    {
+      "name": "coverage_by_rating",
+      "number": 4,
+      "caption": "Label coverage by Play Store rating band (Rico only).",
+      "note": "Rating is an app-level attribute applied to every element of that app, so elements are not independent within an app. Treat this as descriptive.",
+      "headers": [
+        "Rating band",
+        "Needs label",
+        "Labelled",
+        "Coverage %",
+        "95% CI"
+      ],
+      "rows": [
+        [
+          "< 3.5",
+          "19,581",
+          "3,794",
+          "19.38",
+          "[18.83, 19.94]"
+        ],
+        [
+          "3.5-4.0",
+          "72,584",
+          "13,500",
+          "18.60",
+          "[18.32, 18.88]"
+        ],
+        [
+          "4.0-4.5",
+          "291,101",
+          "50,868",
+          "17.47",
+          "[17.34, 17.61]"
+        ],
+        [
+          "> 4.5",
+          "118,940",
+          "20,944",
+          "17.61",
+          "[17.39, 17.83]"
+        ]
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "name": "rq1_coverage_by_role",
+      "path": "/Users/obadakraishan/Desktop/AISSA26/code/accessibility-debt-agents/phase5_analysis/rq1_label_coverage/outputs/figures/rq1_coverage_by_role.pdf",
+      "caption": "Label coverage by element role and corpus. Hatching duplicates the colour encoding for greyscale print."
+    },
+    {
+      "name": "rq1_overall_coverage",
+      "path": "/Users/obadakraishan/Desktop/AISSA26/code/accessibility-debt-agents/phase5_analysis/rq1_label_coverage/outputs/figures/rq1_overall_coverage.pdf",
+      "caption": "Overall label coverage with 95% Wilson intervals."
+    }
+  ],
+  "notes": [
+    "H1.3 involved 27 category comparisons; p-values are reported unadjusted in each line with the Benjamini-Hochberg adjusted value appended.",
+    "All proportions carry Wilson score intervals, which stay correct at the extreme rates seen in these corpora where Wald intervals would not.",
+    "Cells with fewer than 30 elements requiring a label are reported in tables but excluded from significance testing."
+  ],
+  "limitations": [
+    "The view hierarchy cannot distinguish a decorative image from a meaningful one, so elements coded 'unlabelled' include some that genuinely need no description. Every coverage figure is therefore a lower bound and every debt figure an upper bound.",
+    "Elements are nested within screens and screens within apps, so they are not independent observations. The chi-square tests here treat them as such and are best read as descriptive; RQ4 models the dependence explicitly."
+  ]
+}

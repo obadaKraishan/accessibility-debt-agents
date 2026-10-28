@@ -1,0 +1,9 @@
+{
+  "seed": 20260908,
+  "n_screens_per_dataset": 60,
+  "max_per_screen_stratum": 10,
+  "n_items": 4724,
+  "target_kappa": 0.8,
+  "strata": 40,
+  "instructions": "Code human_role and human_label_status using phase3_codebook/CODEBOOK.md. Do not open validation_sample_key.csv until coding is finished."
+}

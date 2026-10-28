@@ -1,0 +1,27 @@
+# Core analysis stack. Pinned to the minor version so a reviewer who
+# reinstalls in six months gets the same numbers.
+numpy>=1.26,<3.0
+pandas>=2.1,<3.0
+scipy>=1.11,<2.0
+statsmodels>=0.14,<0.16
+pyarrow>=14.0             # parquet, used for all interim tables
+PyYAML>=6.0
+requests>=2.31
+tqdm>=4.66
+matplotlib>=3.8,<4.0
+
+# AndroidControl accessibility trees.
+# The PyPI wheel already ships the pre-generated *_pb2 protobuf modules, so
+# there is NO need to clone google-deepmind/android_env as the dataset README
+# suggests. Requires Python >= 3.10.
+android-env==1.3.0
+protobuf>=4.25
+
+# TFRecord reading. tensorflow-cpu is enough and much smaller than tensorflow.
+# If installing TensorFlow is a problem on your machine, phase2 falls back to
+# a dependency-free TFRecord reader; see phase2_processing/02_parse_androidcontrol.py.
+tensorflow-cpu>=2.15,<3.0 ; platform_system != "Darwin" or platform_machine != "arm64"
+tensorflow>=2.15,<3.0 ; platform_system == "Darwin" and platform_machine == "arm64"
+
+# Development only
+pytest>=7.4

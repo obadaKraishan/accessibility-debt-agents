@@ -1,0 +1,12 @@
+kind,key,label,value_or_statistic,n,df,p_value,effect_name,effect_size,ci_low,ci_high,interpretation
+descriptive,,Items double-coded,300,,,,,,,,
+descriptive,,Items coded by Obada only,0,,,,,,,,
+descriptive,,Items coded by Kulsawasd only,0,,,,,,,,
+descriptive,,Items requiring adjudication,28,,,,,,,,
+descriptive,,Items in exact agreement,272,,,,,,,,
+test,kappa_human_human_human_role,"Cohen's kappa, element role: Obada vs Kulsawasd",0.97,300,,nan,Cohen's kappa,0.961973973297279,0.9359337583332663,0.9832694435204613,almost perfect (inter-rater reliability)
+test,kappa_a_auto_human_role,"Cohen's kappa, element role: Obada vs automated rules",0.98,300,,nan,Cohen's kappa,0.9746685805961327,0.9532249759469479,0.9916266400510474,almost perfect (scheme validity)
+test,kappa_b_auto_human_role,"Cohen's kappa, element role: Kulsawasd vs automated rules",0.99,300,,nan,Cohen's kappa,0.9873613256565089,0.97062763465311,1.0,almost perfect (scheme validity)
+test,kappa_human_human_human_label_status,"Cohen's kappa, label status: Obada vs Kulsawasd",0.9333333333333333,300,,nan,Cohen's kappa,0.9084235107373434,0.8667860995139456,0.9453225530456537,almost perfect (inter-rater reliability)
+test,kappa_a_auto_human_label_status,"Cohen's kappa, label status: Obada vs automated rules",0.9733333333333334,300,,nan,Cohen's kappa,0.9634864367326447,0.9362989165336324,0.9863106107065538,almost perfect (scheme validity)
+test,kappa_b_auto_human_label_status,"Cohen's kappa, label status: Kulsawasd vs automated rules",0.96,300,,nan,Cohen's kappa,0.9452904167046594,0.913302050895332,0.9768069863402948,almost perfect (scheme validity)

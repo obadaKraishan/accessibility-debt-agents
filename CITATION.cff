@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this code or its findings, please cite the paper below."
+title: "Trained on What Screen Readers Cannot Read: Accessibility Debt in the GUI Corpora Behind Computer-Use Agents"
+authors:
+  - family-names: Kraishan
+    given-names: Obada
+    affiliation: "College of Media and Communication, Texas Tech University"
+  - family-names: Jitkajornwanich
+    given-names: Kulsawasd
+    affiliation: "College of Media and Communication, Texas Tech University"
+version: "0.1.0"
+date-released: "2026-09-08"
+license: MIT
+repository-code: "https://github.com/obadaKraishan/accessibility-debt-agents"
+keywords:
+  - accessibility
+  - computer-use agents
+  - GUI datasets
+  - content descriptions
+  - benchmark validity
+# Add the DOI here once IEEE Xplore assigns one.
+preferred-citation:
+  type: conference-paper
+  title: "Trained on What Screen Readers Cannot Read: Accessibility Debt in the GUI Corpora Behind Computer-Use Agents"
+  authors:
+    - family-names: Kraishan
+      given-names: Obada
+      affiliation: "College of Media and Communication, Texas Tech University"
+    - family-names: Jitkajornwanich
+      given-names: Kulsawasd
+      affiliation: "College of Media and Communication, Texas Tech University"
+  collection-title: "IEEE AISSA 2026"
+  conference:
+    name: "IEEE AISSA 2026"
+  year: 2026

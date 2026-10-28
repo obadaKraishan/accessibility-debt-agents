@@ -1,0 +1,4 @@
+Model,Density measured on,Covariates,SE,N,Density IRR,95% CI,p
+Model 1,all visited screens,log elements (episode total),model-based,"7,615",0.818,"[0.783, 0.855]",0.0000
+Model 2,all visited screens,"log elements (episode total), split",clustered by app,"7,615",0.819,"[0.740, 0.906]",0.0001
+Model 3,first in-app screen,"log elements (same screen), split",clustered by app,"7,407",0.986,"[0.895, 1.086]",0.7770

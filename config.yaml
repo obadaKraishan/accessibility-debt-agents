@@ -1,0 +1,157 @@
+# ---------------------------------------------------------------------------
+# Trained on What Screen Readers Cannot Read: Accessibility Debt in the GUI Corpora Behind Computer-Use Agents
+# Project configuration.
+#
+# Every URL, threshold and filter the analysis depends on lives here, so the
+# scripts contain no magic numbers and a reviewer can see the whole
+# parameterisation of the study on one screen.
+#
+# Paths are NOT set here. They come from .env (see .env.example) so that a
+# collaborator can point the data directory at a bigger disk without editing
+# a tracked file.
+# ---------------------------------------------------------------------------
+
+project:
+  name: "Trained on What Screen Readers Cannot Read: Accessibility Debt in the GUI Corpora Behind Computer-Use Agents"
+  short_name: a11ydebt
+  version: "0.1.0"
+  target_venue: "IEEE AISSA 2026"
+
+run:
+  seed: 20260908
+  confidence: 0.95
+  n_permutations: 10000
+  n_bootstrap: 5000
+  # Console progress is printed every N units during long loops.
+  progress_every: 250
+  # Checkpoints are flushed every N completed units.
+  checkpoint_every: 500
+
+# ---------------------------------------------------------------------------
+# Rico (Deka et al., UIST 2017)
+# Direct anonymous HTTPS. Range requests are supported, so downloads resume.
+# LICENCE WARNING: Rico is released under a University of Illinois research-use
+# agreement, NOT an open licence. Raw Rico data must never be committed or
+# redistributed. See docs/DATA_LICENSES.md.
+# ---------------------------------------------------------------------------
+rico:
+  base_url: "https://storage.googleapis.com/crowdstf-rico-uiuc-4540/rico_dataset_v0.1"
+  files:
+    ui_details: {name: "ui_details.csv", bytes: 2405809, required: true}
+    app_details: {name: "app_details.csv", bytes: 2025565, required: true}
+    unique_uis: {name: "unique_uis.tar.gz", bytes: 6471262799, required: true}
+    semantic_annotations: {name: "semantic_annotations.zip", bytes: 157800634, required: false}
+    ui_layout_vectors: {name: "ui_layout_vectors.zip", bytes: 8183659, required: false}
+  # Verified facts the parser relies on. Changing these changes the analysis.
+  schema:
+    root_path: ["activity", "root"]
+    children_key: "children"
+    # content-desc is ALWAYS a list of length 1; [None] when absent.
+    content_desc_key: "content-desc"
+    content_desc_is_list: true
+    bounds_key: "bounds"          # [x1, y1, x2, y2] absolute pixels
+    visible_key: "visible-to-user"
+    # There is no plain "scrollable" key; it is split in two.
+    scrollable_keys: ["scrollable-horizontal", "scrollable-vertical"]
+  expected_screens: 66261
+  expected_apps: 9384
+  # app_details.csv contains one malformed row with an unescaped quote which
+  # shifts every subsequent column. The parser drops it and reports the drop.
+  known_bad_app_rows: ["net.ayudaporfavor.Love"]
+  citation: "Deka et al. (2017). Rico: A Mobile App Dataset for Building Data-Driven Design Applications. UIST '17. https://doi.org/10.1145/3126594.3126651"
+
+# ---------------------------------------------------------------------------
+# AndroidControl (Li et al., NeurIPS 2024 D&B). Apache-2.0.
+# 20 GZIP-compressed TFRecord shards, ~2.5 GB each, 46.5 GB total.
+# Set n_shards_to_download lower for a pilot; 3 shards is roughly 2,300 episodes.
+# ---------------------------------------------------------------------------
+androidcontrol:
+  base_url: "https://storage.googleapis.com/gresearch/android_control"
+  n_shards: 20
+  n_shards_to_download: 20
+  aux_files: ["splits.json", "test_subsplits.json"]
+  schema:
+    compression: "GZIP"
+    features:
+      - episode_id            # int64_list, length 1
+      - goal                  # bytes_list, length 1
+      - screenshots           # bytes_list, length S  (PNG)
+      - screenshot_widths     # int64_list, length S
+      - screenshot_heights    # int64_list, length S
+      - accessibility_trees   # bytes_list, length S  (AndroidAccessibilityForest)
+      - actions               # bytes_list, length S-1 (JSON)
+      - step_instructions     # bytes_list, length S-1
+    proto_module: "android_env.proto.a11y.android_accessibility_forest_pb2"
+    proto_message: "AndroidAccessibilityForest"
+    # unique_id restarts per window, so nodes are keyed on (window_index, unique_id).
+    node_key: ["window_index", "unique_id"]
+  expected_episodes: {train: 13603, validation: 137, test: 1543, total: 15283}
+  expected_apps: 833
+  # The app an episode ran in is recorded only on open_app actions; every
+  # other step stores an empty app_name. App identity is therefore taken from
+  # the dominant package prefix of the episode's resource ids
+  # ('<package>:id/<name>'), ignoring the platform packages below, which
+  # appear on every device (status bar, keyboard, launcher, dialogs).
+  system_packages:
+    - android
+    - com.android.systemui
+    - com.android.launcher3
+    - com.android.intentresolver
+    - com.android.permissioncontroller
+    - com.android.packageinstaller
+    - com.android.printspooler
+    - com.android.bips
+    - com.android.htmlviewer
+    - com.google.android.inputmethod.latin
+    - com.google.android.apps.nexuslauncher
+    - com.google.android.permissioncontroller
+    - com.google.android.packageinstaller
+    - com.google.android.gms
+    - com.google.android.ext.services
+    - com.google.android.settings.intelligence
+    - com.google.android.tts
+  citation: "Li et al. (2024). On the Effects of Data Scale on UI Control Agents. NeurIPS 2024 Datasets and Benchmarks. arXiv:2406.03679"
+
+# ---------------------------------------------------------------------------
+# RICO-Semantics (Sunkara et al., 2022). CC BY-SA 4.0.
+# Used only to validate the labelled/unlabelled call against human icon
+# annotations. Covers 42,434 of Rico's 66,261 screens.
+# ---------------------------------------------------------------------------
+rico_semantics:
+  repo_url: "https://github.com/google-research-datasets/rico_semantics"
+  archive_url: "https://github.com/google-research-datasets/rico_semantics/archive/refs/heads/main.zip"
+  files: ["data/semantics/train.json", "data/semantics/val.json", "data/semantics/test.json"]
+  coordinates: "normalised"   # multiply by screen dimensions to compare with Rico bounds
+  expected_screens: 42434
+  citation: "Sunkara et al. (2022). Towards Better Semantic Understanding of Mobile Interfaces. arXiv:2210.02663"
+
+# ---------------------------------------------------------------------------
+# Analysis parameters
+# ---------------------------------------------------------------------------
+analysis:
+  # Inclusion rule applied identically to both datasets.
+  inclusion:
+    require_visible_to_user: true
+    require_positive_area: true
+    require_enabled: false        # toggled in the sensitivity analysis
+  # RQ3 hit-testing: how a click coordinate is resolved to an element.
+  hit_test:
+    strategy: "deepest_visible_in_topmost_window"
+    fallback_to_clickable_ancestor: true
+    # Background comparison set for the permutation test.
+    background: "all_included_elements_on_touched_screens"
+  # RQ4 outcome. AndroidControl ships human demonstrations, not agent runs,
+  # so the outcome is demonstration length (a difficulty proxy), NOT agent
+  # success. See docs/ROADMAP.docx section "Design corrections".
+  rq4:
+    outcome: "steps_to_completion"
+    covariates: ["n_elements", "n_unlabelled", "label_density", "app_category"]
+    # Model 3 measures density on one screen; below this many elements needing
+    # a label, a single screen's density is too coarse to use.
+    min_first_screen_needs_label: 5
+  # Validation sample sizes for the codebook.
+  codebook:
+    n_screens_per_dataset: 60
+    n_elements_per_screen: 10
+    n_double_coded: 300
+    target_kappa: 0.80

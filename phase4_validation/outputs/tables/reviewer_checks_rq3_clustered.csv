@@ -1,0 +1,4 @@
+Population,Screens,Paired screens,Pooled diff (pp),Screen-bootstrap 95% CI,Paired diff (pp),Paired 95% CI,Composition alone (pp),Stratified perm. p
+all requiring a label,"26,184","6,406",-2.74,"[-3.95, -1.47]",-0.63,"[-1.79, 0.52]",-1.94,0.1443
+clickable only,"23,139","6,020",+3.31,"[2.15, 4.51]",+2.35,"[1.43, 3.27]",+1.32,0.0001
+icon-like only,"20,877","3,251",+9.00,"[7.47, 10.51]",+4.52,"[3.43, 5.62]",+5.47,0.0001

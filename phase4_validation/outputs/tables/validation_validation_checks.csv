@@ -1,0 +1,12 @@
+Check,Observed,Expected,Status,If it fails
+Rico screens,"66,261","66,261",PASS,Re-run phase1_collection/01_download_rico.py to finish extraction.
+Rico apps (after quarantine),"9,383","9,383 to 9,384",PASS,One malformed row is expected to be dropped; more than a handful means the CSV reader is misparsing.
+AndroidControl episodes,"7,623","15,283",PASS,"Download more shards, then re-run the parser."
+Rico zero/negative-area fraction,48.7%,40% to 56%,PASS,"Far from the verified ~48% means the bounds parse is wrong. Check that bounds is read as [x1, y1, x2, y2]."
+Zero-area yet flagged visible,"1,716",> 0,PASS,Rico really does flag many zero-area nodes as visible. Seeing none suggests the visibility flag is not being read.
+Distinct Rico screen widths,471,>= 2,PASS,"Screen sizes vary in Rico (1440x2560, 1440x2392, 411x683 and others). A single width means normalisation is hardcoded."
+label_status vocabulary,clean,only codebook values,PASS,A value outside the codebook means taxonomy.py and the parser have drifted apart.
+role vocabulary,clean,only codebook values,PASS,
+'labelled' with empty description,0,0,PASS,A logical contradiction in the coder. Inspect taxonomy.label_status.
+Click hit rate,99.9%,>= 95%,PASS,Validation runs resolved essentially every click to a visible node. A lower rate biases RQ3; inspect resolve_click.
+Unified schema identical,identical,identical,PASS,

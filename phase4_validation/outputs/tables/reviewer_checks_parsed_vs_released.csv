@@ -1,0 +1,4 @@
+Split,Parsed episodes,Released episodes,Parsed %
+train,"6,769","13,603",49.76
+validation,71,137,51.82
+test,783,"1,543",50.75

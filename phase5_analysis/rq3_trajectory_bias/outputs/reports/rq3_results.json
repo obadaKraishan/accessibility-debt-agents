@@ -1,0 +1,345 @@
+{
+  "stem": "rq3",
+  "title": "RQ3: Trajectory selection bias",
+  "subtitle": "Are elements touched by benchmark tasks better labelled than the elements around them?",
+  "generated_at": "2026-09-10T05:05:28",
+  "script": "phase5_analysis/rq3_trajectory_bias/run_rq3.py",
+  "provenance": {
+    "environment": {
+      "python": "3.13.9",
+      "platform": "Darwin 25.6.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "pandas": "2.3.3",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.1"
+    },
+    "git_commit": "bb8055f (dirty)",
+    "table": "/Users/obadakraishan/Desktop/AISSA26/code/accessibility-debt-agents/data/processed/rq3_touched.parquet",
+    "seed": 20260908,
+    "n_permutations": 10000,
+    "hit_test_rule": {
+      "strategy": "deepest_visible_in_topmost_window",
+      "fallback_to_clickable_ancestor": true,
+      "background": "all_included_elements_on_touched_screens"
+    }
+  },
+  "descriptives": [
+    {
+      "label": "Elements on visited screens",
+      "value": 3556428,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Touched elements",
+      "value": 26205,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Screens visited",
+      "value": 26228,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Episodes contributing",
+      "value": 7342,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Click-to-element hit rate",
+      "value": "99.92%",
+      "unit": "",
+      "note": "Share of click actions resolved to a visible element. A low rate would bias this analysis toward whatever the rule can see."
+    }
+  ],
+  "tests": {
+    "h3_1_all": {
+      "name": "Permutation test, all elements requiring a label",
+      "statistic_name": "diff",
+      "statistic": -0.02740036936909096,
+      "p_value": 9.999000099990002e-05,
+      "effect_name": "difference in label rate",
+      "effect_size": -0.02740036936909096,
+      "ci_low": -0.03940766706709096,
+      "ci_high": -0.015000221319037159,
+      "n": 767648,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "n_a": 6408,
+        "n_b": 761240,
+        "mean_a": 0.541354556803995,
+        "mean_b": 0.568754926173086,
+        "n_permutations": 10000,
+        "alternative": "two-sided",
+        "null_mean": -5.639876550717432e-05,
+        "null_sd": 0.006192940728594213
+      },
+      "note": "p from 10,000 label permutations using the (r+1)/(m+1) convention; CI from 2,000 bootstrap replicates.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "diff = -0.027, p < .001, difference in label rate = -0.027, 95% CI [-0.039, -0.015], N = 767,648",
+      "significant": true,
+      "hypothesis": "H3.1. Touched elements are labelled at a higher rate than the background population on the same screens.",
+      "interpretation": "see estimate and interval"
+    },
+    "h3_1_all_z": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": -4.410064599773126,
+      "p_value": 1.0333978670118427e-05,
+      "effect_name": "risk difference",
+      "effect_size": -0.02740036936909096,
+      "ci_low": -0.039672198486106,
+      "ci_high": -0.015177824980450479,
+      "n": 767648,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "touched": {
+          "k": 3469,
+          "n": 6408,
+          "proportion": 0.541354556803995,
+          "pct": 54.1354556803995,
+          "ci_low": 0.529133229395229,
+          "ci_high": 0.5535263315754942,
+          "ci_low_pct": 52.9133229395229,
+          "ci_high_pct": 55.35263315754943,
+          "formatted": "54.14% (3,469/6,408)"
+        },
+        "background": {
+          "k": 432959,
+          "n": 761240,
+          "proportion": 0.568754926173086,
+          "pct": 56.8754926173086,
+          "ci_low": 0.5676420514073635,
+          "ci_high": 0.5698671070239203,
+          "ci_low_pct": 56.764205140736344,
+          "ci_high_pct": 56.98671070239203,
+          "formatted": "56.88% (432,959/761,240)"
+        },
+        "difference": -0.02740036936909096,
+        "difference_pct": -2.740036936909096
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (touched minus background). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large).",
+      "effect2_name": "Cohen's h",
+      "effect2_size": -0.05514323878321781,
+      "apa": "z = -4.410, p < .001, risk difference = -0.027, 95% CI [-0.040, -0.015], Cohen's h = -0.055, N = 767,648",
+      "significant": "True",
+      "hypothesis": "Parametric companion to H3_1_ALL (all elements requiring a label).",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h3_2_clickable": {
+      "name": "Permutation test, clickable elements only",
+      "statistic_name": "diff",
+      "statistic": 0.033139923428233464,
+      "p_value": 9.999000099990002e-05,
+      "effect_name": "difference in label rate",
+      "effect_size": 0.033139923428233464,
+      "ci_low": 0.02134167764944563,
+      "ci_high": 0.045260931968765995,
+      "n": 165879,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "n_a": 6150,
+        "n_b": 159729,
+        "mean_a": 0.5590243902439025,
+        "mean_b": 0.525884466815669,
+        "n_permutations": 10000,
+        "alternative": "two-sided",
+        "null_mean": -5.423696202516809e-05,
+        "null_sd": 0.006491214539386653
+      },
+      "note": "p from 10,000 label permutations using the (r+1)/(m+1) convention; CI from 2,000 bootstrap replicates.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "diff = 0.033, p < .001, difference in label rate = 0.033, 95% CI [0.021, 0.045], N = 165,879",
+      "significant": true,
+      "hypothesis": "H3.2. The difference survives restricting the background to clickable elements, which is the fairer comparison since trajectories can only touch clickable targets.",
+      "interpretation": "see estimate and interval"
+    },
+    "h3_2_clickable_z": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 5.1080447801539615,
+      "p_value": 3.2550951778453907e-07,
+      "effect_name": "risk difference",
+      "effect_size": 0.033139923428233464,
+      "ci_low": 0.020459441396579216,
+      "ci_high": 0.04574835114567293,
+      "n": 165879,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "touched": {
+          "k": 3438,
+          "n": 6150,
+          "proportion": 0.5590243902439025,
+          "pct": 55.90243902439025,
+          "ci_low": 0.5465824664710032,
+          "ci_high": 0.5713926235371053,
+          "ci_low_pct": 54.65824664710032,
+          "ci_high_pct": 57.13926235371053,
+          "formatted": "55.90% (3,438/6,150)"
+        },
+        "background": {
+          "k": 83999,
+          "n": 159729,
+          "proportion": 0.525884466815669,
+          "pct": 52.58844668156691,
+          "ci_low": 0.5234351292091302,
+          "ci_high": 0.5283325594169546,
+          "ci_low_pct": 52.343512920913014,
+          "ci_high_pct": 52.833255941695455,
+          "formatted": "52.59% (83,999/159,729)"
+        },
+        "difference": 0.033139923428233464,
+        "difference_pct": 3.3139923428233464
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (touched minus background). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large).",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.06653260745683953,
+      "apa": "z = 5.108, p < .001, risk difference = 0.033, 95% CI [0.020, 0.046], Cohen's h = 0.067, N = 165,879",
+      "significant": "True",
+      "hypothesis": "Parametric companion to H3_2_CLICKABLE (clickable elements only).",
+      "interpretation": "negligible (by Cohen's h)"
+    },
+    "h3_3_icon_like": {
+      "name": "Permutation test, icon-like elements only",
+      "statistic_name": "diff",
+      "statistic": 0.08995501843854758,
+      "p_value": 9.999000099990002e-05,
+      "effect_name": "difference in label rate",
+      "effect_size": 0.08995501843854758,
+      "ci_low": 0.0750325809615909,
+      "ci_high": 0.10571374279144975,
+      "n": 101667,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "n_a": 3386,
+        "n_b": 98281,
+        "mean_a": 0.6996455995274661,
+        "mean_b": 0.6096905810889185,
+        "n_permutations": 10000,
+        "alternative": "two-sided",
+        "null_mean": 0.00013340265531887864,
+        "null_sd": 0.008608058796124387
+      },
+      "note": "p from 10,000 label permutations using the (r+1)/(m+1) convention; CI from 2,000 bootstrap replicates.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "diff = 0.090, p < .001, difference in label rate = 0.090, 95% CI [0.075, 0.106], N = 101,667",
+      "significant": true,
+      "hypothesis": "H3.3. The difference survives restricting to tappable graphics with no text, where a missing description is unambiguously a defect.",
+      "interpretation": "see estimate and interval"
+    },
+    "h3_3_icon_like_z": {
+      "name": "Two-proportion z test",
+      "statistic_name": "z",
+      "statistic": 10.564846299287394,
+      "p_value": 0.0,
+      "effect_name": "risk difference",
+      "effect_size": 0.08995501843854758,
+      "ci_low": 0.07400200153380819,
+      "ci_high": 0.10546579614190446,
+      "n": 101667,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "touched": {
+          "k": 2369,
+          "n": 3386,
+          "proportion": 0.6996455995274661,
+          "pct": 69.9645599527466,
+          "ci_low": 0.6839859733014377,
+          "ci_high": 0.7148527383090908,
+          "ci_low_pct": 68.39859733014377,
+          "ci_high_pct": 71.48527383090908,
+          "formatted": "69.96% (2,369/3,386)"
+        },
+        "background": {
+          "k": 59921,
+          "n": 98281,
+          "proportion": 0.6096905810889185,
+          "pct": 60.96905810889185,
+          "ci_low": 0.6066365419537144,
+          "ci_high": 0.612736045720791,
+          "ci_low_pct": 60.66365419537144,
+          "ci_high_pct": 61.2736045720791,
+          "formatted": "60.97% (59,921/98,281)"
+        },
+        "difference": 0.08995501843854758,
+        "difference_pct": 8.995501843854758
+      },
+      "note": "The CI is Newcombe's hybrid score interval on the risk difference (touched minus background). Cohen's h is reported without an interval and is interpreted using Cohen's conventions (.20 small, .50 medium, .80 large).",
+      "effect2_name": "Cohen's h",
+      "effect2_size": 0.1895634756180571,
+      "apa": "z = 10.565, p < .001, risk difference = 0.090, 95% CI [0.074, 0.105], Cohen's h = 0.190, N = 101,667",
+      "significant": "True",
+      "hypothesis": "Parametric companion to H3_3_ICON_LIKE (icon-like elements only).",
+      "interpretation": "negligible (by Cohen's h)"
+    }
+  },
+  "tables": [
+    {
+      "name": "touched_vs_background",
+      "number": 1,
+      "caption": "Label coverage among touched versus background elements on the same screens.",
+      "note": "Background excludes touched elements. Permutation tests shuffle the touched/background assignment while holding the pooled outcomes fixed.",
+      "headers": [
+        "Comparison",
+        "Touched n",
+        "Touched %",
+        "Background n",
+        "Background %",
+        "Difference (pp)"
+      ],
+      "rows": [
+        [
+          "all elements requiring a label",
+          "6,408",
+          "54.14",
+          "761,240",
+          "56.88",
+          "-2.74"
+        ],
+        [
+          "clickable elements only",
+          "6,150",
+          "55.90",
+          "159,729",
+          "52.59",
+          "+3.31"
+        ],
+        [
+          "icon-like elements only",
+          "3,386",
+          "69.96",
+          "98,281",
+          "60.97",
+          "+9.00"
+        ]
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "name": "rq3_touched_vs_background",
+      "path": "/Users/obadakraishan/Desktop/AISSA26/code/accessibility-debt-agents/phase5_analysis/rq3_trajectory_bias/outputs/figures/rq3_touched_vs_background.pdf",
+      "caption": "Label coverage among elements touched by task trajectories versus the background population on the same screens."
+    }
+  ],
+  "notes": [
+    "Permutation p-values use the (r+1)/(m+1) convention and can never be exactly zero, which is the honest way to report a test whose null was never matched."
+  ],
+  "limitations": [
+    "Touched elements are inferred from coordinates, not read from the data. A systematic bias in the hit-testing rule, for instance a preference for larger targets, would propagate into this result. The reported hit rate and the clickable-only comparison are the two guards against that.",
+    "Elements within a screen are not independent, and one screen can contribute many background elements and one touched element. The permutation test respects the observed marginals but not the nesting; a screen-level cluster bootstrap would be the stronger design and is the natural extension for the journal version."
+  ]
+}

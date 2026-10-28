@@ -1,0 +1,10 @@
+kind,key,label,value_or_statistic,n,df,p_value,effect_name,effect_size,ci_low,ci_high,interpretation
+proportion,,"Coverage, rico_2017",0.177374971397873,502585,,,,,0.17632137395329073,0.1784335007098573,
+proportion,,"Coverage, androidcontrol_2024",0.5726569593803673,1462544,,,,,0.5718550375881011,0.5734584994979839,
+test,h2_1_overall,Two-proportion z test,484.2886126252856,1965129,,0.0,risk difference,0.3952819879824943,0.39395399593988206,0.39660582110467363,large (by Cohen's h)
+test,h2_2_role_button,Two-proportion z test,117.09545340212615,184498,,0.0,risk difference,0.2698190108100056,0.26538799085226916,0.27423669526653965,medium (by Cohen's h)
+test,h2_2_role_image,Two-proportion z test,479.91635080609956,1505762,,0.0,risk difference,0.4880535280482142,0.4866782061505358,0.48942063456705004,large (by Cohen's h)
+test,h2_2_role_input,Two-proportion z test,84.43935340003054,53818,,0.0,risk difference,0.25014800589803504,0.24433432325678092,0.25599451082558533,large (by Cohen's h)
+test,h2_2_role_other,Two-proportion z test,59.53310415795204,212859,,0.0,risk difference,0.1228379425711193,0.11887253403144747,0.12679444638116633,small (by Cohen's h)
+test,h2_2_role_text,Two-proportion z test,30.24453603886583,8192,,0.0,risk difference,0.41433193879640734,0.3980467276666594,0.42920166170949015,large (by Cohen's h)
+test,h2_3_icon_like,Two-proportion z test,164.12001525851736,322081,,0.0,risk difference,0.2955853636174271,0.2922191925747661,0.29894053114908375,medium (by Cohen's h)

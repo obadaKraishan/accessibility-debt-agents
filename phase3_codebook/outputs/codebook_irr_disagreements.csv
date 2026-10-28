@@ -1,0 +1,29 @@
+item_id,adjudicated_role,adjudicated_label_status,adjudication_note,dataset,class_name,content_desc,text,clickable,long_clickable,human_role_a,human_role_b,auto_role,human_label_status_a,human_label_status_b,auto_label_status,human_notes_a,human_notes_b
+1,,,,androidcontrol_2024,android.widget.ImageButton,Open menu drawer,,True,False,image,button,button,labelled,labelled,labelled,imagebutton?,
+5,,,,androidcontrol_2024,android.widget.FrameLayout,Wifi three bars.,,False,False,container,container,container,labelled,not_applicable,labelled,,container?
+13,,,,androidcontrol_2024,android.widget.LinearLayout,,,True,False,container,container,container,unlabelled,not_applicable,not_applicable,clickable?,
+27,,,,androidcontrol_2024,android.widget.ImageView,,,False,False,image,image,image,not_applicable,unlabelled,unlabelled,image?,
+28,,,,androidcontrol_2024,android.widget.ImageView,,,False,False,image,image,image,unlabelled,not_applicable,unlabelled,,image?
+29,,,,androidcontrol_2024,android.widget.ImageView,,,False,False,image,image,image,not_applicable,unlabelled,unlabelled,image?,
+32,,,,androidcontrol_2024,android.widget.EditText,,Search,True,True,input,input,input,named_by_text,labelled,named_by_text,,visible text?
+37,,,,androidcontrol_2024,android.widget.Image,,copy2,False,False,image,other,other,named_by_text,named_by_text,named_by_text,class name?,
+38,,,,androidcontrol_2024,android.widget.Image,,bg,False,False,other,image,other,named_by_text,named_by_text,named_by_text,,class name?
+39,,,,androidcontrol_2024,android.widget.Image,,cta,False,False,image,other,other,named_by_text,named_by_text,named_by_text,class name?,
+54,,,,androidcontrol_2024,android.view.View, ,,True,False,other,other,other,not_applicable,unlabelled,unlabelled,clickable?,
+55,,,,androidcontrol_2024,android.view.View,,,True,False,other,other,other,unlabelled,not_applicable,unlabelled,,clickable?
+56,,,,androidcontrol_2024,android.view.View,,,True,False,other,other,other,not_applicable,unlabelled,unlabelled,clickable?,
+83,,,,androidcontrol_2024,android.webkit.WebView,,MW Definition,False,False,web,web,web,not_applicable,named_by_text,named_by_text,web?,
+88,,,,androidcontrol_2024,android.widget.FrameLayout,o,,True,True,container,container,container,labelled,not_applicable,labelled,,container?
+100,,,,androidcontrol_2024,android.view.ViewGroup,,,True,False,container,container,container,not_applicable,unlabelled,not_applicable,,clickable?
+118,,,,androidcontrol_2024,android.widget.ImageView,,,False,False,image,image,image,not_applicable,unlabelled,unlabelled,image?,
+128,,,,androidcontrol_2024,android.widget.EditText,,Mens Running Shoes.,True,True,input,input,input,named_by_text,labelled,named_by_text,,visible text?
+155,,,,rico_2017,android.widget.ImageButton,,,True,False,image,button,button,unlabelled,unlabelled,unlabelled,imagebutton?,
+156,,,,rico_2017,android.widget.RelativeLayout,,,True,False,container,container,container,not_applicable,unlabelled,not_applicable,,clickable?
+166,,,,rico_2017,net.aljazeera.english.ui.widget.FadeInNetworkImageView,,,False,False,image,other,image,unlabelled,not_applicable,unlabelled,,custom class?
+184,,,,rico_2017,org.lucasr.twowayview.widget.TwoWayView,,,False,False,container,other,other,not_applicable,not_applicable,not_applicable,view?,
+195,,,,androidcontrol_2024,android.widget.ImageButton,Clear search text,,True,False,button,image,button,labelled,labelled,labelled,,imagebutton?
+198,,,,androidcontrol_2024,android.widget.Button,,Documents & other,True,False,button,button,button,labelled,named_by_text,named_by_text,visible text?,
+204,,,,androidcontrol_2024,android.widget.FrameLayout,"Month finance .docx, 6.27 kB, from 1 hour ago",,True,True,container,container,container,labelled,not_applicable,labelled,,container?
+226,,,,androidcontrol_2024,android.widget.EditText,,month finance,True,True,input,input,input,named_by_text,labelled,named_by_text,,visible text?
+228,,,,androidcontrol_2024,android.support.v7.widget.LinearLayoutCompat,,,False,False,container,other,other,not_applicable,not_applicable,not_applicable,layout?,
+243,,,,androidcontrol_2024,android.widget.FrameLayout,Latest,,True,False,container,container,container,labelled,not_applicable,labelled,,container?

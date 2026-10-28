@@ -1,0 +1,232 @@
+================================================================================
+  RQ2: COVERAGE DIFFERENCE BETWEEN CORPORA
+  Rico (2017) compared with AndroidControl (2024-25)
+================================================================================
+
+Report id      : rq2
+Generated      : 2026-09-10 05:05:15
+Script         : phase5_analysis/rq2_temporal_change/run_rq2.py
+Git commit     : bb8055f (dirty)
+Environment    : Darwin 25.6.0 | python 3.13.9, numpy 2.5.3, scipy 1.18.1, pandas 2.3.3, statsmodels 0.15.0, matplotlib 3.11.1
+elements_table : /Users/obadakraishan/Desktop/AISSA26/code/accessibility-debt-agents/data/processed/elements.parquet
+seed           : 20260908
+older_corpus   : rico_2017
+newer_corpus   : androidcontrol_2024
+
+--------------------------------------------------------------------------------
+1. DESIGN AND WHAT THE COMPARISON CAN SUPPORT
+--------------------------------------------------------------------------------
+
+Rico and AndroidControl are two independently collected corpora, not two waves
+of a panel. Any difference between them confounds genuine change in developer
+practice with app selection, platform evolution, and differences in how each
+corpus captured the interface. The difference is therefore reported as a corpus
+difference throughout. It is not a causal estimate of change over time, and it
+should not be written up as one.
+
+--------------------------------------------------------------------------------
+2. OVERALL DIFFERENCE
+--------------------------------------------------------------------------------
+  Coverage, rico_2017............................. 17.74% (89,146/502,585)
+      95% CI [17.63%, 17.84%]
+  Coverage, androidcontrol_2024................... 57.27% (837,536/1,462,544)
+      95% CI [57.19%, 57.35%]
+
+H2.1. Coverage is higher in the newer corpus.
+  Two-proportion z test
+    z = 484.289, p < .001, risk difference = 0.395, 95% CI [0.394, 0.397], Cohen's h = 0.847, N = 1,965,129
+    Interpretation: large (by Cohen's h)
+    androidcontrol_2024: 57.27% (837,536/1,462,544)  95% CI [57.19%, 57.35%]
+    rico_2017: 17.74% (89,146/502,585)  95% CI [17.63%, 17.84%]
+    difference: 0.3953
+    difference_pct: 39.5282
+    Note. The CI is Newcombe's hybrid score interval on the risk difference
+          (androidcontrol_2024 minus rico_2017). Cohen's h is reported without
+          an interval and is interpreted using Cohen's conventions (.20 small,
+          .50 medium, .80 large).
+
+--------------------------------------------------------------------------------
+3. DIFFERENCE BY ELEMENT ROLE
+--------------------------------------------------------------------------------
+
+Table 1. Label coverage by element role in each corpus.
+Role    rico_2017 n  rico_2017 %  androidcontrol_2024 n  androidcontrol_2024 %  Difference (pp)
+------  -----------  -----------  ---------------------  ---------------------  ---------------
+button  76,461       45.28        108,037                72.26                  +26.98         
+image   302,202      9.62         1,203,560              58.42                  +48.81         
+input   29,416       2.20         24,402                 27.21                  +25.01         
+other   92,964       26.63        119,895                38.91                  +12.28         
+text    1,542        4.09         6,650                  45.52                  +41.43         
+
+Note. Roles are assigned from the class name alone in both corpora, so neither benefits from richer metadata. Cells below 30 elements are shown but not tested.
+
+
+H2.2. The corpus difference for 'button' elements.
+  Two-proportion z test
+    z = 117.095, p < .001, risk difference = 0.270, 95% CI [0.265, 0.274], Cohen's h = 0.556, N = 184,498
+    Interpretation: medium (by Cohen's h)
+    androidcontrol_2024 button: 72.26% (78,066/108,037)  95% CI [71.99%, 72.52%]
+    rico_2017 button: 45.28% (34,619/76,461)  95% CI [44.92%, 45.63%]
+    difference: 0.2698
+    difference_pct: 26.9819
+    Note. The CI is Newcombe's hybrid score interval on the risk difference
+          (androidcontrol_2024 button minus rico_2017 button). Cohen's h is
+          reported without an interval and is interpreted using Cohen's
+          conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg
+          adjusted p = 0.0000.
+
+H2.2. The corpus difference for 'image' elements.
+  Two-proportion z test
+    z = 479.916, p < .001, risk difference = 0.488, 95% CI [0.487, 0.489], Cohen's h = 1.109, N = 1,505,762
+    Interpretation: large (by Cohen's h)
+    androidcontrol_2024 image: 58.42% (703,149/1,203,560)  95% CI [58.33%, 58.51%]
+    rico_2017 image: 9.62% (29,063/302,202)  95% CI [9.51%, 9.72%]
+    difference: 0.4881
+    difference_pct: 48.8054
+    Note. The CI is Newcombe's hybrid score interval on the risk difference
+          (androidcontrol_2024 image minus rico_2017 image). Cohen's h is
+          reported without an interval and is interpreted using Cohen's
+          conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg
+          adjusted p = 0.0000.
+
+H2.2. The corpus difference for 'input' elements.
+  Two-proportion z test
+    z = 84.439, p < .001, risk difference = 0.250, 95% CI [0.244, 0.256], Cohen's h = 0.800, N = 53,818
+    Interpretation: large (by Cohen's h)
+    androidcontrol_2024 input: 27.21% (6,640/24,402)  95% CI [26.66%, 27.77%]
+    rico_2017 input: 2.20% (646/29,416)  95% CI [2.03%, 2.37%]
+    difference: 0.2501
+    difference_pct: 25.0148
+    Note. The CI is Newcombe's hybrid score interval on the risk difference
+          (androidcontrol_2024 input minus rico_2017 input). Cohen's h is
+          reported without an interval and is interpreted using Cohen's
+          conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg
+          adjusted p = 0.0000.
+
+H2.2. The corpus difference for 'other' elements.
+  Two-proportion z test
+    z = 59.533, p < .001, risk difference = 0.123, 95% CI [0.119, 0.127], Cohen's h = 0.263, N = 212,859
+    Interpretation: small (by Cohen's h)
+    androidcontrol_2024 other: 38.91% (46,654/119,895)  95% CI [38.64%, 39.19%]
+    rico_2017 other: 26.63% (24,755/92,964)  95% CI [26.35%, 26.91%]
+    difference: 0.1228
+    difference_pct: 12.2838
+    Note. The CI is Newcombe's hybrid score interval on the risk difference
+          (androidcontrol_2024 other minus rico_2017 other). Cohen's h is
+          reported without an interval and is interpreted using Cohen's
+          conventions (.20 small, .50 medium, .80 large). Benjamini-Hochberg
+          adjusted p = 0.0000.
+
+H2.2. The corpus difference for 'text' elements.
+  Two-proportion z test
+    z = 30.245, p < .001, risk difference = 0.414, 95% CI [0.398, 0.429], Cohen's h = 1.074, N = 8,192
+    Interpretation: large (by Cohen's h)
+    androidcontrol_2024 text: 45.52% (3,027/6,650)  95% CI [44.32%, 46.72%]
+    rico_2017 text: 4.09% (63/1,542)  95% CI [3.21%, 5.19%]
+    difference: 0.4143
+    difference_pct: 41.4332
+    Note. The CI is Newcombe's hybrid score interval on the risk difference
+          (androidcontrol_2024 text minus rico_2017 text). Cohen's h is reported
+          without an interval and is interpreted using Cohen's conventions (.20
+          small, .50 medium, .80 large). Benjamini-Hochberg adjusted p = 0.0000.
+
+--------------------------------------------------------------------------------
+4. THE STRICT SUBPOPULATION
+--------------------------------------------------------------------------------
+
+H2.3. The corpus difference holds on tappable graphics with no text, where a
+missing description is unambiguously a defect.
+  Two-proportion z test
+    z = 164.120, p < .001, risk difference = 0.296, 95% CI [0.292, 0.299], Cohen's h = 0.601, N = 322,081
+    Interpretation: medium (by Cohen's h)
+    androidcontrol_2024 icon-like: 62.75% (122,074/194,529)  95% CI [62.54%, 62.97%]
+    rico_2017 icon-like: 33.20% (42,341/127,552)  95% CI [32.94%, 33.45%]
+    difference: 0.2956
+    difference_pct: 29.5585
+    Note. The CI is Newcombe's hybrid score interval on the risk difference
+          (androidcontrol_2024 icon-like minus rico_2017 icon-like). Cohen's h
+          is reported without an interval and is interpreted using Cohen's
+          conventions (.20 small, .50 medium, .80 large).
+
+--------------------------------------------------------------------------------
+RESULTS SECTION DRAFT (APA 7)
+--------------------------------------------------------------------------------
+
+Auto-composed from the recorded statistics. Treat it as a first draft: check
+every claim against the tables above, and rewrite the prose in your own voice
+before it goes near the manuscript.
+
+H2.1. Coverage is higher in the newer corpus. A two-proportion z test was
+conducted, z = 484.289, p < .001, risk difference = 0.395, 95% CI [0.394,
+0.397], Cohen's h = 0.847, N = 1,965,129. The effect is large (by Cohen's h).
+
+H2.2. The corpus difference for 'button' elements. A two-proportion z test was
+conducted, z = 117.095, p < .001, risk difference = 0.270, 95% CI [0.265,
+0.274], Cohen's h = 0.556, N = 184,498. The effect is medium (by Cohen's h).
+
+H2.2. The corpus difference for 'image' elements. A two-proportion z test was
+conducted, z = 479.916, p < .001, risk difference = 0.488, 95% CI [0.487,
+0.489], Cohen's h = 1.109, N = 1,505,762. The effect is large (by Cohen's h).
+
+H2.2. The corpus difference for 'input' elements. A two-proportion z test was
+conducted, z = 84.439, p < .001, risk difference = 0.250, 95% CI [0.244, 0.256],
+Cohen's h = 0.800, N = 53,818. The effect is large (by Cohen's h).
+
+H2.2. The corpus difference for 'other' elements. A two-proportion z test was
+conducted, z = 59.533, p < .001, risk difference = 0.123, 95% CI [0.119, 0.127],
+Cohen's h = 0.263, N = 212,859. The effect is small (by Cohen's h).
+
+H2.2. The corpus difference for 'text' elements. A two-proportion z test was
+conducted, z = 30.245, p < .001, risk difference = 0.414, 95% CI [0.398, 0.429],
+Cohen's h = 1.074, N = 8,192. The effect is large (by Cohen's h).
+
+H2.3. The corpus difference holds on tappable graphics with no text, where a
+missing description is unambiguously a defect. A two-proportion z test was
+conducted, z = 164.120, p < .001, risk difference = 0.296, 95% CI [0.292,
+0.299], Cohen's h = 0.601, N = 322,081. The effect is medium (by Cohen's h).
+
+--------------------------------------------------------------------------------
+IEEE-STYLE NUMERIC SUMMARY
+--------------------------------------------------------------------------------
+
+Compact numeric summary of all tests (IEEE style).
+Test              Stat  Value    df  p       Effect           Size   95% CI          Std. effect        N        
+----------------  ----  -------  --  ------  ---------------  -----  --------------  -----------------  ---------
+h2_1_overall      z     484.289      < .001  risk difference  0.395  [0.394, 0.397]  Cohen's h = 0.847  1,965,129
+h2_2_role_button  z     117.095      < .001  risk difference  0.270  [0.265, 0.274]  Cohen's h = 0.556  184,498  
+h2_2_role_image   z     479.916      < .001  risk difference  0.488  [0.487, 0.489]  Cohen's h = 1.109  1,505,762
+h2_2_role_input   z     84.439       < .001  risk difference  0.250  [0.244, 0.256]  Cohen's h = 0.800  53,818   
+h2_2_role_other   z     59.533       < .001  risk difference  0.123  [0.119, 0.127]  Cohen's h = 0.263  212,859  
+h2_2_role_text    z     30.245       < .001  risk difference  0.414  [0.398, 0.429]  Cohen's h = 1.074  8,192    
+h2_3_icon_like    z     164.120      < .001  risk difference  0.296  [0.292, 0.299]  Cohen's h = 0.601  322,081  
+
+Note. p reported exactly; '<.001' where smaller. Effect sizes carry 95% CIs.
+
+--------------------------------------------------------------------------------
+NOTES, ASSUMPTIONS AND LIMITATIONS
+--------------------------------------------------------------------------------
+
+Notes
+  1. H2.2 comprises 5 role comparisons; each line reports the unadjusted p with
+     the Benjamini-Hochberg adjusted value appended.
+  2. A defensible way to state the finding is: the corpus that represents
+     contemporary, actively maintained apps shows markedly higher coverage, and
+     the residual debt in it is the quantity that matters for agents today.
+
+Limitations
+  1. Corpus differences are not causal estimates of change over time. App
+     selection, platform evolution and capture method all differ between the two
+     datasets and cannot be separated with these data alone.
+  2. AndroidControl covers 833 apps chosen to support task demonstrations, which
+     is a narrower and probably better-maintained population than Rico's broad
+     2017 crawl of 9,384 apps. That alone would push the newer corpus's coverage
+     upward.
+
+Figures
+  - rq2_difference_by_role: /Users/obadakraishan/Desktop/AISSA26/code/accessibility-debt-agents/phase5_analysis/rq2_temporal_change/outputs/figures/rq2_difference_by_role.pdf
+    Coverage difference by element role, newer corpus minus older. Direction is
+    encoded by hatching as well as colour.
+
+================================================================================
+  END OF REPORT — rq2
+================================================================================

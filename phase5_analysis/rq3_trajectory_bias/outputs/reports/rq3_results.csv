@@ -1,0 +1,12 @@
+kind,key,label,value_or_statistic,n,df,p_value,effect_name,effect_size,ci_low,ci_high,interpretation
+descriptive,,Elements on visited screens,3556428,,,,,,,,
+descriptive,,Touched elements,26205,,,,,,,,
+descriptive,,Screens visited,26228,,,,,,,,
+descriptive,,Episodes contributing,7342,,,,,,,,
+descriptive,,Click-to-element hit rate,99.92%,,,,,,,,
+test,h3_1_all,"Permutation test, all elements requiring a label",-0.02740036936909096,767648,,9.999000099990002e-05,difference in label rate,-0.02740036936909096,-0.03940766706709096,-0.015000221319037159,see estimate and interval
+test,h3_1_all_z,Two-proportion z test,-4.410064599773126,767648,,1.0333978670118427e-05,risk difference,-0.02740036936909096,-0.039672198486106,-0.015177824980450479,negligible (by Cohen's h)
+test,h3_2_clickable,"Permutation test, clickable elements only",0.033139923428233464,165879,,9.999000099990002e-05,difference in label rate,0.033139923428233464,0.02134167764944563,0.045260931968765995,see estimate and interval
+test,h3_2_clickable_z,Two-proportion z test,5.1080447801539615,165879,,3.2550951778453907e-07,risk difference,0.033139923428233464,0.020459441396579216,0.04574835114567293,negligible (by Cohen's h)
+test,h3_3_icon_like,"Permutation test, icon-like elements only",0.08995501843854758,101667,,9.999000099990002e-05,difference in label rate,0.08995501843854758,0.0750325809615909,0.10571374279144975,see estimate and interval
+test,h3_3_icon_like_z,Two-proportion z test,10.564846299287394,101667,,0.0,risk difference,0.08995501843854758,0.07400200153380819,0.10546579614190446,negligible (by Cohen's h)

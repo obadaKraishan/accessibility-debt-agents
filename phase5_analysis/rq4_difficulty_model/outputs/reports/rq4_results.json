@@ -1,0 +1,543 @@
+{
+  "stem": "rq4",
+  "title": "RQ4: Label density and task difficulty",
+  "subtitle": "Demonstration length as the outcome, not agent success",
+  "generated_at": "2026-10-06T19:08:59",
+  "script": "phase5_analysis/rq4_difficulty_model/run_rq4.py",
+  "provenance": {
+    "environment": {
+      "python": "3.13.9",
+      "platform": "Darwin 25.6.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "pandas": "2.3.3",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.1"
+    },
+    "git_commit": "571e5d1 (dirty)",
+    "episodes_table": "/Volumes/Kraishan/AISSA26/code/accessibility-debt-agents/data/processed/androidcontrol_episodes.parquet",
+    "seed": 20260908,
+    "outcome": "steps_to_completion"
+  },
+  "descriptives": [
+    {
+      "label": "Episodes analysed",
+      "value": 7619,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Median steps per episode",
+      "value": 5.0,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Median label density",
+      "value": 0.5061224489795918,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Mean steps, lower density",
+      "value": 5.708,
+      "unit": "",
+      "note": "95% CI [5.578, 5.831], n = 3,809"
+    },
+    {
+      "label": "Mean steps, higher density",
+      "value": 5.386,
+      "unit": "",
+      "note": "95% CI [5.250, 5.521], n = 3,810"
+    },
+    {
+      "label": "Model episodes (at least one step)",
+      "value": 7615,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Episodes where screens visited equals steps plus one",
+      "value": 7615,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Correlation of log episode-total elements with log steps",
+      "value": 0.8,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Episodes whose first action is open_app",
+      "value": 2840,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Model 3 episodes (first in-app screen has >= 5 needs-label elements)",
+      "value": 7407,
+      "unit": "",
+      "note": ""
+    },
+    {
+      "label": "Model 3 episodes dropped",
+      "value": 208,
+      "unit": "",
+      "note": "First in-app screen has fewer than 5 elements needing a label."
+    },
+    {
+      "label": "Check A and D episodes (first screen has >= 5 needs-label elements)",
+      "value": 7520,
+      "unit": "",
+      "note": ""
+    }
+  ],
+  "tests": {
+    "h4_1_density_steps": {
+      "name": "Permutation test, steps by label density group",
+      "statistic_name": "diff",
+      "statistic": 0.3224955537685643,
+      "p_value": 0.000999900009999,
+      "effect_name": "difference in mean steps",
+      "effect_size": 0.3224955537685643,
+      "ci_low": 0.13008858698385997,
+      "ci_high": 0.5033466100112389,
+      "n": 7619,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "n_a": 3809,
+        "n_b": 3810,
+        "mean_a": 5.708059858230507,
+        "mean_b": 5.385564304461942,
+        "n_permutations": 10000,
+        "alternative": "two-sided",
+        "null_mean": -0.0003855648005931574,
+        "null_sd": 0.09279374619521191
+      },
+      "note": "p from 10,000 label permutations using the (r+1)/(m+1) convention; CI from 2,000 bootstrap replicates. Cliff's delta = 0.059 (negligible), a rank-based effect size robust to the skew in step counts.",
+      "effect2_name": "Cliff's delta",
+      "effect2_size": 0.058679712161209485,
+      "apa": "diff = 0.322, p < .001, difference in mean steps = 0.322, 95% CI [0.130, 0.503], Cliff's delta = 0.059, N = 7,619",
+      "significant": true,
+      "hypothesis": "H4.1. Episodes on screens with lower label density take more steps to complete.",
+      "interpretation": "see estimate and interval"
+    },
+    "h4_2_density_adjusted": {
+      "name": "Negative binomial regression (adjusted)",
+      "statistic_name": "z",
+      "statistic": -8.954313864100836,
+      "p_value": 3.418550060021561e-19,
+      "effect_name": "incidence rate ratio",
+      "effect_size": 0.8179128772589536,
+      "ci_low": 0.782707663847953,
+      "ci_high": 0.8547015772110479,
+      "n": 7615,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "pseudo_r2": 0.1942195355180435,
+        "alpha": 0.005127421047468857
+      },
+      "note": "Adjusted for log element count. The IRR is the multiplicative change in expected steps per unit of label density, i.e. moving from none labelled to all labelled.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "z = -8.954, p < .001, incidence rate ratio = 0.818, 95% CI [0.783, 0.855], N = 7,615",
+      "significant": true,
+      "hypothesis": "H4.2. The association between label density and demonstration length survives adjustment for screen complexity.",
+      "interpretation": "see estimate and interval"
+    },
+    "h4_2_model_2": {
+      "name": "Negative binomial, Model 2",
+      "statistic_name": "z",
+      "statistic": -3.8658085246438265,
+      "p_value": 0.00011072178154353072,
+      "effect_name": "incidence rate ratio",
+      "effect_size": 0.8187581851701404,
+      "ci_low": 0.7398178125629027,
+      "ci_high": 0.9061216888801316,
+      "n": 7615,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "density_on": "all visited screens",
+        "covariates": "log elements (episode total), split",
+        "standard_errors": "clustered by app",
+        "app_clusters": 949,
+        "alpha": 0.005119532907344896
+      },
+      "note": "Density measured on all visited screens; covariates: log elements (episode total), split; standard errors clustered by app.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "z = -3.866, p < .001, incidence rate ratio = 0.819, 95% CI [0.740, 0.906], N = 7,615",
+      "significant": true,
+      "hypothesis": "Model 2. Label density is associated with demonstration length under this specification.",
+      "interpretation": "see estimate and interval"
+    },
+    "h4_2_model_3": {
+      "name": "Negative binomial, Model 3",
+      "statistic_name": "z",
+      "statistic": -0.2832680519610411,
+      "p_value": 0.7769713655617102,
+      "effect_name": "incidence rate ratio",
+      "effect_size": 0.9861158406761974,
+      "ci_low": 0.8951871800344674,
+      "ci_high": 1.0862805823415413,
+      "n": 7407,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "density_on": "first in-app screen",
+        "covariates": "log elements (same screen), split",
+        "standard_errors": "clustered by app",
+        "app_clusters": 933,
+        "alpha": 0.2243050472888418
+      },
+      "note": "Density measured on first in-app screen; covariates: log elements (same screen), split; standard errors clustered by app.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "z = -0.283, p = .777, incidence rate ratio = 0.986, 95% CI [0.895, 1.086], N = 7,407",
+      "significant": false,
+      "hypothesis": "Model 3. Label density is associated with demonstration length under this specification.",
+      "interpretation": "see estimate and interval"
+    },
+    "h4_2_check_a": {
+      "name": "Negative binomial, Check A",
+      "statistic_name": "z",
+      "statistic": 3.664276330721197,
+      "p_value": 0.00024803888538659896,
+      "effect_name": "incidence rate ratio",
+      "effect_size": 1.176349482217369,
+      "ci_low": 1.0784670375530232,
+      "ci_high": 1.2831158080202683,
+      "n": 7520,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "density_on": "first screen",
+        "covariates": "log elements (same screen), split",
+        "standard_errors": "clustered by app",
+        "app_clusters": 943,
+        "alpha": 0.22031748724583544
+      },
+      "note": "Density measured on first screen; covariates: log elements (same screen), split; standard errors clustered by app.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "z = 3.664, p < .001, incidence rate ratio = 1.176, 95% CI [1.078, 1.283], N = 7,520",
+      "significant": true,
+      "hypothesis": "Check A. Label density is associated with demonstration length under this specification.",
+      "interpretation": "see estimate and interval"
+    },
+    "h4_2_check_b": {
+      "name": "Negative binomial, Check B",
+      "statistic_name": "z",
+      "statistic": -3.4244730552558287,
+      "p_value": 0.0006159929255700599,
+      "effect_name": "incidence rate ratio",
+      "effect_size": 0.8555577334067453,
+      "ci_low": 0.7824780506069382,
+      "ci_high": 0.9354627067485402,
+      "n": 7407,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "density_on": "first in-app screen",
+        "covariates": "log elements (episode total), split",
+        "standard_errors": "clustered by app",
+        "app_clusters": 933,
+        "alpha": 0.004515120408217201
+      },
+      "note": "Density measured on first in-app screen; covariates: log elements (episode total), split; standard errors clustered by app.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "z = -3.424, p < .001, incidence rate ratio = 0.856, 95% CI [0.782, 0.935], N = 7,407",
+      "significant": true,
+      "hypothesis": "Check B. Label density is associated with demonstration length under this specification.",
+      "interpretation": "see estimate and interval"
+    },
+    "h4_2_check_d": {
+      "name": "Negative binomial, Check D",
+      "statistic_name": "z",
+      "statistic": -2.7610089277437257,
+      "p_value": 0.00576231011999225,
+      "effect_name": "incidence rate ratio",
+      "effect_size": 0.8927866799309018,
+      "ci_low": 0.8237287301312536,
+      "ci_high": 0.9676341575885512,
+      "n": 7520,
+      "df": null,
+      "conf": 0.95,
+      "groups": {
+        "density_on": "first screen",
+        "covariates": "log elements (episode total), split",
+        "standard_errors": "clustered by app",
+        "app_clusters": 943,
+        "alpha": 0.005370153108101385
+      },
+      "note": "Density measured on first screen; covariates: log elements (episode total), split; standard errors clustered by app.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "z = -2.761, p = .006, incidence rate ratio = 0.893, 95% CI [0.824, 0.968], N = 7,520",
+      "significant": true,
+      "hypothesis": "Check D. Label density is associated with demonstration length under this specification.",
+      "interpretation": "see estimate and interval"
+    },
+    "h4_3_subsplit_density": {
+      "name": "Chi-square test of independence",
+      "statistic_name": "chi2",
+      "statistic": 38.084449379931165,
+      "p_value": 2.712474606917611e-08,
+      "effect_name": "Cramer's V",
+      "effect_size": 0.012693981898970147,
+      "ci_low": 0.00910657338769225,
+      "ci_high": 0.017304386654942643,
+      "n": 236348,
+      "df": 3.0,
+      "conf": 0.95,
+      "groups": {
+        "table": [
+          [
+            36597,
+            29733
+          ],
+          [
+            30978,
+            24146
+          ],
+          [
+            27650,
+            22827
+          ],
+          [
+            36243,
+            28174
+          ]
+        ],
+        "row_labels": [
+          "IDD",
+          "category_unseen",
+          "app_unseen",
+          "task_unseen"
+        ],
+        "col_labels": [
+          "labelled",
+          "unlabelled"
+        ],
+        "dropped_empty": {
+          "rows": [],
+          "cols": []
+        }
+      },
+      "note": "Cramer's V CI from 2,000 parametric bootstrap replicates.",
+      "effect2_name": "",
+      "effect2_size": null,
+      "apa": "chi2 (3) = 38.084, p < .001, Cramer's V = 0.013, 95% CI [0.009, 0.017], N = 236,348",
+      "significant": true,
+      "hypothesis": "H4.3. Label density differs across the benchmark's generalisation subsplits.",
+      "interpretation": "negligible"
+    }
+  },
+  "tables": [
+    {
+      "name": "negbin_model",
+      "number": 1,
+      "caption": "Negative binomial regression of demonstration length on label density, controlling for screen complexity.",
+      "note": "Incidence rate ratios below 1 mean fewer steps. Step counts are over-dispersed counts, so a negative binomial is used rather than Poisson, which would understate the standard errors.",
+      "headers": [
+        "Term",
+        "Coefficient",
+        "SE",
+        "Incidence rate ratio",
+        "95% CI",
+        "p"
+      ],
+      "rows": [
+        [
+          "const",
+          "-3.6776",
+          "0.0543",
+          "0.0253",
+          "[0.0227, 0.0281]",
+          "0.0000"
+        ],
+        [
+          "label_density",
+          "-0.2010",
+          "0.0224",
+          "0.8179",
+          "[0.7827, 0.8547]",
+          "0.0000"
+        ],
+        [
+          "log_elements",
+          "+0.8124",
+          "0.0077",
+          "2.2534",
+          "[2.2196, 2.2877]",
+          "0.0000"
+        ]
+      ]
+    },
+    {
+      "name": "negbin_models",
+      "number": 2,
+      "caption": "Incidence rate ratio for label density in three negative binomial models of demonstration length.",
+      "note": "IRR below 1 means more description goes with fewer steps. Associations only.",
+      "headers": [
+        "Model",
+        "Density measured on",
+        "Covariates",
+        "SE",
+        "N",
+        "Density IRR",
+        "95% CI",
+        "p"
+      ],
+      "rows": [
+        [
+          "Model 1",
+          "all visited screens",
+          "log elements (episode total)",
+          "model-based",
+          "7,615",
+          "0.818",
+          "[0.783, 0.855]",
+          "0.0000"
+        ],
+        [
+          "Model 2",
+          "all visited screens",
+          "log elements (episode total), split",
+          "clustered by app",
+          "7,615",
+          "0.819",
+          "[0.740, 0.906]",
+          "0.0001"
+        ],
+        [
+          "Model 3",
+          "first in-app screen",
+          "log elements (same screen), split",
+          "clustered by app",
+          "7,407",
+          "0.986",
+          "[0.895, 1.086]",
+          "0.7770"
+        ]
+      ]
+    },
+    {
+      "name": "negbin_checks",
+      "number": 3,
+      "caption": "Specification checks: element count and first screen.",
+      "note": "IRR below 1 means more description goes with fewer steps. Associations only.",
+      "headers": [
+        "Model",
+        "Density measured on",
+        "Covariates",
+        "SE",
+        "N",
+        "Density IRR",
+        "95% CI",
+        "p"
+      ],
+      "rows": [
+        [
+          "Check A",
+          "first screen",
+          "log elements (same screen), split",
+          "clustered by app",
+          "7,520",
+          "1.176",
+          "[1.078, 1.283]",
+          "0.0002"
+        ],
+        [
+          "Check B",
+          "first in-app screen",
+          "log elements (episode total), split",
+          "clustered by app",
+          "7,407",
+          "0.856",
+          "[0.782, 0.935]",
+          "0.0006"
+        ],
+        [
+          "Check D",
+          "first screen",
+          "log elements (episode total), split",
+          "clustered by app",
+          "7,520",
+          "0.893",
+          "[0.824, 0.968]",
+          "0.0058"
+        ]
+      ]
+    },
+    {
+      "name": "subsplit_density",
+      "number": 4,
+      "caption": "Label coverage and demonstration length by test subsplit.",
+      "note": "The subsplits overlap and are not a partition; episode counts here therefore sum to more than the test split.",
+      "headers": [
+        "Subsplit",
+        "Episodes",
+        "Needs label",
+        "Coverage %",
+        "95% CI",
+        "Mean steps"
+      ],
+      "rows": [
+        [
+          "IDD",
+          "364",
+          "66,330",
+          "55.17",
+          "[54.80, 55.55]",
+          "5.37"
+        ],
+        [
+          "category_unseen",
+          "349",
+          "55,124",
+          "56.20",
+          "[55.78, 56.61]",
+          "5.77"
+        ],
+        [
+          "app_unseen",
+          "318",
+          "50,477",
+          "54.78",
+          "[54.34, 55.21]",
+          "5.74"
+        ],
+        [
+          "task_unseen",
+          "401",
+          "64,417",
+          "56.26",
+          "[55.88, 56.65]",
+          "5.72"
+        ]
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "name": "rq4_density_vs_steps",
+      "path": "/Volumes/Kraishan/AISSA26/code/accessibility-debt-agents/phase5_analysis/rq4_difficulty_model/outputs/figures/rq4_density_vs_steps.pdf",
+      "caption": "Mean demonstration length by label density decile. Bins with fewer than five episodes are omitted."
+    }
+  ],
+  "notes": [
+    "If agent rollouts become available, the same script takes an agent-success outcome by swapping the 'steps' column for a binary success column and the negative binomial for a logistic model."
+  ],
+  "limitations": [
+    "The outcome is demonstration length, not agent success. AndroidControl contains human demonstrations and no agent rollouts, so no claim about agent accuracy can be made from the episode-level models here.",
+    "Demonstration length is a coarse difficulty proxy. A long demonstration may reflect a complex goal rather than a hard interface, and label density is measured over the whole episode rather than at the moment of each decision.",
+    "Models 1 and 2 adjust for the log of the total number of elements across an episode's screens. That total grows with the number of screens visited, so it partly measures the outcome, and the association they show should not be read as a finding. Model 3 takes density and element count from one screen fixed before the demonstration and is the specification to report.",
+    "The subsplit analysis is ecological: it compares aggregate label density with aggregate published accuracy. An association at split level does not establish one at episode level."
+  ]
+}

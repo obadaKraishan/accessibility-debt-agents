@@ -1,0 +1,226 @@
+================================================================================
+  RQ3: TRAJECTORY SELECTION BIAS
+  Are elements touched by benchmark tasks better labelled than the elements around them?
+================================================================================
+
+Report id      : rq3
+Generated      : 2026-09-10 05:05:28
+Script         : phase5_analysis/rq3_trajectory_bias/run_rq3.py
+Git commit     : bb8055f (dirty)
+Environment    : Darwin 25.6.0 | python 3.13.9, numpy 2.5.3, scipy 1.18.1, pandas 2.3.3, statsmodels 0.15.0, matplotlib 3.11.1
+table          : /Users/obadakraishan/Desktop/AISSA26/code/accessibility-debt-agents/data/processed/rq3_touched.parquet
+seed           : 20260908
+n_permutations : 10000
+hit_test_rule  :
+                 - strategy: deepest_visible_in_topmost_window
+                 - fallback_to_clickable_ancestor: True
+                 - background: all_included_elements_on_touched_screens
+
+--------------------------------------------------------------------------------
+1. DESIGN
+--------------------------------------------------------------------------------
+
+The comparison set is every included element on screens a trajectory actually
+visited, not the whole corpus. Holding the screen fixed isolates element
+selection from screen selection, which is what the hypothesis concerns. Touched
+elements are inferred by point-in-bounds hit testing, because AndroidControl
+actions record coordinates and no element reference.
+  Elements on visited screens..................... 3,556,428
+  Touched elements................................ 26,205
+  Screens visited................................. 26,228
+  Episodes contributing........................... 7,342
+  Click-to-element hit rate....................... 99.92%
+      Share of click actions resolved to a visible element. A low rate would bias this analysis toward whatever the rule can see.
+
+--------------------------------------------------------------------------------
+2. RESULTS
+--------------------------------------------------------------------------------
+
+H3.1. Touched elements are labelled at a higher rate than the background
+population on the same screens.
+  Permutation test, all elements requiring a label
+    diff = -0.027, p < .001, difference in label rate = -0.027, 95% CI [-0.039, -0.015], N = 767,648
+    Interpretation: see estimate and interval
+    n_a: 6,408
+    n_b: 761,240
+    mean_a: 0.5414
+    mean_b: 0.5688
+    n_permutations: 10,000
+    null_mean: -0.0001
+    null_sd: 0.0062
+    Note. p from 10,000 label permutations using the (r+1)/(m+1) convention; CI
+          from 2,000 bootstrap replicates.
+
+Parametric companion to H3_1_ALL (all elements requiring a label).
+  Two-proportion z test
+    z = -4.410, p < .001, risk difference = -0.027, 95% CI [-0.040, -0.015], Cohen's h = -0.055, N = 767,648
+    Interpretation: negligible (by Cohen's h)
+    touched: 54.14% (3,469/6,408)  95% CI [52.91%, 55.35%]
+    background: 56.88% (432,959/761,240)  95% CI [56.76%, 56.99%]
+    difference: -0.0274
+    difference_pct: -2.74
+    Note. The CI is Newcombe's hybrid score interval on the risk difference
+          (touched minus background). Cohen's h is reported without an interval
+          and is interpreted using Cohen's conventions (.20 small, .50 medium,
+          .80 large).
+
+H3.2. The difference survives restricting the background to clickable elements,
+which is the fairer comparison since trajectories can only touch clickable
+targets.
+  Permutation test, clickable elements only
+    diff = 0.033, p < .001, difference in label rate = 0.033, 95% CI [0.021, 0.045], N = 165,879
+    Interpretation: see estimate and interval
+    n_a: 6,150
+    n_b: 159,729
+    mean_a: 0.559
+    mean_b: 0.5259
+    n_permutations: 10,000
+    null_mean: -0.0001
+    null_sd: 0.0065
+    Note. p from 10,000 label permutations using the (r+1)/(m+1) convention; CI
+          from 2,000 bootstrap replicates.
+
+Parametric companion to H3_2_CLICKABLE (clickable elements only).
+  Two-proportion z test
+    z = 5.108, p < .001, risk difference = 0.033, 95% CI [0.020, 0.046], Cohen's h = 0.067, N = 165,879
+    Interpretation: negligible (by Cohen's h)
+    touched: 55.90% (3,438/6,150)  95% CI [54.66%, 57.14%]
+    background: 52.59% (83,999/159,729)  95% CI [52.34%, 52.83%]
+    difference: 0.0331
+    difference_pct: 3.314
+    Note. The CI is Newcombe's hybrid score interval on the risk difference
+          (touched minus background). Cohen's h is reported without an interval
+          and is interpreted using Cohen's conventions (.20 small, .50 medium,
+          .80 large).
+
+H3.3. The difference survives restricting to tappable graphics with no text,
+where a missing description is unambiguously a defect.
+  Permutation test, icon-like elements only
+    diff = 0.090, p < .001, difference in label rate = 0.090, 95% CI [0.075, 0.106], N = 101,667
+    Interpretation: see estimate and interval
+    n_a: 3,386
+    n_b: 98,281
+    mean_a: 0.6996
+    mean_b: 0.6097
+    n_permutations: 10,000
+    null_mean: 0.0001
+    null_sd: 0.0086
+    Note. p from 10,000 label permutations using the (r+1)/(m+1) convention; CI
+          from 2,000 bootstrap replicates.
+
+Parametric companion to H3_3_ICON_LIKE (icon-like elements only).
+  Two-proportion z test
+    z = 10.565, p < .001, risk difference = 0.090, 95% CI [0.074, 0.105], Cohen's h = 0.190, N = 101,667
+    Interpretation: negligible (by Cohen's h)
+    touched: 69.96% (2,369/3,386)  95% CI [68.40%, 71.49%]
+    background: 60.97% (59,921/98,281)  95% CI [60.66%, 61.27%]
+    difference: 0.09
+    difference_pct: 8.9955
+    Note. The CI is Newcombe's hybrid score interval on the risk difference
+          (touched minus background). Cohen's h is reported without an interval
+          and is interpreted using Cohen's conventions (.20 small, .50 medium,
+          .80 large).
+
+Table 1. Label coverage among touched versus background elements on the same screens.
+Comparison                      Touched n  Touched %  Background n  Background %  Difference (pp)
+------------------------------  ---------  ---------  ------------  ------------  ---------------
+all elements requiring a label  6,408      54.14      761,240       56.88         -2.74          
+clickable elements only         6,150      55.90      159,729       52.59         +3.31          
+icon-like elements only         3,386      69.96      98,281        60.97         +9.00          
+
+Note. Background excludes touched elements. Permutation tests shuffle the touched/background assignment while holding the pooled outcomes fixed.
+
+
+--------------------------------------------------------------------------------
+RESULTS SECTION DRAFT (APA 7)
+--------------------------------------------------------------------------------
+
+Auto-composed from the recorded statistics. Treat it as a first draft: check
+every claim against the tables above, and rewrite the prose in your own voice
+before it goes near the manuscript.
+
+If touched elements are better labelled than their neighbours, the practical
+reading is that benchmark tasks are easier than the app population they are
+drawn from, and that the gap is an accessibility artifact rather than a property
+of the task design. Reported agent accuracy would then be an optimistic estimate
+of performance on arbitrary screens.
+
+H3.1. Touched elements are labelled at a higher rate than the background
+population on the same screens. A permutation test, all elements requiring a
+label was conducted, diff = -0.027, p < .001, difference in label rate = -0.027,
+95% CI [-0.039, -0.015], N = 767,648. The magnitude should be read from the
+estimate and its confidence interval rather than a conventional benchmark.
+
+Parametric companion to H3_1_ALL (all elements requiring a label). A two-
+proportion z test was conducted, z = -4.410, p < .001, risk difference = -0.027,
+95% CI [-0.040, -0.015], Cohen's h = -0.055, N = 767,648. The effect is
+negligible (by Cohen's h).
+
+H3.2. The difference survives restricting the background to clickable elements,
+which is the fairer comparison since trajectories can only touch clickable
+targets. A permutation test, clickable elements only was conducted, diff =
+0.033, p < .001, difference in label rate = 0.033, 95% CI [0.021, 0.045], N =
+165,879. The magnitude should be read from the estimate and its confidence
+interval rather than a conventional benchmark.
+
+Parametric companion to H3_2_CLICKABLE (clickable elements only). A two-
+proportion z test was conducted, z = 5.108, p < .001, risk difference = 0.033,
+95% CI [0.020, 0.046], Cohen's h = 0.067, N = 165,879. The effect is negligible
+(by Cohen's h).
+
+H3.3. The difference survives restricting to tappable graphics with no text,
+where a missing description is unambiguously a defect. A permutation test, icon-
+like elements only was conducted, diff = 0.090, p < .001, difference in label
+rate = 0.090, 95% CI [0.075, 0.106], N = 101,667. The magnitude should be read
+from the estimate and its confidence interval rather than a conventional
+benchmark.
+
+Parametric companion to H3_3_ICON_LIKE (icon-like elements only). A two-
+proportion z test was conducted, z = 10.565, p < .001, risk difference = 0.090,
+95% CI [0.074, 0.105], Cohen's h = 0.190, N = 101,667. The effect is negligible
+(by Cohen's h).
+
+--------------------------------------------------------------------------------
+IEEE-STYLE NUMERIC SUMMARY
+--------------------------------------------------------------------------------
+
+Compact numeric summary of all tests (IEEE style).
+Test              Stat  Value   df  p       Effect                    Size    95% CI            Std. effect         N      
+----------------  ----  ------  --  ------  ------------------------  ------  ----------------  ------------------  -------
+h3_1_all          diff  -0.027      < .001  difference in label rate  -0.027  [-0.039, -0.015]                      767,648
+h3_1_all_z        z     -4.410      < .001  risk difference           -0.027  [-0.040, -0.015]  Cohen's h = -0.055  767,648
+h3_2_clickable    diff  0.033       < .001  difference in label rate  0.033   [0.021, 0.045]                        165,879
+h3_2_clickable_z  z     5.108       < .001  risk difference           0.033   [0.020, 0.046]    Cohen's h = 0.067   165,879
+h3_3_icon_like    diff  0.090       < .001  difference in label rate  0.090   [0.075, 0.106]                        101,667
+h3_3_icon_like_z  z     10.565      < .001  risk difference           0.090   [0.074, 0.105]    Cohen's h = 0.190   101,667
+
+Note. p reported exactly; '<.001' where smaller. Effect sizes carry 95% CIs.
+
+--------------------------------------------------------------------------------
+NOTES, ASSUMPTIONS AND LIMITATIONS
+--------------------------------------------------------------------------------
+
+Notes
+  1. Permutation p-values use the (r+1)/(m+1) convention and can never be
+     exactly zero, which is the honest way to report a test whose null was never
+     matched.
+
+Limitations
+  1. Touched elements are inferred from coordinates, not read from the data. A
+     systematic bias in the hit-testing rule, for instance a preference for
+     larger targets, would propagate into this result. The reported hit rate and
+     the clickable-only comparison are the two guards against that.
+  2. Elements within a screen are not independent, and one screen can contribute
+     many background elements and one touched element. The permutation test
+     respects the observed marginals but not the nesting; a screen-level cluster
+     bootstrap would be the stronger design and is the natural extension for the
+     journal version.
+
+Figures
+  - rq3_touched_vs_background: /Users/obadakraishan/Desktop/AISSA26/code/accessibility-debt-agents/phase5_analysis/rq3_trajectory_bias/outputs/figures/rq3_touched_vs_background.pdf
+    Label coverage among elements touched by task trajectories versus the
+    background population on the same screens.
+
+================================================================================
+  END OF REPORT — rq3
+================================================================================

@@ -1,0 +1,5 @@
+Dataset,Cluster,Clusters,Coverage %,Cluster-bootstrap 95% CI,Element-level Wilson 95% CI
+androidcontrol_2024,screen,"49,745",57.27,"[56.99, 57.53]","[57.19, 57.35]"
+androidcontrol_2024,app,951,57.27,"[55.65, 58.86]","[57.19, 57.35]"
+rico_2017,screen,"60,637",17.74,"[17.50, 17.97]","[17.63, 17.84]"
+rico_2017,app,"8,904",17.74,"[17.14, 18.37]","[17.63, 17.84]"

@@ -1,0 +1,4 @@
+Population,Touched,Via fallback,Via fallback %,"Labelled, direct %","Labelled, via fallback %",Diff without them (pp),Screen-bootstrap 95% CI
+all requiring a label,"6,408","2,225",34.72,59.53,44.00,+2.65,"[1.15, 4.18]"
+clickable only,"6,150","2,225",36.18,62.65,44.00,+10.06,"[8.57, 11.60]"
+icon-like only,"3,386",598,17.66,68.40,77.26,+7.43,"[5.77, 9.06]"

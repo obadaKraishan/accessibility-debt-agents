@@ -1,0 +1,42 @@
+kind,key,label,value_or_statistic,n,df,p_value,effect_name,effect_size,ci_low,ci_high,interpretation
+descriptive,,Elements parsed,17373614,,,,,,,,
+descriptive,,Elements in the analysis population,9693702,,,,,,,,
+descriptive,,Excluded by the inclusion rule,7679912,,,,,,,,
+descriptive,,Screens or observations,116083,,,,,,,,
+descriptive,,Datasets,2,,,,,,,,
+proportion,,"Label coverage, androidcontrol_2024",0.5726569593803673,1462544,,,,,0.5718550375881011,0.5734584994979839,
+proportion,,"Icon-like coverage, androidcontrol_2024",0.6275362542345871,194529,,,,,0.6253853446962494,0.629682126831449,
+proportion,,"Label coverage, rico_2017",0.177374971397873,502585,,,,,0.17632137395329073,0.1784335007098573,
+proportion,,"Icon-like coverage, rico_2017",0.33195089061716004,127552,,,,,0.3293716698116607,0.33454023332262356,
+test,h1_1_role_dependence_androidcontrol_2024,Chi-square test of independence,36466.57256310552,1462544,4.0,0.0,Cramer's V,0.15790395324158993,0.1562861888437527,0.1594950023760326,small
+test,h1_1_role_dependence_rico_2017,Chi-square test of independence,63501.78847762553,502585,4.0,0.0,Cramer's V,0.3554579379731823,0.35268136438628694,0.3584715818079228,medium
+test,h1_2_icon_gap_androidcontrol_2024,Two-proportion z test,52.54814443437063,1462544,,0.0,risk difference,0.063298449476757,0.060980918688094826,0.06561145145485844,negligible (by Cohen's h)
+test,h1_2_icon_gap_rico_2017,Two-proportion z test,167.30478601378732,502585,,0.0,risk difference,0.20714853989069065,0.20435939375641166,0.2099441421212797,medium (by Cohen's h)
+test,h1_3_category_art_&_design,Two-proportion z test,-1.8787503335248616,502569,,0.0602785915597861,risk difference,-0.01375475458986955,-0.02718481284213416,0.0006149201251312245,negligible (by Cohen's h)
+test,h1_3_category_auto_&_vehicles,Two-proportion z test,2.1783560727784534,502569,,0.029379537566169844,risk difference,0.011899612441512164,0.0011670019717533071,0.023112750595258767,negligible (by Cohen's h)
+test,h1_3_category_beauty,Two-proportion z test,-6.697933143705962,502569,,2.1138868433467906e-11,risk difference,-0.041552897286182805,-0.052116240911885936,-0.030262392099022716,negligible (by Cohen's h)
+test,h1_3_category_books_&_reference,Two-proportion z test,18.807307297321504,502569,,0.0,risk difference,0.04885668282643793,0.04336604786431898,0.054438158632781106,negligible (by Cohen's h)
+test,h1_3_category_business,Two-proportion z test,6.842412727222922,502569,,7.787104294720848e-12,risk difference,0.022587681510841978,0.01591177322102361,0.029428430750327063,negligible (by Cohen's h)
+test,h1_3_category_comics,Two-proportion z test,-6.010920959801432,502569,,1.844723263033643e-09,risk difference,-0.02453861556042386,-0.03194535404689318,-0.016836820921752316,negligible (by Cohen's h)
+test,h1_3_category_communication,Two-proportion z test,5.7835520481668805,502569,,7.313954331067407e-09,risk difference,0.014508736148509116,0.009501588052717409,0.019609883498241665,negligible (by Cohen's h)
+test,h1_3_category_dating,Two-proportion z test,-13.10789045472688,502569,,0.0,risk difference,-0.05513073379753225,-0.062073993605006796,-0.04784711884644349,negligible (by Cohen's h)
+test,h1_3_category_education,Two-proportion z test,-1.806905397904361,502569,,0.07077703076692221,risk difference,-0.004079395868549579,-0.008429663674106589,0.0003492895194529954,negligible (by Cohen's h)
+test,h1_3_category_entertainment,Two-proportion z test,-1.8046722402318371,502569,,0.07112598624606292,risk difference,-0.003670364192144643,-0.007598077223941047,0.00031889873681889124,negligible (by Cohen's h)
+test,h1_3_category_events,Two-proportion z test,0.04624179231020579,502569,,0.9631175326373043,risk difference,0.0005410611277529009,-0.02125414209216923,0.02464236005470545,negligible (by Cohen's h)
+test,h1_3_category_finance,Two-proportion z test,7.629490012367143,502569,,2.353672812205332e-14,risk difference,0.02307893943310599,0.016951948198442632,0.029342857703231095,negligible (by Cohen's h)
+test,h1_3_category_food_&_drink,Two-proportion z test,-3.2212298942278403,502569,,0.0012764171524020096,risk difference,-0.010324389788570254,-0.016381905352026754,-0.004095780967731435,negligible (by Cohen's h)
+test,h1_3_category_health_&_fitness,Two-proportion z test,-9.555709700383174,502569,,0.0,risk difference,-0.02320377104535007,-0.027682488779359495,-0.018627834752717704,negligible (by Cohen's h)
+test,h1_3_category_house_&_home,Two-proportion z test,18.31263414209274,502569,,0.0,risk difference,0.10501121688448892,0.09198680676601789,0.11840877060809518,small (by Cohen's h)
+test,h1_3_category_lifestyle,Two-proportion z test,7.77432110246623,502569,,7.549516567451064e-15,risk difference,0.018287696473010484,0.01355910791860868,0.023096914182574233,negligible (by Cohen's h)
+test,h1_3_category_maps_&_navigation,Two-proportion z test,17.479966914141464,502569,,0.0,risk difference,0.059044039995169134,0.05179235496643991,0.0664484181331837,negligible (by Cohen's h)
+test,h1_3_category_medical,Two-proportion z test,15.933740646886596,502569,,0.0,risk difference,0.057641364475989165,0.049892393464314275,0.06556727003248594,negligible (by Cohen's h)
+test,h1_3_category_music_&_audio,Two-proportion z test,-4.447761487747394,502569,,8.6769799028108e-06,risk difference,-0.010620500392449106,-0.015154542304533034,-0.005995899322450837,negligible (by Cohen's h)
+test,h1_3_category_news_&_magazines,Two-proportion z test,9.1967996231671,502569,,0.0,risk difference,0.020666879311851294,0.016130627185769804,0.025275393434836108,negligible (by Cohen's h)
+test,h1_3_category_parenting,Two-proportion z test,-6.162339865370805,502569,,7.16777970311e-10,risk difference,-0.03050854209691578,-0.03929548184710516,-0.021275765815437858,negligible (by Cohen's h)
+test,h1_3_category_shopping,Two-proportion z test,5.037076285744418,502569,,4.726964257795174e-07,risk difference,0.01042652965331603,0.0063224818668538236,0.014592272258490236,negligible (by Cohen's h)
+test,h1_3_category_social,Two-proportion z test,-16.76569971242137,502569,,0.0,risk difference,-0.03741650815134173,-0.04140095283943625,-0.033348831139468064,negligible (by Cohen's h)
+test,h1_3_category_sports,Two-proportion z test,2.684274927003935,502569,,0.007268730645562993,risk difference,0.00588646928714312,0.0015760901497150577,0.01026823289990526,negligible (by Cohen's h)
+test,h1_3_category_travel_&_local,Two-proportion z test,9.998344802571479,502569,,0.0,risk difference,0.024790148758791597,0.0197492247448938,0.029919855664537347,negligible (by Cohen's h)
+test,h1_3_category_video_players_&_editors,Two-proportion z test,7.712730271872202,502569,,1.2212453270876722e-14,risk difference,0.03141855848653996,0.023065088455966047,0.040019722974399784,negligible (by Cohen's h)
+test,h1_3_category_weather,Two-proportion z test,-47.34291112716884,502569,,0.0,risk difference,-0.10610502889469367,-0.10923920846268126,-0.1028743869917434,small (by Cohen's h)
+test,h1_4_rating_association,Chi-square test of independence,88.08857805734722,502206,3.0,5.637116964855693e-19,Cramer's V,0.013243990216592599,0.010668560316595329,0.01610223805917966,negligible
